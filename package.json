@@ -1,65 +1,13 @@
 {
-  "name": "lexical-editor-kit",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
-  "description": "A comprehensive collection of Lexical editor extensions and widely-used packages, providing rich-text editing, tables, lists, code blocks, syntax highlighting, and many more powerful features for building advanced editors.",
-  "keywords": [
-    "lexical",
-    "editor",
-    "rich-text",
-    "plugin",
-    "table",
-    "list",
-    "code-block",
-    "react"
-  ],
+  "name": "lexical-editor-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@atlaskit/drag-and-drop-indicator": "^0.11.1",
-    "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",
-    "@excalidraw/excalidraw": "^0.18.0",
-    "@lexical/code-shiki": "^0.40.0",
-    "@lexical/extension": "^0.40.0",
-    "@lexical/file": "^0.40.0",
-    "@lexical/link": "^0.40.0",
-    "@lexical/list": "^0.40.0",
-    "@lexical/react": "^0.40.0",
-    "@lexical/rich-text": "^0.40.0",
-    "date-fns": "^4.1.0",
-    "lexical": "^0.40.0",
-    "prettier": "^3.8.1",
-    "react-day-picker": "^9.13.2",
-    "yjs": "^13.6.29"
-  },
-  "devDependencies": {
-    "@types/node": "^24.10.1",
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react": "^5.1.1",
-    "@eslint/js": "^9.39.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "eslint-plugin-sort-keys-fix": "^1.1.2",
-    "globals": "^16.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.48.0",
-    "vite": "^7.3.1"
-  },
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
+    "dev": "pnpm --filter lexical-editor-playground dev",
+    "build": "pnpm -r build",
+    "build:editor": "pnpm --filter lexical-editor-kit build",
+    "preview": "pnpm --filter lexical-editor-playground preview",
+    "lint": "pnpm --filter lexical-editor-kit run lint; pnpm --filter lexical-editor-playground run lint",
+    "test": "pnpm --filter lexical-editor-kit run test"
   }
 }
