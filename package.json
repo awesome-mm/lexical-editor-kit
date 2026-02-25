@@ -2,6 +2,10 @@
   "name": "lexical-editor-monorepo",
   "private": true,
   "packageManager": "pnpm@9.15.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "dev": "pnpm --filter lexical-editor-playground dev",
     "dev:editor": "pnpm --filter lexical-editor-kit dev",
