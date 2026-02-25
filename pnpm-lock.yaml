@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  apps/playground:
+  apps/website:
     dependencies:
       lexical-editor-kit:
         specifier: workspace:*
