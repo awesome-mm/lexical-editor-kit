@@ -97,5 +97,5 @@ pnpm test
 
 ---
 
-에디터 확장·커스터마이징 방법은 [Lexical 문서](https://lexical.dev/docs/intro)를 참고
-깃허브 [Github 문서](https://github.com/facebook/lexical)를 참고
+에디터 확장·커스터마이징 방법은 [Lexical 문서](https://lexical.dev/docs/intro)를 참고,
+깃허브 [Github 문서](https://github.com/facebook/lexical)를 참고하시면 됩니다.
