@@ -6,7 +6,7 @@
  *
  */
 import { useMemo, useRef } from "react";
-import { debounce } from "../../utils/debounce";
+import { debounce } from "../utils/debounce";
 
 export function useDebounce<T extends (...args: never[]) => void>(
   fn: T,
