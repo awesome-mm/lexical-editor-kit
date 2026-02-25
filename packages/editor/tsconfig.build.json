@@ -8,9 +8,11 @@
     "rootDir": "src",
     "composite": true,
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
     "skipLibCheck": true
+    // type
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
