@@ -2,26 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import svgr from "vite-plugin-svgr";
-import fs from "fs";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    svgr(),
-    {
-      name: "vite-plugin-check-assets",
-      enforce: "pre",
-      load(id) {
-        const exts = [".png", ".jpg", ".jpeg", ".gif", ".svg"];
-        for (const ext of exts) {
-          if (id.endsWith(ext) && !fs.existsSync(id)) {
-            throw new Error(`[Asset Missing] File does not exist: ${id}`);
-          }
-        }
-        return null;
-      },
-    },
-  ],
+  plugins: [react(), svgr()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
@@ -34,8 +17,26 @@ export default defineConfig({
       fileName: (format) => `index.${format === "es" ? "es" : "cjs"}.js`,
       formats: ["es", "cjs"],
     },
-    cssCodeSplit: true,
     rollupOptions: {
+      external: [
+        "react",
+        "react-dom",
+        "lexical",
+        "@lexical/react",
+        "@lexical/rich-text",
+        "@lexical/list",
+        "@lexical/link",
+        "@lexical/code",
+        "@lexical/table",
+        "@lexical/code-shiki",
+        "@lexical/extension",
+        "@lexical/file",
+        "@lexical/hashtag",
+        "@lexical/markdown",
+        "@lexical/selection",
+        "@lexical/utils",
+        "@lexical/yjs",
+      ],
       output: {
         globals: {
           react: "React",
@@ -45,8 +46,6 @@ export default defineConfig({
       },
     },
     sourcemap: true,
-  },
-  server: {
-    open: "/playground/index.html",
+    cssCodeSplit: true,
   },
 });
