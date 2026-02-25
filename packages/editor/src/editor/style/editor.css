@@ -343,7 +343,7 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .emoji.happysmile {
-  background-image: url(/assets/emoji/1F642.png);
+  background-image: url("@/editor/assets/emoji/1F642.png");
 }
 
 .toolbar {
@@ -391,7 +391,7 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .toolbar button.toolbar-item i.table {
-  background-image: url(/assets/icons/table.svg);
+  background-image: url("@/editor/assets/icons/table.svg");
 }
 
 .toolbar button.toolbar-item.active {
@@ -480,7 +480,7 @@ i.chevron-down {
   display: inline-block;
   height: 8px;
   width: 8px;
-  background-image: url(/assets/icons/chevron-down.svg);
+  background-image: url("@/editor/assets/icons/chevron-down.svg");
 }
 
 #block-controls button:hover {
@@ -500,31 +500,31 @@ i.chevron-down {
 }
 
 #block-controls span.block-type.paragraph {
-  background-image: url(/assets/icons/text-paragraph.svg);
+  background-image: url("@/editor/assets/icons/text-paragraph.svg");
 }
 
 #block-controls span.block-type.h1 {
-  background-image: url(/assets/icons/type-h1.svg);
+  background-image: url("@/editor/assets/icons/type-h1.svg");
 }
 
 #block-controls span.block-type.h2 {
-  background-image: url(/assets/icons/type-h2.svg);
+  background-image: url("@/editor/assets/icons/type-h2.svg");
 }
 
 #block-controls span.block-type.quote {
-  background-image: url(/assets/icons/chat-square-quote.svg);
+  background-image: url("@/editor/assets/icons/chat-square-quote.svg");
 }
 
 #block-controls span.block-type.ul {
-  background-image: url(/assets/icons/list-ul.svg);
+  background-image: url("@/editor/assets/icons/list-ul.svg");
 }
 
 #block-controls span.block-type.ol {
-  background-image: url(/assets/icons/list-ol.svg);
+  background-image: url("@/editor/assets/icons/list-ol.svg");
 }
 
 #block-controls span.block-type.code {
-  background-image: url(/assets/icons/code.svg);
+  background-image: url("@/editor/assets/icons/code.svg");
 }
 
 
@@ -595,83 +595,83 @@ i.chevron-down {
 }
 
 i.undo {
-  background-image: url(/assets/icons/arrow-counterclockwise.svg);
+  background-image: url("@/editor/assets/icons/arrow-counterclockwise.svg");
 }
 
 i.redo {
-  background-image: url(/assets/icons/arrow-clockwise.svg);
+  background-image: url("@/editor/assets/icons/arrow-clockwise.svg");
 }
 
 .icon.paragraph {
-  background-image: url(/assets/icons/text-paragraph.svg);
+  background-image: url("@/editor/assets/icons/text-paragraph.svg");
 }
 
 .icon.large-heading,
 .icon.h1 {
-  background-image: url(/assets/icons/type-h1.svg);
+  background-image: url("@/editor/assets/icons/type-h1.svg");
 }
 
 .icon.small-heading,
 .icon.h2 {
-  background-image: url(/assets/icons/type-h2.svg);
+  background-image: url("@/editor/assets/icons/type-h2.svg");
 }
 
 .icon.bullet-list,
 .icon.ul {
-  background-image: url(/assets/icons/list-ul.svg);
+  background-image: url("@/editor/assets/icons/list-ul.svg");
 }
 
 .icon.numbered-list,
 .icon.ol {
-  background-image: url(/assets/icons/list-ol.svg);
+  background-image: url("@/editor/assets/icons/list-ol.svg");
 }
 
 .icon.quote {
-  background-image: url(/assets/icons/chat-square-quote.svg);
+  background-image: url("@/editor/assets/icons/chat-square-quote.svg");
 }
 
 .icon.code {
-  background-image: url(/assets/icons/code.svg);
+  background-image: url("@/editor/assets/icons/code.svg");
 }
 
 i.bold {
-  background-image: url(/assets/icons/type-bold.svg);
+  background-image: url("@/editor/assets/icons/type-bold.svg");
 }
 
 i.italic {
-  background-image: url(/assets/icons/type-italic.svg);
+  background-image: url("@/editor/assets/icons/type-italic.svg");
 }
 
 i.underline {
-  background-image: url(/assets/icons/type-underline.svg);
+  background-image: url("@/editor/assets/icons/type-underline.svg");
 }
 
 i.strikethrough {
-  background-image: url(/assets/icons/type-strikethrough.svg);
+  background-image: url("@/editor/assets/icons/type-strikethrough.svg");
 }
 
 i.code {
-  background-image: url(/assets/icons/code.svg);
+  background-image: url("@/editor/assets/icons/code.svg");
 }
 
 i.link {
-  background-image: url(/assets/icons/link.svg);
+  background-image: url("@/editor/assets/icons/link.svg");
 }
 
 i.left-align {
-  background-image: url(/assets/icons/text-left.svg);
+  background-image: url("@/editor/assets/icons/text-left.svg");
 }
 
 i.center-align {
-  background-image: url(/assets/icons/text-center.svg);
+  background-image: url("@/editor/assets/icons/text-center.svg");
 }
 
 i.right-align {
-  background-image: url(/assets/icons/text-right.svg);
+  background-image: url("@/editor/assets/icons/text-right.svg");
 }
 
 i.justify-align {
-  background-image: url(/assets/icons/justify.svg);
+  background-image: url("@/editor/assets/icons/justify.svg");
 }
 
 .link-editor .button.active,
@@ -716,7 +716,7 @@ i.justify-align {
 }
 
 .link-editor div.link-edit {
-  background-image: url(assets/icons/pencil-fill.svg);
+  background-image: url("@/editor/assets/icons/pencil-fill.svg");
   background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -730,7 +730,7 @@ i.justify-align {
 }
 
 .link-editor div.link-trash {
-  background-image: url(assets/icons/trash.svg);
+  background-image: url("@/editor/assets/icons/trash.svg");
   background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -744,7 +744,7 @@ i.justify-align {
 }
 
 .link-editor div.link-cancel {
-  background-image: url(assets/icons/close.svg);
+  background-image: url("@/editor/assets/icons/close.svg");
   background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -759,7 +759,7 @@ i.justify-align {
 }
 
 .link-editor div.link-confirm {
-  background-image: url(assets/icons/success-alt.svg);
+  background-image: url("@/editor/assets/icons/success-alt.svg");
   background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -879,7 +879,7 @@ i.justify-align {
 }
 
 .ExampleEditorTheme__tableAddColumns:after {
-  background-image: url(/assets/icons/plus.svg);
+  background-image: url("@/editor/assets/icons/plus.svg");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -908,7 +908,7 @@ i.justify-align {
 }
 
 .ExampleEditorTheme__tableAddRows:after {
-  background-image: url(/assets/icons/plus.svg);
+  background-image: url("@/editor/assets/icons/plus.svg");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

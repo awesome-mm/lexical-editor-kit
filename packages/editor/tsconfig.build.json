@@ -2,16 +2,14 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
+    "emitDeclarationOnly": true,
     "declaration": true,
-    "emitDeclarationOnly": false,
-    "rootDir": "src",
     "outDir": "dist",
+    "rootDir": "src",
     "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowJs": true
+    "module": "ESNext", // NPM 패키지용 모듈
+    "moduleResolution": "node", // Node 환경에서 import 해석
+    "allowImportingTsExtensions": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

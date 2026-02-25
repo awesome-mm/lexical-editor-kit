@@ -4,16 +4,18 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "moduleResolution": "bundler", // Vite-friendly
-    "allowImportingTsExtensions": true,
-    "moduleDetection": "force",
-    "noEmit": true, // 개발 중엔 JS 출력 안함
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "strict": true,
     "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] }
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "vite.config.ts"]
+  "include": ["src", "src/types", "main.tsx"],
+  "exclude": ["node_modules", "dist"]
 }
