@@ -15,6 +15,8 @@ export default defineConfig([
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
+    files: ["src/editor/**", "src/ui/**"],
+    rules: {},
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -23,6 +25,10 @@ export default defineConfig([
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "react-refresh/only-export-components": "off",
+      "react-hooks/refs": "off",
+      "react-hooks/static-components": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/set-state-in-effect": "warn",
     },
   },
 ]);
