@@ -6,13 +6,13 @@
  *
  */
 
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {$trimTextContentFromAnchor} from '@lexical/selection';
-import {$restoreEditorState} from '@lexical/utils';
-import {$getSelection, $isRangeSelection, EditorState, RootNode} from 'lexical';
-import {useEffect} from 'react';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $trimTextContentFromAnchor } from "@lexical/selection";
+import { $restoreEditorState } from "@lexical/utils";
+import { $getSelection, $isRangeSelection, EditorState, RootNode } from "lexical";
+import { useEffect } from "react";
 
-export function MaxLengthPlugin({maxLength}: {maxLength: number}): null {
+export function MaxLengthPlugin({ maxLength }: { maxLength: number }): null {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
@@ -24,9 +24,7 @@ export function MaxLengthPlugin({maxLength}: {maxLength: number}): null {
         return;
       }
       const prevEditorState = editor.getEditorState();
-      const prevTextContentSize = prevEditorState.read(() =>
-        rootNode.getTextContentSize(),
-      );
+      const prevTextContentSize = prevEditorState.read(() => rootNode.getTextContentSize());
       const textContentSize = rootNode.getTextContentSize();
       if (prevTextContentSize !== textContentSize) {
         const delCount = textContentSize - maxLength;

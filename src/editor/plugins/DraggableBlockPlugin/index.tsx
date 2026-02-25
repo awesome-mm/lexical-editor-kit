@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type {NodeKey} from 'lexical';
-import type {JSX} from 'react';
+import type { NodeKey } from "lexical";
+import type { JSX } from "react";
 
-import './index.css';
+import "./index.css";
 
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {DraggableBlockPlugin_EXPERIMENTAL} from '@lexical/react/LexicalDraggableBlockPlugin';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { DraggableBlockPlugin_EXPERIMENTAL } from "@lexical/react/LexicalDraggableBlockPlugin";
 import {
   $createParagraphNode,
   $createTextNode,
@@ -19,19 +19,19 @@ import {
   $getNodeByKey,
   $isParagraphNode,
   $isTextNode,
-} from 'lexical';
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import * as ReactDOM from 'react-dom';
+} from "lexical";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import * as ReactDOM from "react-dom";
 
-import useModal from '../../hooks/useModal';
+import useModal from "../../hooks/useModal";
 import {
   ComponentPickerMenuItem,
   ComponentPickerOption,
   getBaseOptions,
   getDynamicOptions,
-} from '../ComponentPickerPlugin';
+} from "../ComponentPickerPlugin";
 
-const DRAGGABLE_BLOCK_MENU_CLASSNAME = 'draggable-block-menu';
+const DRAGGABLE_BLOCK_MENU_CLASSNAME = "draggable-block-menu";
 
 type PickerState = {
   insertBefore: boolean;
@@ -53,12 +53,10 @@ export default function DraggableBlockPlugin({
   const pickerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const targetLineRef = useRef<HTMLDivElement>(null);
-  const [draggableElement, setDraggableElement] = useState<HTMLElement | null>(
-    null,
-  );
+  const [draggableElement, setDraggableElement] = useState<HTMLElement | null>(null);
   const [pickerState, setPickerState] = useState<PickerState | null>(null);
   const [isPickerOpen, setIsPickerOpen] = useState(false);
-  const [queryString, setQueryString] = useState('');
+  const [queryString, setQueryString] = useState("");
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [pickerPosition, setPickerPosition] = useState<{
     left: number;
@@ -72,13 +70,12 @@ export default function DraggableBlockPlugin({
       return baseOptions;
     }
 
-    const regex = new RegExp(queryString, 'i');
+    const regex = new RegExp(queryString, "i");
     return [
       ...getDynamicOptions(editor, queryString),
       ...baseOptions.filter(
         (option) =>
-          regex.test(option.title) ||
-          option.keywords.some((keyword) => regex.test(keyword)),
+          regex.test(option.title) || option.keywords.some((keyword) => regex.test(keyword)),
       ),
     ];
   }, [editor, queryString, showModal]);
@@ -93,9 +90,7 @@ export default function DraggableBlockPlugin({
     if (!isPickerOpen || !options.length) {
       return;
     }
-    setHighlightedIndex((current) =>
-      Math.min(current, Math.max(options.length - 1, 0)),
-    );
+    setHighlightedIndex((current) => Math.min(current, Math.max(options.length - 1, 0)));
   }, [isPickerOpen, options.length]);
 
   useEffect(() => {
@@ -113,9 +108,9 @@ export default function DraggableBlockPlugin({
       setIsPickerOpen(false);
       setPickerState(null);
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isPickerOpen]);
 
@@ -132,7 +127,7 @@ export default function DraggableBlockPlugin({
           return;
         }
         const placeholder = $createParagraphNode();
-        const textNode = $createTextNode('');
+        const textNode = $createTextNode("");
         placeholder.append(textNode);
         if (pickerState.insertBefore) {
           node.insertBefore(placeholder);
@@ -165,31 +160,27 @@ export default function DraggableBlockPlugin({
       if (!isPickerOpen || !options.length) {
         return;
       }
-      if (event.key === 'ArrowDown') {
+      if (event.key === "ArrowDown") {
         event.preventDefault();
-        setHighlightedIndex((index) =>
-          index + 1 >= options.length ? 0 : index + 1,
-        );
-      } else if (event.key === 'ArrowUp') {
+        setHighlightedIndex((index) => (index + 1 >= options.length ? 0 : index + 1));
+      } else if (event.key === "ArrowUp") {
         event.preventDefault();
-        setHighlightedIndex((index) =>
-          index - 1 < 0 ? options.length - 1 : index - 1,
-        );
-      } else if (event.key === 'Enter') {
+        setHighlightedIndex((index) => (index - 1 < 0 ? options.length - 1 : index - 1));
+      } else if (event.key === "Enter") {
         event.preventDefault();
         const option = options[highlightedIndex];
         if (option) {
           selectOption(option);
         }
-      } else if (event.key === 'Escape') {
+      } else if (event.key === "Escape") {
         event.preventDefault();
         setIsPickerOpen(false);
         setPickerState(null);
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [highlightedIndex, isPickerOpen, options, selectOption]);
 
@@ -220,8 +211,8 @@ export default function DraggableBlockPlugin({
           }
         : null,
     );
-    setPickerState({insertBefore, targetNodeKey});
-    setQueryString('');
+    setPickerState({ insertBefore, targetNodeKey });
+    setQueryString("");
     setHighlightedIndex(0);
     setIsPickerOpen(true);
   }
@@ -236,10 +227,11 @@ export default function DraggableBlockPlugin({
               ref={pickerRef}
               style={{
                 left: pickerPosition.left,
-                position: 'absolute',
+                position: "absolute",
                 top: pickerPosition.top,
                 zIndex: 10,
-              }}>
+              }}
+            >
               <input
                 className="component-picker-search"
                 placeholder="Filter blocks..."

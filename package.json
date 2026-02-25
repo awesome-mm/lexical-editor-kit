@@ -25,7 +25,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@atlaskit/drag-and-drop-indicator": "^0.11.1",
+    "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",
     "@excalidraw/excalidraw": "^0.18.0",
+    "@lexical/code-shiki": "^0.40.0",
     "@lexical/extension": "^0.40.0",
     "@lexical/file": "^0.40.0",
     "@lexical/link": "^0.40.0",
@@ -34,7 +37,11 @@
     "@lexical/rich-text": "^0.40.0",
     "date-fns": "^4.1.0",
     "lexical": "^0.40.0",
-    "react-day-picker": "^9.13.2"
+    "lodash": "^4.17.23",
+    "lodash-es": "^4.17.23",
+    "prettier": "^3.8.1",
+    "react-day-picker": "^9.13.2",
+    "yjs": "^13.6.29"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -45,6 +52,7 @@
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
     "globals": "^16.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

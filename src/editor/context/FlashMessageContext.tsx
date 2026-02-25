@@ -6,23 +6,13 @@
  *
  */
 
-import type {JSX} from 'react';
+import type { JSX } from "react";
 
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 
-import FlashMessage from '../ui/FlashMessage';
+import FlashMessage from "../ui/FlashMessage";
 
-export type ShowFlashMessage = (
-  message?: React.ReactNode,
-  duration?: number,
-) => void;
+export type ShowFlashMessage = (message?: React.ReactNode, duration?: number) => void;
 
 interface FlashMessageProps {
   message?: React.ReactNode;
@@ -33,15 +23,10 @@ const Context = createContext<ShowFlashMessage | undefined>(undefined);
 const INITIAL_STATE: FlashMessageProps = {};
 const DEFAULT_DURATION = 1000;
 
-export const FlashMessageContext = ({
-  children,
-}: {
-  children: ReactNode;
-}): JSX.Element => {
+export const FlashMessageContext = ({ children }: { children: ReactNode }): JSX.Element => {
   const [props, setProps] = useState(INITIAL_STATE);
   const showFlashMessage = useCallback<ShowFlashMessage>(
-    (message, duration) =>
-      setProps(message ? {duration, message} : INITIAL_STATE),
+    (message, duration) => setProps(message ? { duration, message } : INITIAL_STATE),
     [],
   );
   useEffect(() => {
@@ -64,7 +49,7 @@ export const FlashMessageContext = ({
 export const useFlashMessageContext = (): ShowFlashMessage => {
   const ctx = useContext(Context);
   if (!ctx) {
-    throw new Error('Missing FlashMessageContext');
+    throw new Error("Missing FlashMessageContext");
   }
   return ctx;
 };

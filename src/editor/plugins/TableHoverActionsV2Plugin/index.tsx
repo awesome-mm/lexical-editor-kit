@@ -5,47 +5,48 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import type {JSX} from 'react';
+import type { JSX } from "react";
 
-import './index.css';
+import "./index.css";
 
-import DropIndicator from '@atlaskit/drag-and-drop-indicator/box';
+import DropIndicator from "@atlaskit/drag-and-drop-indicator/box";
 import {
   draggable,
   dropTargetForElements,
   type ElementDragPayload,
-} from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import {
   autoUpdate,
   offset,
   shift,
   useFloating,
   type VirtualElement,
-} from '@floating-ui/react';
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {useLexicalEditable} from '@lexical/react/useLexicalEditable';
+} from "@floating-ui/react";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useLexicalEditable } from "@lexical/react/useLexicalEditable";
 import {
   $computeTableMapSkipCellCheck,
   $insertTableColumnAtSelection,
   $insertTableRowAtSelection,
-  $isSimpleTable,
   $isTableCellNode,
   $isTableNode,
   $isTableRowNode,
-  $moveTableColumn,
-} from '@lexical/table';
+} from "@lexical/table";
+import { $isSimpleTable } from "./isSimpleTable";
+import { $moveTableColumn } from "./moveTableColumn";
+
 import {
   $getChildCaret,
   $getNearestNodeFromDOMNode,
   $getSiblingCaret,
   type EditorThemeClasses,
   isHTMLElement,
-} from 'lexical';
-import {useEffect, useRef, useState} from 'react';
-import {createPortal} from 'react-dom';
+} from "lexical";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
-import DropDown, {DropDownItem} from '../../ui/DropDown';
-import {getThemeSelector} from '../../utils/getThemeSelector';
+import DropDown, { DropDownItem } from "../../ui/DropDown";
+import { getThemeSelector } from "../../utils/getThemeSelector";
 
 const INDICATOR_SIZE_PX = 18;
 const SIDE_INDICATOR_SIZE_PX = 18;
@@ -60,12 +61,12 @@ function getTableFromMouseEvent(
   tableElement: HTMLTableElement | null;
 } {
   if (!isHTMLElement(event.target)) {
-    return {isOutside: true, tableElement: null};
+    return { isOutside: true, tableElement: null };
   }
 
-  const cellSelector = `td${getThemeSelector(getTheme, 'tableCell')}, th${getThemeSelector(getTheme, 'tableCell')}`;
+  const cellSelector = `td${getThemeSelector(getTheme, "tableCell")}, th${getThemeSelector(getTheme, "tableCell")}`;
   const cell = event.target.closest<HTMLTableCellElement>(cellSelector);
-  const tableElement = cell?.closest<HTMLTableElement>('table') ?? null;
+  const tableElement = cell?.closest<HTMLTableElement>("table") ?? null;
 
   return {
     isOutside: tableElement == null,
@@ -76,7 +77,7 @@ function getTableFromMouseEvent(
 function getClosestTopCellPosition(
   tableElement: HTMLTableElement,
   clientX: number,
-): {centerX: number; top: number; cell: HTMLTableCellElement} | null {
+): { centerX: number; top: number; cell: HTMLTableCellElement } | null {
   const firstRow = tableElement.rows[0];
   if (!firstRow) {
     return null;
@@ -95,7 +96,7 @@ function getClosestTopCellPosition(
     const delta = Math.abs(centerX - clientX);
     if (delta < smallestDelta) {
       smallestDelta = delta;
-      closest = {cell, centerX, top: rect.top};
+      closest = { cell, centerX, top: rect.top };
     }
   }
 
@@ -113,11 +114,11 @@ function isTableFromEditor(
 type ColumnDragData = {
   columnIndex: number;
   tableKey: string | null;
-  type: 'table-column';
+  type: "table-column";
 };
 
 type DropIndicatorState = {
-  edge: 'left' | 'right';
+  edge: "left" | "right";
   height: number;
   left: number;
   top: number;
@@ -143,7 +144,7 @@ function getDropIndicatorState(
   if (clampedIndex === 0) {
     const firstRect = headerRow.cells[0].getBoundingClientRect();
     return {
-      edge: 'left',
+      edge: "left",
       height: tableRect.height,
       left: firstRect.left,
       top: tableRect.top,
@@ -152,7 +153,7 @@ function getDropIndicatorState(
   if (clampedIndex === cellCount) {
     const lastRect = headerRow.cells[cellCount - 1].getBoundingClientRect();
     return {
-      edge: 'right',
+      edge: "right",
       height: tableRect.height,
       left: lastRect.right,
       top: tableRect.top,
@@ -160,7 +161,7 @@ function getDropIndicatorState(
   }
   const targetRect = headerRow.cells[clampedIndex].getBoundingClientRect();
   return {
-    edge: 'left',
+    edge: "left",
     height: tableRect.height,
     left: targetRect.left,
     top: tableRect.top,
@@ -170,21 +171,17 @@ function getDropIndicatorState(
 function isColumnDrag(
   source: ElementDragPayload,
   tableKey: string | null,
-): source is ElementDragPayload & {data: ColumnDragData} {
+): source is ElementDragPayload & { data: ColumnDragData } {
   const data = source?.data as ColumnDragData | undefined;
-  return data?.type === 'table-column' && data.tableKey === tableKey;
+  return data?.type === "table-column" && data.tableKey === tableKey;
 }
 
 function getTableKey(tableElement: HTMLTableElement | null): string | null {
-  return tableElement?.getAttribute('data-lexical-key') ?? null;
+  return tableElement?.getAttribute("data-lexical-key") ?? null;
 }
 
-function TableHoverActionsV2({
-  anchorElem,
-}: {
-  anchorElem: HTMLElement;
-}): JSX.Element | null {
-  const [editor, {getTheme}] = useLexicalComposerContext();
+function TableHoverActionsV2({ anchorElem }: { anchorElem: HTMLElement }): JSX.Element | null {
+  const [editor, { getTheme }] = useLexicalComposerContext();
   const isEditable = useLexicalEditable();
   const [isVisible, setIsVisible] = useState(false);
   const [isLeftVisible, setIsLeftVisible] = useState(false);
@@ -199,29 +196,22 @@ function TableHoverActionsV2({
   const dragHandleRef = useRef<HTMLButtonElement | null>(null);
   const hoveredLeftCellRef = useRef<HTMLTableCellElement | null>(null);
   const hoveredTopCellRef = useRef<HTMLTableCellElement | null>(null);
-  const handleMouseLeaveRef = useRef<((event: MouseEvent) => void) | null>(
-    null,
-  );
+  const handleMouseLeaveRef = useRef<((event: MouseEvent) => void) | null>(null);
   const dropIndicatorCleanupRef = useRef<Array<() => void>>([]);
-  const [hoveredTable, setHoveredTable] = useState<HTMLTableElement | null>(
-    null,
-  );
-  const [hoveredColumnIndex, setHoveredColumnIndex] = useState<number | null>(
-    null,
-  );
+  const [hoveredTable, setHoveredTable] = useState<HTMLTableElement | null>(null);
+  const [hoveredColumnIndex, setHoveredColumnIndex] = useState<number | null>(null);
   const [canReorder, setCanReorder] = useState(false);
-  const [dropIndicatorState, setDropIndicatorState] =
-    useState<DropIndicatorState | null>(null);
+  const [dropIndicatorState, setDropIndicatorState] = useState<DropIndicatorState | null>(null);
 
-  const {refs, floatingStyles, update} = useFloating({
+  const { refs, floatingStyles, update } = useFloating({
     middleware: [
-      offset({mainAxis: -TOP_BUTTON_OVERHANG}),
+      offset({ mainAxis: -TOP_BUTTON_OVERHANG }),
       shift({
         padding: 8,
       }),
     ],
-    placement: 'top',
-    strategy: 'fixed',
+    placement: "top",
+    strategy: "fixed",
     whileElementsMounted: autoUpdate,
   });
 
@@ -231,13 +221,13 @@ function TableHoverActionsV2({
     update: updateLeft,
   } = useFloating({
     middleware: [
-      offset({mainAxis: -LEFT_BUTTON_OVERHANG}),
+      offset({ mainAxis: -LEFT_BUTTON_OVERHANG }),
       shift({
         padding: 8,
       }),
     ],
-    placement: 'left',
-    strategy: 'fixed',
+    placement: "left",
+    strategy: "fixed",
     whileElementsMounted: autoUpdate,
   });
 
@@ -258,7 +248,7 @@ function TableHoverActionsV2({
         return;
       }
 
-      const {tableElement, isOutside} = getTableFromMouseEvent(event, getTheme);
+      const { tableElement, isOutside } = getTableFromMouseEvent(event, getTheme);
 
       if (
         isOutside ||
@@ -273,7 +263,7 @@ function TableHoverActionsV2({
         return;
       }
 
-      const cellSelector = `td${getThemeSelector(getTheme, 'tableCell')}, th${getThemeSelector(getTheme, 'tableCell')}`;
+      const cellSelector = `td${getThemeSelector(getTheme, "tableCell")}, th${getThemeSelector(getTheme, "tableCell")}`;
       const hoveredCell = isHTMLElement(event.target)
         ? event.target.closest<HTMLTableCellElement>(cellSelector)
         : null;
@@ -292,10 +282,7 @@ function TableHoverActionsV2({
           : -1;
       const colIndex = hoveredCell.cellIndex ?? -1;
 
-      const closestTopCell = getClosestTopCellPosition(
-        tableElement,
-        event.clientX,
-      );
+      const closestTopCell = getClosestTopCellPosition(tableElement, event.clientX);
 
       if (!closestTopCell || rowIndex !== 0) {
         setIsVisible(false);
@@ -318,7 +305,7 @@ function TableHoverActionsV2({
         setIsLeftVisible(false);
         hoveredLeftCellRef.current = null;
       } else {
-        const {top, height} = hoveredCell.getBoundingClientRect();
+        const { top, height } = hoveredCell.getBoundingClientRect();
         const centerY = top + height / 2;
         hoveredLeftCellRef.current = hoveredCell;
         leftVirtualRef.current.getBoundingClientRect = () =>
@@ -329,10 +316,10 @@ function TableHoverActionsV2({
       }
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener("mousemove", handleMouseMove);
       setIsVisible(false);
       setIsLeftVisible(false);
     };
@@ -362,13 +349,10 @@ function TableHoverActionsV2({
 
     return editor.registerRootListener((rootElement, prevRootElement) => {
       if (prevRootElement && handleMouseLeaveRef.current) {
-        prevRootElement.removeEventListener(
-          'mouseleave',
-          handleMouseLeaveRef.current,
-        );
+        prevRootElement.removeEventListener("mouseleave", handleMouseLeaveRef.current);
       }
       if (rootElement && handleMouseLeaveRef.current) {
-        rootElement.addEventListener('mouseleave', handleMouseLeaveRef.current);
+        rootElement.addEventListener("mouseleave", handleMouseLeaveRef.current);
       }
     });
   }, [editor]);
@@ -387,7 +371,7 @@ function TableHoverActionsV2({
         const tableNode = $getNearestNodeFromDOMNode(hoveredTable);
         setCanReorder($isTableNode(tableNode) && $isSimpleTable(tableNode));
       },
-      {editor},
+      { editor },
     );
   }, [editor, hoveredTable]);
 
@@ -405,7 +389,7 @@ function TableHoverActionsV2({
       getInitialData: () => ({
         columnIndex,
         tableKey: getTableKey(tableElement),
-        type: 'table-column',
+        type: "table-column",
       }),
       onDrop: () => setDropIndicatorState(null),
     });
@@ -429,49 +413,36 @@ function TableHoverActionsV2({
     const tableKey = getTableKey(hoveredTable);
     const registerDropTarget = (cell: HTMLTableCellElement) =>
       dropTargetForElements({
-        canDrop: ({source}) => isColumnDrag(source, tableKey),
+        canDrop: ({ source }) => isColumnDrag(source, tableKey),
         element: cell,
-        getData: ({input}) => ({
+        getData: ({ input }) => ({
           boundaryIndex: getBoundaryIndex(cell, input.clientX),
         }),
-        onDrag: ({location, source}) => {
+        onDrag: ({ location, source }) => {
           if (!isColumnDrag(source, tableKey)) {
             return;
           }
-          const boundaryIndex = getBoundaryIndex(
-            cell,
-            location.current.input.clientX,
-          );
+          const boundaryIndex = getBoundaryIndex(cell, location.current.input.clientX);
           const tableRect = hoveredTable.getBoundingClientRect();
-          setDropIndicatorState(
-            getDropIndicatorState(headerRow, tableRect, boundaryIndex),
-          );
+          setDropIndicatorState(getDropIndicatorState(headerRow, tableRect, boundaryIndex));
         },
-        onDragEnter: ({location, source}) => {
+        onDragEnter: ({ location, source }) => {
           if (!isColumnDrag(source, tableKey)) {
             return;
           }
-          const boundaryIndex = getBoundaryIndex(
-            cell,
-            location.current.input.clientX,
-          );
+          const boundaryIndex = getBoundaryIndex(cell, location.current.input.clientX);
           const tableRect = hoveredTable.getBoundingClientRect();
-          setDropIndicatorState(
-            getDropIndicatorState(headerRow, tableRect, boundaryIndex),
-          );
+          setDropIndicatorState(getDropIndicatorState(headerRow, tableRect, boundaryIndex));
         },
         onDragLeave: () => setDropIndicatorState(null),
-        onDrop: ({location, source}) => {
+        onDrop: ({ location, source }) => {
           setDropIndicatorState(null);
           const data = (source?.data ?? {}) as ColumnDragData;
           if (data.columnIndex == null) {
             return;
           }
-          const boundaryIndex = getBoundaryIndex(
-            cell,
-            location.current.input.clientX,
-          );
-          const targetTable = cell.closest('table');
+          const boundaryIndex = getBoundaryIndex(cell, location.current.input.clientX);
+          const targetTable = cell.closest("table");
           if (!isHTMLElement(targetTable) || !isColumnDrag(source, tableKey)) {
             return;
           }
@@ -481,10 +452,7 @@ function TableHoverActionsV2({
               return;
             }
             const columnCount = tableNode.getColumnCount();
-            const clampedBoundary = Math.max(
-              0,
-              Math.min(boundaryIndex, columnCount),
-            );
+            const clampedBoundary = Math.max(0, Math.min(boundaryIndex, columnCount));
             const startIndex = data.columnIndex;
             if (
               clampedBoundary === startIndex ||
@@ -495,9 +463,7 @@ function TableHoverActionsV2({
               return;
             }
             const finishIndex =
-              clampedBoundary > startIndex
-                ? clampedBoundary - 1
-                : clampedBoundary;
+              clampedBoundary > startIndex ? clampedBoundary - 1 : clampedBoundary;
             $moveTableColumn(tableNode, startIndex, finishIndex);
           });
         },
@@ -546,7 +512,7 @@ function TableHoverActionsV2({
     });
   };
 
-  const handleSortColumn = (direction: 'asc' | 'desc') => {
+  const handleSortColumn = (direction: "asc" | "desc") => {
     const targetCell = hoveredTopCellRef.current;
     if (!targetCell) {
       return;
@@ -571,11 +537,7 @@ function TableHoverActionsV2({
       const colIndex = cellNode.getIndexWithinParent();
       const rows = tableNode.getChildren().filter($isTableRowNode);
 
-      const [tableMap] = $computeTableMapSkipCellCheck(
-        tableNode,
-        cellNode,
-        cellNode,
-      );
+      const [tableMap] = $computeTableMapSkipCellCheck(tableNode, cellNode, cellNode);
 
       const headerCell = tableMap[0]?.[colIndex]?.cell;
       const shouldSkipTopRow = headerCell?.hasHeader() ?? false;
@@ -596,15 +558,15 @@ function TableHoverActionsV2({
         const aCellValue = aMapRow[colIndex];
         const bCellValue = bMapRow[colIndex];
 
-        const aText = aCellValue?.cell.getTextContent() ?? '';
-        const bText = bCellValue?.cell.getTextContent() ?? '';
-        const result = aText.localeCompare(bText, undefined, {numeric: true});
-        return direction === 'asc' ? -result : result;
+        const aText = aCellValue?.cell.getTextContent() ?? "";
+        const bText = bCellValue?.cell.getTextContent() ?? "";
+        const result = aText.localeCompare(bText, undefined, { numeric: true });
+        return direction === "asc" ? -result : result;
       });
 
       const insertionCaret = shouldSkipTopRow
-        ? $getSiblingCaret(rows[0], 'next')
-        : $getChildCaret(tableNode, 'next');
+        ? $getSiblingCaret(rows[0], "next")
+        : $getChildCaret(tableNode, "next");
 
       insertionCaret?.splice(0, sortableRows);
     });
@@ -621,7 +583,8 @@ function TableHoverActionsV2({
           ...floatingStyles,
           opacity: isVisible ? 1 : 0,
         }}
-        className="floating-top-actions">
+        className="floating-top-actions"
+      >
         <button
           ref={dragHandleRef}
           className="floating-drag-indicator"
@@ -631,15 +594,12 @@ function TableHoverActionsV2({
         <DropDown
           buttonAriaLabel="Sort column"
           buttonClassName="floating-filter-indicator"
-          hideChevron={true}>
-          <DropDownItem
-            className="item"
-            onClick={() => handleSortColumn('desc')}>
+          hideChevron={true}
+        >
+          <DropDownItem className="item" onClick={() => handleSortColumn("desc")}>
             Sort Ascending
           </DropDownItem>
-          <DropDownItem
-            className="item"
-            onClick={() => handleSortColumn('asc')}>
+          <DropDownItem className="item" onClick={() => handleSortColumn("asc")}>
             Sort Descending
           </DropDownItem>
         </DropDown>
@@ -669,12 +629,13 @@ function TableHoverActionsV2({
           style={{
             height: dropIndicatorState.height,
             left: dropIndicatorState.left,
-            pointerEvents: 'none',
-            position: 'fixed',
+            pointerEvents: "none",
+            position: "fixed",
             top: dropIndicatorState.top,
             width: 2,
             zIndex: 20,
-          }}>
+          }}
+        >
           <DropIndicator edge={dropIndicatorState.edge} />
         </div>
       ) : null}

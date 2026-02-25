@@ -9,6 +9,9 @@ export default defineConfig([
   globalIgnores(["dist"]),
   {
     files: ["**/*.{ts,tsx}"],
+    plugins: {
+      "sort-keys-fix": sortKeysFix,
+    },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,

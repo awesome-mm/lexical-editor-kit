@@ -7,8 +7,8 @@
  */
 
 export function setDomHiddenUntilFound(dom: HTMLElement): void {
-  // @ts-expect-error
-  dom.hidden = 'until-found';
+  // @ts-expect-error Chromium supports 'until-found' but TS lib.dom.d.ts is outdated
+  dom.hidden = "until-found";
 }
 
 export function domOnBeforeMatch(dom: HTMLElement, callback: () => void): void {

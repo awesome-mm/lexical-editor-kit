@@ -6,15 +6,15 @@
  *
  */
 
-import type {JSX} from 'react';
+import type { JSX } from "react";
 
-import {$isLinkNode, TOGGLE_LINK_COMMAND} from '@lexical/link';
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
   NodeContextMenuOption,
   NodeContextMenuPlugin,
   NodeContextMenuSeparator,
-} from '@lexical/react/LexicalNodeContextMenuPlugin';
+} from "@lexical/react/LexicalNodeContextMenuPlugin";
 import {
   $getSelection,
   $isDecoratorNode,
@@ -24,8 +24,8 @@ import {
   CUT_COMMAND,
   type LexicalNode,
   PASTE_COMMAND,
-} from 'lexical';
-import {useMemo} from 'react';
+} from "lexical";
+import { useMemo } from "react";
 
 export default function ContextMenuPlugin(): JSX.Element {
   const [editor] = useLexicalComposerContext();
@@ -48,9 +48,7 @@ export default function ContextMenuPlugin(): JSX.Element {
           editor.dispatchCommand(CUT_COMMAND, null);
         },
         disabled: false,
-        icon: (
-          <i className="PlaygroundEditorTheme__contextMenuItemIcon page-break" />
-        ),
+        icon: <i className="PlaygroundEditorTheme__contextMenuItemIcon page-break" />,
       }),
       new NodeContextMenuOption(`Copy`, {
         $onSelect: () => {
@@ -69,10 +67,10 @@ export default function ContextMenuPlugin(): JSX.Element {
 
             const permission = await navigator.permissions.query({
               // @ts-expect-error These types are incorrect.
-              name: 'clipboard-read',
+              name: "clipboard-read",
             });
-            if (permission.state === 'denied') {
-              alert('Not allowed to paste from clipboard.');
+            if (permission.state === "denied") {
+              alert("Not allowed to paste from clipboard.");
               return;
             }
 
@@ -81,7 +79,7 @@ export default function ContextMenuPlugin(): JSX.Element {
               data.setData(type, dataString);
             }
 
-            const event = new ClipboardEvent('paste', {
+            const event = new ClipboardEvent("paste", {
               clipboardData: data,
             });
 
@@ -89,28 +87,26 @@ export default function ContextMenuPlugin(): JSX.Element {
           });
         },
         disabled: false,
-        icon: (
-          <i className="PlaygroundEditorTheme__contextMenuItemIcon paste" />
-        ),
+        icon: <i className="PlaygroundEditorTheme__contextMenuItemIcon paste" />,
       }),
       new NodeContextMenuOption(`Paste as Plain Text`, {
         $onSelect: () => {
           navigator.clipboard.read().then(async function (...args) {
             const permission = await navigator.permissions.query({
               // @ts-expect-error These types are incorrect.
-              name: 'clipboard-read',
+              name: "clipboard-read",
             });
 
-            if (permission.state === 'denied') {
-              alert('Not allowed to paste from clipboard.');
+            if (permission.state === "denied") {
+              alert("Not allowed to paste from clipboard.");
               return;
             }
 
             const data = new DataTransfer();
             const clipboardText = await navigator.clipboard.readText();
-            data.setData('text/plain', clipboardText);
+            data.setData("text/plain", clipboardText);
 
-            const event = new ClipboardEvent('paste', {
+            const event = new ClipboardEvent("paste", {
               clipboardData: data,
             });
             editor.dispatchCommand(PASTE_COMMAND, event);
@@ -125,9 +121,7 @@ export default function ContextMenuPlugin(): JSX.Element {
           const selection = $getSelection();
           if ($isRangeSelection(selection)) {
             const currentNode = selection.anchor.getNode();
-            const ancestorNodeWithRootAsParent = currentNode
-              .getParents()
-              .at(-2);
+            const ancestorNodeWithRootAsParent = currentNode.getParents().at(-2);
 
             ancestorNodeWithRootAsParent?.remove();
           } else if ($isNodeSelection(selection)) {
@@ -140,9 +134,7 @@ export default function ContextMenuPlugin(): JSX.Element {
           }
         },
         disabled: false,
-        icon: (
-          <i className="PlaygroundEditorTheme__contextMenuItemIcon clear" />
-        ),
+        icon: <i className="PlaygroundEditorTheme__contextMenuItemIcon clear" />,
       }),
     ];
   }, [editor]);
