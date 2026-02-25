@@ -9,7 +9,8 @@ import type { JSX } from "react";
 
 import "./index.css";
 
-import DropIndicator from "@atlaskit/drag-and-drop-indicator/box";
+// !@교체 예정
+import { DropIndicator } from "@atlaskit/pragmatic-drag-and-drop-react-indicator/box";
 import {
   draggable,
   dropTargetForElements,

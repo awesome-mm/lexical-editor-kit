@@ -26,25 +26,6 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
-    dedupe: [
-      "react",
-      "react-dom",
-      "lexical",
-      "@lexical/react",
-      "@lexical/rich-text",
-      "@lexical/list",
-      "@lexical/link",
-      "@lexical/code",
-      "@lexical/table",
-      "@lexical/code-shiki",
-      "@lexical/extension",
-      "@lexical/file",
-      "@lexical/hashtag",
-      "@lexical/markdown",
-      "@lexical/selection",
-      "@lexical/utils",
-      "@lexical/yjs",
-    ],
   },
   build: {
     lib: {
@@ -55,26 +36,6 @@ export default defineConfig({
     },
     cssCodeSplit: true,
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react/jsx-runtime",
-        "lexical",
-        "@lexical/react",
-        "@lexical/rich-text",
-        "@lexical/list",
-        "@lexical/link",
-        "@lexical/code",
-        "@lexical/table",
-        "@lexical/code-shiki",
-        "@lexical/extension",
-        "@lexical/file",
-        "@lexical/hashtag",
-        "@lexical/markdown",
-        "@lexical/selection",
-        "@lexical/utils",
-        "@lexical/yjs",
-      ],
       output: {
         globals: {
           react: "React",

@@ -6,6 +6,7 @@
     "dev": "pnpm --filter lexical-editor-playground dev",
     "dev:editor": "pnpm --filter lexical-editor-kit dev",
     "build": "pnpm -r build",
+    "build:apps": "pnpm --filter lexical-editor-playground build",
     "build:editor": "pnpm --filter lexical-editor-kit build",
     "preview": "pnpm --filter lexical-editor-playground preview",
     "lint": "pnpm --filter lexical-editor-kit run lint; pnpm --filter lexical-editor-playground run lint",

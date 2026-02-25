@@ -7,9 +7,10 @@
     "outDir": "dist",
     "rootDir": "src",
     "composite": true,
-    "module": "ESNext", // NPM 패키지용 모듈
-    "moduleResolution": "node", // Node 환경에서 import 해석
-    "allowImportingTsExtensions": true
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

@@ -23,6 +23,9 @@ importers:
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.3
+      '@types/node':
+        specifier: ^24.10.1
+        version: 24.10.13
       '@types/react':
         specifier: ^18.2.66
         version: 18.3.28
@@ -50,12 +53,12 @@ importers:
 
   packages/editor:
     dependencies:
-      '@atlaskit/drag-and-drop-indicator':
-        specifier: ^0.11.1
-        version: 0.11.1(@types/react@18.3.28)(react@18.3.1)
       '@atlaskit/pragmatic-drag-and-drop':
         specifier: ^1.7.7
         version: 1.7.7
+      '@atlaskit/pragmatic-drag-and-drop-react-indicator':
+        specifier: ^0.18.0
+        version: 0.18.0(@types/react@18.3.28)(react@18.3.1)
       '@excalidraw/excalidraw':
         specifier: ^0.18.0
         version: 0.18.0(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -78,6 +81,9 @@ importers:
         specifier: ^0.40.0
         version: 0.40.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.29)
       '@lexical/rich-text':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/utils':
         specifier: ^0.40.0
         version: 0.40.0
       date-fns:
@@ -147,20 +153,6 @@ importers:
 
 packages:
 
-  '@atlaskit/drag-and-drop-hitbox@0.8.1':
-    resolution: {integrity: sha512-a0RxjILKbW6NcpkAOKHjktpX6WfAOnMG9F7GuAWm9RYC+ArlctAZO+b86+xF6NmhBi3gigxGqJONREWf3MQSAg==}
-    deprecated: '@atlaskit/drag-and-drop-hitbox has been renamed to @atlaskit/pragmatic-drag-and-drop-hitbox'
-
-  '@atlaskit/drag-and-drop-indicator@0.11.1':
-    resolution: {integrity: sha512-1syhAgHvYTWbBbGzYwHXBS34+W0u3UdufJjmMMOoy+jNQJ6yqFQXE6rGe9noUstMZYhDCG4W/S3t0fda16GP3g==}
-    deprecated: '@atlaskit/drag-and-drop-indicator has been renamed to @atlaskit/pragmatic-drag-and-drop-react-indicator'
-    peerDependencies:
-      react: ^16.8.0
-
-  '@atlaskit/drag-and-drop@0.15.1':
-    resolution: {integrity: sha512-0eeHD7SlEvFQAKbXFGp2nhdhmioCUqpRXMe/4OTTJYFq6qL5cH3hDoNfPqy4BS4k4PMjM+9vxNVp6pbyO73biQ==}
-    deprecated: Renamed to @atlaskit/pragmatic-drag-and-drop
-
   '@atlaskit/ds-lib@2.7.0':
     resolution: {integrity: sha512-+U4aPE2dBRFUBYWCM9vkrwJGrLAYVcK30ZpEiQDNpM2D7K41223TfEijC8azaN4VM3tsCgwSKBWwniloNxqYbA==}
     peerDependencies:
@@ -168,6 +160,17 @@ packages:
 
   '@atlaskit/platform-feature-flags@0.3.0':
     resolution: {integrity: sha512-/0u5fFJ0Rw2j4M5wzsXgaHO6Ey12oekPCDTRvmmAIp4GO9T2Swbl80bavLAPSOmSHMhHTSuvRxiJveZXfQ21IQ==}
+
+  '@atlaskit/pragmatic-drag-and-drop-hitbox@0.12.1':
+    resolution: {integrity: sha512-kasSifl+wIYGUCEqF+VMbxPxgoQjW6S5rj5MzQ8ULZnOgqDJ5xuiMAcI2px0osftEg6wusX0jRkPOWpSeEXz3Q==}
+
+  '@atlaskit/pragmatic-drag-and-drop-react-indicator@0.18.0':
+    resolution: {integrity: sha512-ep6SKPjM0RtCByBG3YOMnMN1lCQRkX3WzCAfOEP/NSvPL8WQ3jkbOvG4eT6OQMnDLOVKca66Eu0IxwkPySfu+w==}
+    peerDependencies:
+      react: ^16.8.0
+
+  '@atlaskit/pragmatic-drag-and-drop@0.25.0':
+    resolution: {integrity: sha512-odIEqRtKhBqSNnAOfqVCVKP9aEy5oWO80bmQORXGCiBv0sIexWdn0RH4j8NUf6Glce/iV/tJLOh/irqcqtGo4Q==}
 
   '@atlaskit/pragmatic-drag-and-drop@1.7.7':
     resolution: {integrity: sha512-jX+68AoSTqO/fhCyJDTZ38Ey6/wyL2Iq+J/moanma0YyktpnoHxevjY1UNJHYp0NCburdQDZSL1ZFac1mO1osQ==}
@@ -2718,29 +2721,6 @@ packages:
 
 snapshots:
 
-  '@atlaskit/drag-and-drop-hitbox@0.8.1':
-    dependencies:
-      '@atlaskit/drag-and-drop': 0.15.1
-      '@babel/runtime': 7.28.6
-
-  '@atlaskit/drag-and-drop-indicator@0.11.1(@types/react@18.3.28)(react@18.3.1)':
-    dependencies:
-      '@atlaskit/drag-and-drop': 0.15.1
-      '@atlaskit/drag-and-drop-hitbox': 0.8.1
-      '@atlaskit/tokens': 1.61.0(@types/react@18.3.28)(react@18.3.1)
-      '@babel/runtime': 7.28.6
-      '@emotion/react': 11.14.0(@types/react@18.3.28)(react@18.3.1)
-      react: 18.3.1
-    transitivePeerDependencies:
-      - '@types/react'
-      - supports-color
-
-  '@atlaskit/drag-and-drop@0.15.1':
-    dependencies:
-      '@babel/runtime': 7.28.6
-      bind-event-listener: 2.1.1
-      raf-schd: 4.0.3
-
   '@atlaskit/ds-lib@2.7.0(@types/react@18.3.28)(react@18.3.1)':
     dependencies:
       '@atlaskit/platform-feature-flags': 0.3.0
@@ -2754,6 +2734,29 @@ snapshots:
   '@atlaskit/platform-feature-flags@0.3.0':
     dependencies:
       '@babel/runtime': 7.28.6
+
+  '@atlaskit/pragmatic-drag-and-drop-hitbox@0.12.1':
+    dependencies:
+      '@atlaskit/pragmatic-drag-and-drop': 0.25.0
+      '@babel/runtime': 7.28.6
+
+  '@atlaskit/pragmatic-drag-and-drop-react-indicator@0.18.0(@types/react@18.3.28)(react@18.3.1)':
+    dependencies:
+      '@atlaskit/pragmatic-drag-and-drop': 0.25.0
+      '@atlaskit/pragmatic-drag-and-drop-hitbox': 0.12.1
+      '@atlaskit/tokens': 1.61.0(@types/react@18.3.28)(react@18.3.1)
+      '@babel/runtime': 7.28.6
+      '@emotion/react': 11.14.0(@types/react@18.3.28)(react@18.3.1)
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
+  '@atlaskit/pragmatic-drag-and-drop@0.25.0':
+    dependencies:
+      '@babel/runtime': 7.28.6
+      bind-event-listener: 2.1.1
+      raf-schd: 4.0.3
 
   '@atlaskit/pragmatic-drag-and-drop@1.7.7':
     dependencies:
