@@ -3,14 +3,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { useLexicalEditable } from "@lexical/react/useLexicalEditable";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-  DndContext,
-  DragEndEvent,
-  DragStartEvent,
-  useDraggable,
-  useDroppable,
-  closestCenter,
-} from "@dnd-kit/core";
+import { DndContext, DragEndEvent, useDraggable, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove, horizontalListSortingStrategy } from "@dnd-kit/sortable";
 
 import { ColumnDragData, DropIndicatorState } from "./types";
