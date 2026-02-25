@@ -29,6 +29,8 @@
   ],
   "scripts": {
     "build": "vite build && tsc -p tsconfig.build.json",
+    "prepare": "pnpm run build",
+    "prepublishOnly": "pnpm run build",
     "lint": "eslint src",
     "test": "vitest"
   },

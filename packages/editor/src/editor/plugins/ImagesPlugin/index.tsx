@@ -34,8 +34,8 @@ import {
 import { useEffect, useRef, useState } from "react";
 import * as React from "react";
 
-import landscapeImage from "../../images/landscape.jpg";
-import yellowFlowerImage from "../../images/yellow-flower.jpg";
+import landscapeImage from "@/editor/assets/images/landscape.jpg";
+import yellowFlowerImage from "@/editor/assets/images/yellow-flower.jpg";
 import { $createImageNode, $isImageNode, ImageNode, ImagePayload } from "../../nodes/ImageNode";
 import Button from "../../ui/Button";
 import { DialogActions, DialogButtonsList } from "../../ui/Dialog";

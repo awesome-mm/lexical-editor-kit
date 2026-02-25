@@ -45,7 +45,8 @@ import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "rea
 import { createWebsocketProvider } from "../collaboration";
 import { useSettings } from "../context/SettingsContext";
 import { useSharedHistoryContext } from "../context/SharedHistoryContext";
-import brokenImage from "../images/image-broken.svg";
+import brokenImage from "@/editor/assets/icons/image-broken.svg";
+
 import EmojisPlugin from "../plugins/EmojisPlugin";
 import KeywordsPlugin from "../plugins/KeywordsPlugin";
 import LinkPlugin from "../plugins/LinkPlugin";
