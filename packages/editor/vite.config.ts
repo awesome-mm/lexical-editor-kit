@@ -19,6 +19,8 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
         "react",
         "react-dom",
         "lexical",
@@ -29,7 +31,6 @@ export default defineConfig({
         "@lexical/markdown",
         "@lexical/mark",
         "@lexical/overflow",
-        "@lexical/selection",
         "@lexical/history",
         "@lexical/auto-link",
         "@lexical/table",
@@ -47,10 +48,10 @@ export default defineConfig({
         "@lexical/hashtag",
         "@lexical/selection",
         "@lexical/utils",
-        "@lexical/yjs",
+        "yjs",
         "katex",
         "react-error-boundary",
-        "@floating-ui/react-dom",
+        "@floating-ui/react",
       ],
       output: {
         globals: {
