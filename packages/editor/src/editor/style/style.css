@@ -1188,19 +1188,19 @@ i.page-break,
 }
 
 .emoji.happysmile {
-  background-image: url("@/editor/assets/icons/emoji/1F642.png");
+  background-image: url("@/editor/assets/emoji/1F642.png");
 }
 
 .emoji.veryhappysmile {
-  background-image: url("@/editor/assets/icons/emoji/1F600.png");
+  background-image: url("@/editor/assets/emoji/1F600.png");
 }
 
 .emoji.unhappysmile {
-  background-image: url("@/editor/assets/icons/emoji/1F641.png");
+  background-image: url("@/editor/assets/emoji/1F641.png");
 }
 
 .emoji.heart {
-  background-image: url("@/editor/assets/icons/emoji/2764.png");
+  background-image: url("@/editor/assets/emoji/2764.png");
 }
 
 .keyword {
