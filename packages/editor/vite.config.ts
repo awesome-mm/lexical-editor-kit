@@ -59,10 +59,12 @@ export default defineConfig({
           "react-dom": "ReactDOM",
           lexical: "Lexical",
         },
+        inlineDynamicImports: true,
       },
     },
     sourcemap: true,
     cssCodeSplit: true,
+    cssMinify: true,
   },
   server: {
     open: "./playground/index.html",
