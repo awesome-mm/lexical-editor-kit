@@ -1,4 +1,4 @@
-import "./editor/style/index.css";
+import "./editor/style/style.css";
 import "./editor/style/editor.css";
 
 export { default as Editor } from "./editor/Editor";
