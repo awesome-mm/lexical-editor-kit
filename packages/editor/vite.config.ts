@@ -64,4 +64,7 @@ export default defineConfig({
     sourcemap: true,
     cssCodeSplit: true,
   },
+  server: {
+    open: "./playground/index.html",
+  },
 });

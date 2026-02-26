@@ -1,4 +1,4 @@
-import ExampleTheme from "./ExampleTheme";
+import ExampleTheme from "./themes/ExampleTheme";
 
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { ListItemNode, ListNode } from "@lexical/list";

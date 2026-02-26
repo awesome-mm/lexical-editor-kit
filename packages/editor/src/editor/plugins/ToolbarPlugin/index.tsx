@@ -71,13 +71,12 @@ import { Dispatch, useCallback, useEffect, useState } from "react";
 import { useSettings } from "../../context/SettingsContext";
 import { blockTypeToBlockName, useToolbarState } from "../../context/ToolbarContext";
 import useModal from "../../hooks/useModal";
-import catTypingGif from "../../images/cat-typing.gif";
-import { $createStickyNode } from "../../nodes/StickyNode";
-import DropDown, { DropDownItem } from "../../ui/DropDown";
-import DropdownColorPicker from "../../ui/DropdownColorPicker";
-import { isKeyboardInput } from "../../utils/focusUtils";
-import { getSelectedNode } from "../../utils/getSelectedNode";
-import { sanitizeUrl } from "../../utils/url";
+import catTypingGif from "@/editor/assets/images/cat-typing.gif";
+import DropDown, { DropDownItem } from "@/editor/ui/DropDown";
+import DropdownColorPicker from "@/editor/ui/DropdownColorPicker";
+import { isKeyboardInput } from "@/editor/utils/focusUtils";
+import { getSelectedNode } from "@/editor/utils/getSelectedNode";
+import { sanitizeUrl } from "@/editor/utils/url";
 import { EmbedConfigs } from "../AutoEmbedPlugin";
 import { INSERT_COLLAPSIBLE_COMMAND } from "../CollapsiblePlugin";
 import { InsertEquationDialog } from "../EquationsPlugin";
@@ -99,6 +98,7 @@ import {
   formatParagraph,
   formatQuote,
 } from "./utils";
+import { $createStickyNode } from "@/editor/nodes/StickyNode";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const rootTypeToRootName = {
