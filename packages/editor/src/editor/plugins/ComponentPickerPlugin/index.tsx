@@ -24,7 +24,7 @@ import {
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
 import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
 import { $setBlocksType } from "@lexical/selection";
-import { INSERT_TABLE_COMMAND } from "@lexical/table";
+import { getOptionalTable } from "@/utils/optional";
 import {
   $createParagraphNode,
   $getSelection,
@@ -46,7 +46,7 @@ import { INSERT_IMAGE_COMMAND, InsertImageDialog } from "../ImagesPlugin";
 import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
 import { InsertPollDialog } from "../PollPlugin";
-import { InsertTableDialog } from "../TablePlugin";
+import { LazyInsertTableDialog } from "../LazyInsertTableDialog";
 
 export class ComponentPickerOption extends MenuOption {
   // What shows up in the editor
@@ -122,7 +122,8 @@ export function getDynamicOptions(editor: LexicalEditor, queryString: string) {
 
   const tableMatch = queryString.match(/^([1-9]\d?)(?:x([1-9]\d?)?)?$/);
 
-  if (tableMatch !== null) {
+  const tableApi = getOptionalTable();
+  if (tableMatch !== null && tableApi?.INSERT_TABLE_COMMAND) {
     const rows = tableMatch[1];
     const colOptions = tableMatch[2]
       ? [tableMatch[2]]
@@ -134,7 +135,8 @@ export function getDynamicOptions(editor: LexicalEditor, queryString: string) {
           new ComponentPickerOption(`${rows}x${columns} Table`, {
             icon: <i className="icon table" />,
             keywords: ["table"],
-            onSelect: () => editor.dispatchCommand(INSERT_TABLE_COMMAND, { columns, rows }),
+            onSelect: () =>
+              editor.dispatchCommand(tableApi.INSERT_TABLE_COMMAND, { columns, rows }),
           }),
       ),
     );
@@ -172,14 +174,18 @@ export function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
             }),
         }),
     ),
-    new ComponentPickerOption("Table", {
-      icon: <i className="icon table" />,
-      keywords: ["table", "grid", "spreadsheet", "rows", "columns"],
-      onSelect: () =>
-        showModal("Insert Table", (onClose) => (
-          <InsertTableDialog activeEditor={editor} onClose={onClose} />
-        )),
-    }),
+    ...(getOptionalTable()
+      ? [
+          new ComponentPickerOption("Table", {
+            icon: <i className="icon table" />,
+            keywords: ["table", "grid", "spreadsheet", "rows", "columns"],
+            onSelect: () =>
+              showModal("Insert Table", (onClose) => (
+                <LazyInsertTableDialog activeEditor={editor} onClose={onClose} />
+              )),
+          }),
+        ]
+      : []),
     new ComponentPickerOption("Numbered List", {
       icon: <i className="icon number" />,
       keywords: ["numbered list", "ordered list", "ol"],

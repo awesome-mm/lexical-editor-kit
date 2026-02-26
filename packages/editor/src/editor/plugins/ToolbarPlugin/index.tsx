@@ -28,7 +28,7 @@ import {
   $isParentElementRTL,
   $patchStyleText,
 } from "@lexical/selection";
-import { $isTableNode, $isTableSelection } from "@lexical/table";
+import { getOptionalTable } from "@/utils/optional";
 import {
   $findMatchingParent,
   $getNearestNodeOfType,
@@ -86,7 +86,7 @@ import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
 import { InsertPollDialog } from "../PollPlugin";
 import { SHORTCUTS } from "../ShortcutsPlugin/shortcuts";
-import { InsertTableDialog } from "../TablePlugin";
+import { LazyInsertTableDialog } from "../LazyInsertTableDialog";
 import FontSize, { parseFontSizeForToolbar } from "./fontSize";
 import {
   clearFormatting,
@@ -659,8 +659,9 @@ export default function ToolbarPlugin({
       const isLink = $isLinkNode(parent) || $isLinkNode(node);
       updateToolbarState("isLink", isLink);
 
-      const tableNode = $findMatchingParent(node, $isTableNode);
-      if ($isTableNode(tableNode)) {
+      const table = getOptionalTable();
+      const tableNode = table ? $findMatchingParent(node, table.$isTableNode) : null;
+      if (table && tableNode && table.$isTableNode(tableNode)) {
         updateToolbarState("rootType", "table");
       } else {
         updateToolbarState("rootType", "root");
@@ -711,7 +712,8 @@ export default function ToolbarPlugin({
             : parent?.getFormatType() || "left",
       );
     }
-    if ($isRangeSelection(selection) || $isTableSelection(selection)) {
+    const tableApi = getOptionalTable();
+    if ($isRangeSelection(selection) || (tableApi && tableApi.$isTableSelection(selection))) {
       // Update text format
       updateToolbarState("isBold", selection.hasFormat("bold"));
       updateToolbarState("isItalic", selection.hasFormat("italic"));
@@ -1239,17 +1241,19 @@ export default function ToolbarPlugin({
                   <i className="icon diagram-2" />
                   <span className="text">Excalidraw</span>
                 </DropDownItem>
-                <DropDownItem
-                  onClick={() => {
-                    showModal("Insert Table", (onClose) => (
-                      <InsertTableDialog activeEditor={activeEditor} onClose={onClose} />
-                    ));
-                  }}
-                  className="item"
-                >
-                  <i className="icon table" />
-                  <span className="text">Table</span>
-                </DropDownItem>
+                {getOptionalTable() && (
+                  <DropDownItem
+                    onClick={() => {
+                      showModal("Insert Table", (onClose) => (
+                        <LazyInsertTableDialog activeEditor={activeEditor} onClose={onClose} />
+                      ));
+                    }}
+                    className="item"
+                  >
+                    <i className="icon table" />
+                    <span className="text">Table</span>
+                  </DropDownItem>
+                )}
                 <DropDownItem
                   onClick={() => {
                     showModal("Insert Poll", (onClose) => (

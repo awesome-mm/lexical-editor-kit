@@ -24,3 +24,14 @@ dist-ssr
 *.sw?
 # TS Build Info
 *.tsbuildinfo
+
+# ai agent
+# .cursor
+# .cursorrules    
+# AGENTS.md
+# ARCHITECTURE.md
+
+# Playwright
+playwright-report/
+test-results/
+/e2e/.auth/

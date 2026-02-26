@@ -24,11 +24,9 @@ import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { SelectionAlwaysOnDisplay } from "@lexical/react/LexicalSelectionAlwaysOnDisplay";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
-import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
 import { useLexicalEditable } from "@lexical/react/useLexicalEditable";
 import { CAN_USE_DOM } from "@lexical/utils";
-import { useEffect, useMemo, useState } from "react";
-import { Doc } from "yjs";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 
 import { useSettings } from "./context/SettingsContext";
 import { useSharedHistoryContext } from "./context/SharedHistoryContext";
@@ -64,15 +62,24 @@ import ShortcutsPlugin from "./plugins/ShortcutsPlugin";
 import SpecialTextPlugin from "./plugins/SpecialTextPlugin";
 import SpeechToTextPlugin from "./plugins/SpeechToTextPlugin";
 import TabFocusPlugin from "./plugins/TabFocusPlugin";
-import TableCellActionMenuPlugin from "./plugins/TableActionMenuPlugin";
-import TableCellResizer from "./plugins/TableCellResizer";
-import TableHoverActionsV2Plugin from "./plugins/TableHoverActionsV2Plugin";
 import TableOfContentsPlugin from "./plugins/TableOfContentsPlugin";
-import TableScrollShadowPlugin from "./plugins/TableScrollShadowPlugin";
 import ToolbarPlugin from "./plugins/ToolbarPlugin/index";
 import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import YouTubePlugin from "./plugins/YouTubePlugin";
 import ContentEditable from "./ui/ContentEditable";
+
+import type { TableFeaturePluginsProps } from "./plugins/TableFeaturePlugins";
+
+function TableFeatureFallback(_props: TableFeaturePluginsProps): JSX.Element {
+  return <></>;
+}
+
+const TableFeatureLazy = React.lazy(() =>
+  import("@lexical/table")
+    .then(() => import("./plugins/TableFeaturePlugins"))
+    .then((m) => ({ default: m.TableFeaturePlugins }))
+    .catch(() => ({ default: TableFeatureFallback })),
+);
 
 export default function Editor(): JSX.Element {
   const { historyState } = useSharedHistoryContext();
@@ -190,16 +197,16 @@ export default function Editor(): JSX.Element {
             {/* <ListPlugin hasStrictIndent={listStrictIndent} shouldPreserveNumbering={false} /> */}
             <ListPlugin hasStrictIndent={listStrictIndent} />
             <CheckListPlugin />
-            <TablePlugin
-              hasCellMerge={tableCellMerge}
-              hasCellBackgroundColor={tableCellBackgroundColor}
-              hasHorizontalScroll={tableHorizontalScroll}
-              // ! error
-              // hasFitNestedTables={hasFitNestedTables}
-              hasNestedTables={hasNestedTables}
-            />
-            <TableCellResizer />
-            <TableScrollShadowPlugin />
+            <Suspense fallback={null}>
+              <TableFeatureLazy
+                tableCellMerge={tableCellMerge}
+                tableCellBackgroundColor={tableCellBackgroundColor}
+                tableHorizontalScroll={tableHorizontalScroll}
+                hasNestedTables={hasNestedTables}
+                anchorElem={floatingAnchorElem}
+                isSmallWidthViewport={isSmallWidthViewport}
+              />
+            </Suspense>
             <ImagesPlugin />
             <LinkPlugin hasLinkAttributes={hasLinkAttributes} />
             <PollPlugin />
@@ -221,14 +228,12 @@ export default function Editor(): JSX.Element {
                   isLinkEditMode={isLinkEditMode}
                   setIsLinkEditMode={setIsLinkEditMode}
                 />
-                <TableCellActionMenuPlugin anchorElem={floatingAnchorElem} cellMerge={true} />
               </>
             )}
             {floatingAnchorElem && !isSmallWidthViewport && (
               <>
                 <DraggableBlockPlugin anchorElem={floatingAnchorElem} />
                 <CodeActionMenuPlugin anchorElem={floatingAnchorElem} />
-                <TableHoverActionsV2Plugin anchorElem={floatingAnchorElem} />
                 <FloatingTextFormatToolbarPlugin
                   anchorElem={floatingAnchorElem}
                   setIsLinkEditMode={setIsLinkEditMode}

@@ -14,6 +14,14 @@
     "build:editor": "pnpm --filter lexical-editor-kit build",
     "preview": "pnpm --filter lexical-editor-playground preview",
     "lint": "pnpm --filter lexical-editor-kit run lint; pnpm --filter lexical-editor-playground run lint",
-    "test": "pnpm --filter lexical-editor-kit run test"
+    "test": "pnpm --filter lexical-editor-kit run test",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:no-optional": "PLAYWRIGHT_BASE_URL=http://localhost:4174 playwright test e2e/optional-missing.spec.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
   }
 }

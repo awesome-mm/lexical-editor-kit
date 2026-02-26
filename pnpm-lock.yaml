@@ -6,13 +6,71 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      '@playwright/test':
+        specifier: ^1.58.2
+        version: 1.58.2
 
   apps/website:
     dependencies:
+      '@lexical/clipboard':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/code':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/code-shiki':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/extension':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/file':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/hashtag':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/history':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/html':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/link':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/list':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/mark':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/markdown':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/overflow':
+        specifier: ^0.40.0
+        version: 0.40.0
       '@lexical/react':
         specifier: ^0.40.0
         version: 0.40.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.29)
+      '@lexical/rich-text':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/selection':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/table':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/utils':
+        specifier: ^0.40.0
+        version: 0.40.0
+      '@lexical/yjs':
+        specifier: ^0.40.0
+        version: 0.40.0(yjs@13.6.29)
       lexical:
         specifier: ^0.40.0
         version: 0.40.0
@@ -25,6 +83,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      yjs:
+        specifier: ^13.6.29
+        version: 13.6.29
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.1
@@ -71,6 +132,25 @@ importers:
       '@floating-ui/react':
         specifier: ^0.27.18
         version: 0.27.18(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
+      katex:
+        specifier: ^0.16.33
+        version: 0.16.33
+      prettier:
+        specifier: ^3.8.1
+        version: 3.8.1
+      react-day-picker:
+        specifier: ^9.13.2
+        version: 9.13.2(react@18.3.1)
+      react-error-boundary:
+        specifier: ^6.1.1
+        version: 6.1.1(react@18.3.1)
+    devDependencies:
+      '@eslint/js':
+        specifier: ^9.39.1
+        version: 9.39.3
       '@lexical/clipboard':
         specifier: ^0.40.0
         version: 0.40.0
@@ -110,6 +190,9 @@ importers:
       '@lexical/overflow':
         specifier: ^0.40.0
         version: 0.40.0
+      '@lexical/react':
+        specifier: ^0.40.0
+        version: 0.40.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.29)
       '@lexical/rich-text':
         specifier: ^0.40.0
         version: 0.40.0
@@ -125,31 +208,6 @@ importers:
       '@lexical/yjs':
         specifier: ^0.40.0
         version: 0.40.0(yjs@13.6.29)
-      date-fns:
-        specifier: ^4.1.0
-        version: 4.1.0
-      katex:
-        specifier: ^0.16.33
-        version: 0.16.33
-      prettier:
-        specifier: ^3.8.1
-        version: 3.8.1
-      react-day-picker:
-        specifier: ^9.13.2
-        version: 9.13.2(react@18.3.1)
-      react-error-boundary:
-        specifier: ^6.1.1
-        version: 6.1.1(react@18.3.1)
-      yjs:
-        specifier: ^13.6.29
-        version: 13.6.29
-    devDependencies:
-      '@eslint/js':
-        specifier: ^9.39.1
-        version: 9.39.3
-      '@lexical/react':
-        specifier: ^0.40.0
-        version: 0.40.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.29)
       '@types/node':
         specifier: ^24.10.1
         version: 24.10.13
@@ -198,6 +256,9 @@ importers:
       vite-plugin-svgr:
         specifier: ^4.5.0
         version: 4.5.0(rollup@4.59.0)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13))
+      yjs:
+        specifier: ^13.6.29
+        version: 13.6.29
 
 packages:
 
@@ -661,6 +722,11 @@ packages:
     resolution: {integrity: sha512-wpasbrlfzBnHhyuUunxZcGwOH+bqfxUuavGgwxDlTTlHJMnyF5bUG7ADcuqd3gFLB+dpABL0lWo6VxdSOo7fdg==}
     peerDependencies:
       yjs: '>=13.5.22'
+
+  '@playwright/test@1.58.2':
+    resolution: {integrity: sha512-akea+6bHYBBfA9uQqSYmlJXn61cTa+jbO87xVLCWbTqbWadRVmhxlXATaOjOgcBaWU4ePo0wB41KMFv3o35IXA==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@preact/signals-core@1.13.0':
     resolution: {integrity: sha512-slT6XeTCAbdql61GVLlGU4x7XHI7kCZV5Um5uhE4zLX4ApgiiXc0UYFvVOKq06xcovzp7p+61l68oPi563ARKg==}
@@ -1802,6 +1868,11 @@ packages:
     resolution: {integrity: sha512-PcOxmqwYCW7O2ovKRU8OoQQj2yqTfEB/yeTYk4gPid6dN5ODRfU1hXd9tTVZzax/0NkO7AxpHykvZnT1aYp/BQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -2231,6 +2302,16 @@ packages:
   picomatch@4.0.3:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
+
+  playwright-core@1.58.2:
+    resolution: {integrity: sha512-yZkEtftgwS8CsfYo7nm0KE8jsvm6i/PTgVtB8DL726wNf6H2IMsDuxCpJj59KDaxCtSnrWan2AeDqM7JBaultg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.58.2:
+    resolution: {integrity: sha512-vA30H8Nvkq/cPBnNw4Q8TWz1EJyqgpuinBcHET0YVJVFldr8JDNiU9LaWAE1KqSkRYazuaBhTpB5ZzShOezQ6A==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   png-chunk-text@1.0.0:
     resolution: {integrity: sha512-DEROKU3SkkLGWNMzru3xPVgxyd48UGuMSZvioErCure6yhOc/pRH2ZV+SEn7nmaf7WNf3NdIpH+UTrRdKyq9Lw==}
@@ -3197,6 +3278,10 @@ snapshots:
       '@lexical/selection': 0.40.0
       lexical: 0.40.0
       yjs: 13.6.29
+
+  '@playwright/test@1.58.2':
+    dependencies:
+      playwright: 1.58.2
 
   '@preact/signals-core@1.13.0': {}
 
@@ -4379,6 +4464,9 @@ snapshots:
 
   fractional-indexing@3.2.0: {}
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -4865,6 +4953,14 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.3: {}
+
+  playwright-core@1.58.2: {}
+
+  playwright@1.58.2:
+    dependencies:
+      playwright-core: 1.58.2
+    optionalDependencies:
+      fsevents: 2.3.2
 
   png-chunk-text@1.0.0: {}
 

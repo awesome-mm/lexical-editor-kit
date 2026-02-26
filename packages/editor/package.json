@@ -38,6 +38,57 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@excalidraw/excalidraw": "^0.18.0",
     "@floating-ui/react": "^0.27.18",
+    "date-fns": "^4.1.0",
+    "katex": "^0.16.33",
+    "prettier": "^3.8.1",
+    "react-day-picker": "^9.13.2",
+    "react-error-boundary": "^6.1.1"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "lexical": ">=0.40.0",
+    "@lexical/react": ">=0.40.0",
+    "@lexical/clipboard": ">=0.40.0",
+    "@lexical/code-shiki": ">=0.40.0",
+    "@lexical/extension": ">=0.40.0",
+    "@lexical/file": ">=0.40.0",
+    "@lexical/hashtag": ">=0.40.0",
+    "@lexical/history": ">=0.40.0",
+    "@lexical/html": ">=0.40.0",
+    "@lexical/link": ">=0.40.0",
+    "@lexical/mark": ">=0.40.0",
+    "@lexical/markdown": ">=0.40.0",
+    "@lexical/overflow": ">=0.40.0",
+    "@lexical/rich-text": ">=0.40.0",
+    "@lexical/selection": ">=0.40.0",
+    "@lexical/utils": ">=0.40.0",
+    "@lexical/table": ">=0.40.0",
+    "@lexical/list": ">=0.40.0",
+    "@lexical/code": ">=0.40.0",
+    "@lexical/yjs": ">=0.40.0",
+    "yjs": ">=13.6.0"
+  },
+  "peerDependenciesMeta": {
+    "@lexical/table": {
+      "optional": true
+    },
+    "@lexical/list": {
+      "optional": true
+    },
+    "@lexical/code": {
+      "optional": true
+    },
+    "@lexical/yjs": {
+      "optional": true
+    },
+    "yjs": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "lexical": "^0.40.0",
+    "@lexical/react": "^0.40.0",
     "@lexical/clipboard": "^0.40.0",
     "@lexical/code": "^0.40.0",
     "@lexical/code-shiki": "^0.40.0",
@@ -56,22 +107,7 @@
     "@lexical/table": "^0.40.0",
     "@lexical/utils": "^0.40.0",
     "@lexical/yjs": "^0.40.0",
-    "date-fns": "^4.1.0",
-    "katex": "^0.16.33",
-    "prettier": "^3.8.1",
-    "react-day-picker": "^9.13.2",
-    "react-error-boundary": "^6.1.1",
-    "yjs": "^13.6.29"
-  },
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "lexical": ">=0.40.0",
-    "@lexical/react": ">=0.40.0"
-  },
-  "devDependencies": {
-    "lexical": "^0.40.0",
-    "@lexical/react": "^0.40.0",
+    "yjs": "^13.6.29",
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
     "@types/react": "^18.3.28",

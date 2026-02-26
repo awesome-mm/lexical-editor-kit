@@ -8,16 +8,16 @@
 
 import type { Klass, LexicalNode } from "lexical";
 
-import { CodeHighlightNode, CodeNode } from "@lexical/code";
 import { HashtagNode } from "@lexical/hashtag";
 import { AutoLinkNode, LinkNode } from "@lexical/link";
-import { ListItemNode, ListNode } from "@lexical/list";
 import { MarkNode } from "@lexical/mark";
 import { OverflowNode } from "@lexical/overflow";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
-import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
 
+import { getTableNodes } from "../../../features/table";
+import { getListNodes } from "../../../features/list";
+import { getCodeNodes } from "../../../features/code";
 import { CollapsibleContainerNode } from "../../plugins/CollapsiblePlugin/CollapsibleContainerNode";
 import { CollapsibleContentNode } from "../../plugins/CollapsiblePlugin/CollapsibleContentNode";
 import { CollapsibleTitleNode } from "../../plugins/CollapsiblePlugin/CollapsibleTitleNode";
@@ -38,41 +38,46 @@ import { StickyNode } from "../../nodes/StickyNode";
 import { TweetNode } from "../../nodes/TweetNode";
 import { YouTubeNode } from "../../nodes/YouTubeNode";
 
-const PlaygroundNodes: Array<Klass<LexicalNode>> = [
-  HeadingNode,
-  ListNode,
-  ListItemNode,
-  QuoteNode,
-  CodeNode,
-  TableNode,
-  TableCellNode,
-  TableRowNode,
-  HashtagNode,
-  CodeHighlightNode,
-  AutoLinkNode,
-  LinkNode,
-  OverflowNode,
-  PollNode,
-  StickyNode,
-  ImageNode,
-  MentionNode,
-  EmojiNode,
-  ExcalidrawNode,
-  EquationNode,
-  AutocompleteNode,
-  KeywordNode,
-  HorizontalRuleNode,
-  TweetNode,
-  YouTubeNode,
-  FigmaNode,
-  MarkNode,
-  CollapsibleContainerNode,
-  CollapsibleContentNode,
-  CollapsibleTitleNode,
-  PageBreakNode,
-  LayoutContainerNode,
-  LayoutItemNode,
-  SpecialTextNode,
-];
+function getPlaygroundNodesArray(): Array<Klass<LexicalNode>> {
+  const listNodes = getListNodes();
+  const codeNodes = getCodeNodes();
+  const tableNodes = getTableNodes();
+  return [
+    HeadingNode,
+    QuoteNode,
+    ...(listNodes ?? []),
+    ...(codeNodes ?? []),
+    ...(tableNodes ?? []),
+    HashtagNode,
+    AutoLinkNode,
+    LinkNode,
+    OverflowNode,
+    PollNode,
+    StickyNode,
+    ImageNode,
+    MentionNode,
+    EmojiNode,
+    ExcalidrawNode,
+    EquationNode,
+    AutocompleteNode,
+    KeywordNode,
+    HorizontalRuleNode,
+    TweetNode,
+    YouTubeNode,
+    FigmaNode,
+    MarkNode,
+    CollapsibleContainerNode,
+    CollapsibleContentNode,
+    CollapsibleTitleNode,
+    PageBreakNode,
+    LayoutContainerNode,
+    LayoutItemNode,
+    SpecialTextNode,
+  ];
+}
+
+/** Playground nodes including optional table/list/code when those packages are installed. */
+const PlaygroundNodes = getPlaygroundNodesArray();
 
 export default PlaygroundNodes;
+export { getPlaygroundNodesArray as getPlaygroundNodes };

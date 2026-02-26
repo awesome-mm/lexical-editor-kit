@@ -1,44 +1,43 @@
 import ExampleTheme from "./themes/ExampleTheme";
 
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
-import { ListItemNode, ListNode } from "@lexical/list";
 import { AutoLinkNode, LinkNode } from "@lexical/link";
-import { CodeHighlightNode, CodeNode } from "@lexical/code";
-import { TableCellNode, TableNode, TableRowNode } from "@lexical/table";
-import { EmojiNode } from "../custom/plugin/emoji/EmojiNode";
 import { HashtagNode } from "@lexical/hashtag";
 import { HorizontalRuleNode } from "@lexical/extension";
 
+import { EmojiNode } from "../custom/plugin/emoji/EmojiNode";
+import { getTableNodes } from "../../features/table";
+import { getListNodes } from "../../features/list";
+import { getCodeNodes } from "../../features/code";
 import { initialEditorState } from "./initialEditorState";
 
-export const EditorConfig = {
-  namespace: "MyEditor",
-  // The editor theme
-  theme: ExampleTheme,
-  // 편집 가능 여부 (명시적으로 true)
-  editable: true,
-  // Any custom nodes go here
-  nodes: [
+function getEditorConfigNodes() {
+  const listNodes = getListNodes();
+  const codeNodes = getCodeNodes();
+  const tableNodes = getTableNodes();
+  return [
     HeadingNode,
-    ListNode,
-    ListItemNode,
     QuoteNode,
-    CodeNode,
-    CodeHighlightNode,
-    TableNode,
-    TableCellNode,
-    TableRowNode,
+    ...(listNodes ?? []),
+    ...(codeNodes ?? []),
+    ...(tableNodes ?? []),
     AutoLinkNode,
     LinkNode,
     EmojiNode,
     HashtagNode,
     HorizontalRuleNode,
-  ],
-  // Handling of errors during update
+  ];
+}
+
+export const EditorConfig = {
+  namespace: "MyEditor",
+  theme: ExampleTheme,
+  editable: true,
+  get nodes() {
+    return getEditorConfigNodes();
+  },
   onError(error: Error) {
     throw error;
   },
-
-  // 초기 에디터 상태
   editorState: initialEditorState,
 };
