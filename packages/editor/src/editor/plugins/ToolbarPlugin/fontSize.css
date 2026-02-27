@@ -10,13 +10,13 @@
   font-weight: bold;
   font-size: 14px;
   color: #777;
-  border-radius: 5px;
-  border-color: grey;
-  height: 15px;
+  border-radius: 4px;
+  height: 16px;
   padding: 6px 12px;
   text-align: center;
   width: 20px;
   align-self: center;
+  border: 1px solid #999;
 }
 
 .font-size-input:disabled {

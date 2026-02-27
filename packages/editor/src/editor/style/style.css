@@ -307,7 +307,7 @@ pre::-webkit-scrollbar-thumb {
   color: #050505;
   cursor: pointer;
   line-height: 16px;
-  font-size: 15px;
+  font-size: 16px;
   display: flex;
   align-content: center;
   flex-direction: row;
@@ -632,9 +632,9 @@ i.page-break,
   box-sizing: border-box;
   margin: 12px 12px;
   padding: 8px 12px;
-  border-radius: 15px;
+  border-radius: 16px;
   background-color: #eee;
-  font-size: 15px;
+  font-size: 16px;
   color: rgb(5, 5, 5);
   border: 0;
   outline: 0;
@@ -647,8 +647,8 @@ i.page-break,
   width: calc(100% - 24px);
   margin: 8px 12px;
   padding: 8px 12px;
-  border-radius: 15px;
-  font-size: 15px;
+  border-radius: 16px;
+  font-size: 16px;
   color: rgb(5, 5, 5);
   border: 0;
   outline: 0;
@@ -784,7 +784,7 @@ i.page-break,
   color: #050505;
   cursor: pointer;
   line-height: 16px;
-  font-size: 15px;
+  font-size: 16px;
   display: flex;
   align-content: center;
   flex-direction: row;
@@ -1328,7 +1328,7 @@ i.chevron-down {
   padding: 8px 12px;
   position: relative;
   margin-left: 5px;
-  border-radius: 15px;
+  border-radius: 16px;
   color: #222;
   display: inline-block;
   cursor: pointer;
@@ -1419,7 +1419,7 @@ button.action-button:disabled {
 }
 
 .connecting {
-  font-size: 15px;
+  font-size: 16px;
   color: #999;
   overflow: hidden;
   position: absolute;
@@ -1737,7 +1737,7 @@ button.item.dropdown-item-active i {
   outline: 0px;
   padding: 0;
   user-select: text;
-  font-size: 15px;
+  font-size: 16px;
   white-space: pre-wrap;
   word-break: break-word;
   z-index: 3;

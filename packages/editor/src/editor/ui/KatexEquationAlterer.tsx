@@ -27,9 +27,17 @@ export default function KatexEquationAlterer({
   onConfirm,
   initialEquation = "",
 }: Props): JSX.Element {
+  const DEFAULT_EQUATION = "\\frac{1}{\\sin x}";
+  const DEFAULT_INLINE = true;
+
   const [editor] = useLexicalComposerContext();
   const [equation, setEquation] = useState<string>(initialEquation);
   const [inline, setInline] = useState<boolean>(true);
+
+  React.useEffect(() => {
+    setEquation(DEFAULT_EQUATION);
+    setInline(DEFAULT_INLINE);
+  }, []);
 
   const onClick = useCallback(() => {
     onConfirm(equation, inline);
