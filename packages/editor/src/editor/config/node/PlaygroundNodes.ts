@@ -23,7 +23,6 @@ import { CollapsibleContentNode } from "../../plugins/CollapsiblePlugin/Collapsi
 import { CollapsibleTitleNode } from "../../plugins/CollapsiblePlugin/CollapsibleTitleNode";
 import { AutocompleteNode } from "../../nodes/AutocompleteNode";
 import { EmojiNode } from "../../nodes/EmojiNode";
-import { FigmaNode } from "../../nodes/FigmaNode";
 import { ImageNode } from "../../nodes/ImageNode";
 import { KeywordNode } from "../../nodes/KeywordNode";
 import { LayoutContainerNode } from "../../nodes/LayoutContainerNode";
@@ -32,7 +31,6 @@ import { MentionNode } from "../../nodes/MentionNode";
 import { PageBreakNode } from "../../nodes/PageBreakNode";
 import { SpecialTextNode } from "../../nodes/SpecialTextNode";
 import { StickyNode } from "../../nodes/StickyNode";
-import { TweetNode } from "../../nodes/TweetNode";
 import { YouTubeNode } from "../../nodes/YouTubeNode";
 
 function getPlaygroundNodesArray(): Array<Klass<LexicalNode>> {
@@ -56,9 +54,7 @@ function getPlaygroundNodesArray(): Array<Klass<LexicalNode>> {
     AutocompleteNode,
     KeywordNode,
     HorizontalRuleNode,
-    TweetNode,
     YouTubeNode,
-    FigmaNode,
     MarkNode,
     CollapsibleContainerNode,
     CollapsibleContentNode,

@@ -75,7 +75,6 @@ import {
   useToolbarState,
 } from "../../context/ToolbarContext";
 import useModal from "../../hooks/useModal";
-import catTypingGif from "@/editor/assets/images/cat-typing.gif";
 import DropDown, { DropDownItem } from "@/editor/ui/DropDown";
 import DropdownColorPicker from "@/editor/ui/DropdownColorPicker";
 import { isKeyboardInput } from "@/editor/utils/focusUtils";
@@ -1222,18 +1221,6 @@ export default function ToolbarPlugin({
                 >
                   <i className="icon image" />
                   <span className="text">Image</span>
-                </DropDownItem>
-                <DropDownItem
-                  onClick={() =>
-                    insertGifOnClick({
-                      altText: "Cat typing on a laptop",
-                      src: catTypingGif,
-                    })
-                  }
-                  className="item"
-                >
-                  <i className="icon gif" />
-                  <span className="text">GIF</span>
                 </DropDownItem>
                 <DropDownItem
                   onClick={() => {
