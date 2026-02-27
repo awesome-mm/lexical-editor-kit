@@ -32,7 +32,6 @@ import { LayoutContainerNode } from "../../nodes/LayoutContainerNode";
 import { LayoutItemNode } from "../../nodes/LayoutItemNode";
 import { MentionNode } from "../../nodes/MentionNode";
 import { PageBreakNode } from "../../nodes/PageBreakNode";
-import { PollNode } from "../../nodes/PollNode";
 import { SpecialTextNode } from "../../nodes/SpecialTextNode";
 import { StickyNode } from "../../nodes/StickyNode";
 import { TweetNode } from "../../nodes/TweetNode";
@@ -52,7 +51,6 @@ function getPlaygroundNodesArray(): Array<Klass<LexicalNode>> {
     AutoLinkNode,
     LinkNode,
     OverflowNode,
-    PollNode,
     StickyNode,
     ImageNode,
     MentionNode,

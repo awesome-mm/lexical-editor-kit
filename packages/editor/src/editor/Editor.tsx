@@ -57,7 +57,6 @@ import MarkdownShortcutPlugin from "./plugins/MarkdownShortcutPlugin";
 import { MaxLengthPlugin } from "./plugins/MaxLengthPlugin";
 import MentionsPlugin from "./plugins/MentionsPlugin";
 import PageBreakPlugin from "./plugins/PageBreakPlugin";
-import PollPlugin from "./plugins/PollPlugin";
 import ShortcutsPlugin from "./plugins/ShortcutsPlugin";
 import SpecialTextPlugin from "./plugins/SpecialTextPlugin";
 import TabFocusPlugin from "./plugins/TabFocusPlugin";
@@ -191,8 +190,6 @@ export default function Editor(): JSX.Element {
             <MarkdownShortcutPlugin />
             {isCodeHighlighted &&
               (isCodeShiki ? <CodeHighlightShikiPlugin /> : <CodeHighlightPrismPlugin />)}
-            {/* shouldPreserveNumbering 오류 발생 */}
-            {/* <ListPlugin hasStrictIndent={listStrictIndent} shouldPreserveNumbering={false} /> */}
             <ListPlugin hasStrictIndent={listStrictIndent} />
             <CheckListPlugin />
             <Suspense fallback={null}>
@@ -207,7 +204,6 @@ export default function Editor(): JSX.Element {
             </Suspense>
             <ImagesPlugin />
             <LinkPlugin hasLinkAttributes={hasLinkAttributes} />
-            <PollPlugin />
             <YouTubePlugin />
             <FigmaPlugin />
             <ClickableLinkPlugin disabled={isEditable} />

@@ -88,7 +88,6 @@ import { INSERT_EXCALIDRAW_COMMAND } from "../ExcalidrawPlugin";
 import { INSERT_IMAGE_COMMAND, InsertImageDialog, InsertImagePayload } from "../ImagesPlugin";
 import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
-import { InsertPollDialog } from "../PollPlugin";
 import { SHORTCUTS } from "../ShortcutsPlugin/shortcuts";
 import { LazyInsertTableDialog } from "../LazyInsertTableDialog";
 import FontSize, { parseFontSizeForToolbar } from "./fontSize";
@@ -1258,17 +1257,7 @@ export default function ToolbarPlugin({
                     <span className="text">Table</span>
                   </DropDownItem>
                 )}
-                <DropDownItem
-                  onClick={() => {
-                    showModal("Insert Poll", (onClose) => (
-                      <InsertPollDialog activeEditor={activeEditor} onClose={onClose} />
-                    ));
-                  }}
-                  className="item"
-                >
-                  <i className="icon poll" />
-                  <span className="text">Poll</span>
-                </DropDownItem>
+
                 <DropDownItem
                   onClick={() => {
                     showModal("Insert Columns Layout", (onClose) => (
