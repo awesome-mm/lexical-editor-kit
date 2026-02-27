@@ -60,7 +60,6 @@ import PageBreakPlugin from "./plugins/PageBreakPlugin";
 import PollPlugin from "./plugins/PollPlugin";
 import ShortcutsPlugin from "./plugins/ShortcutsPlugin";
 import SpecialTextPlugin from "./plugins/SpecialTextPlugin";
-import SpeechToTextPlugin from "./plugins/SpeechToTextPlugin";
 import TabFocusPlugin from "./plugins/TabFocusPlugin";
 import TableOfContentsPlugin from "./plugins/TableOfContentsPlugin";
 import ToolbarPlugin from "./plugins/ToolbarPlugin/index";
@@ -174,7 +173,6 @@ export default function Editor(): JSX.Element {
         <EmojisPlugin />
         <HashtagPlugin />
         <KeywordsPlugin />
-        <SpeechToTextPlugin />
         <AutoLinkPlugin />
 
         {isRichText ? (
