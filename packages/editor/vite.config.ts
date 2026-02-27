@@ -4,16 +4,19 @@ import path from "path";
 import svgr from "vite-plugin-svgr";
 import visualizer from "rollup-plugin-visualizer";
 
+const isAnalyze = process.env.VITE_ANALYZE === "true";
+
 export default defineConfig({
   plugins: [
     react(),
     svgr(),
-    visualizer({
-      filename: "./report.html",
-      open: true,
-      brotliSize: true,
-    }),
-  ],
+    isAnalyze &&
+      visualizer({
+        filename: "./report.html",
+        open: true,
+        brotliSize: true,
+      }),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),

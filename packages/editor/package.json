@@ -31,7 +31,8 @@
     "dev": "vite",
     "build": "vite build && tsc -p tsconfig.build.json",
     "lint": "eslint src",
-    "test": "vitest"
+    "test": "vitest",
+    "analyze": "cross-env VITE_ANALYZE=true vite build"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -102,6 +103,7 @@
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^5.1.4",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
