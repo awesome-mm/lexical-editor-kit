@@ -41,7 +41,6 @@ import catTypingGif from "@/editor/assets/images/cat-typing.gif";
 import { EmbedConfigs } from "../AutoEmbedPlugin";
 import { INSERT_COLLAPSIBLE_COMMAND } from "../CollapsiblePlugin";
 import { InsertEquationDialog } from "../EquationsPlugin";
-import { INSERT_EXCALIDRAW_COMMAND } from "../ExcalidrawPlugin";
 import { INSERT_IMAGE_COMMAND, InsertImageDialog } from "../ImagesPlugin";
 import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
@@ -241,11 +240,7 @@ export function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       keywords: ["page break", "divider"],
       onSelect: () => editor.dispatchCommand(INSERT_PAGE_BREAK, undefined),
     }),
-    new ComponentPickerOption("Excalidraw", {
-      icon: <i className="icon diagram-2" />,
-      keywords: ["excalidraw", "diagram", "drawing"],
-      onSelect: () => editor.dispatchCommand(INSERT_EXCALIDRAW_COMMAND, undefined),
-    }),
+
     ...EmbedConfigs.map(
       (embedConfig) =>
         new ComponentPickerOption(`Embed ${embedConfig.contentName}`, {

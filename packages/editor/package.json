@@ -36,20 +36,17 @@
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
-    "@excalidraw/excalidraw": "^0.18.0",
     "@floating-ui/react": "^0.27.18",
     "date-fns": "^4.1.0",
     "katex": "^0.16.33",
     "prettier": "^3.8.1",
     "react-day-picker": "^9.13.2",
-    "react-error-boundary": "^6.1.1"
+    "react-error-boundary": "^6.1.1",
+    "rollup-plugin-visualizer": "^7.0.0"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "lexical": ">=0.40.0",
-    "@lexical/react": ">=0.40.0",
     "@lexical/clipboard": ">=0.40.0",
+    "@lexical/code": ">=0.40.0",
     "@lexical/code-shiki": ">=0.40.0",
     "@lexical/extension": ">=0.40.0",
     "@lexical/file": ">=0.40.0",
@@ -57,16 +54,19 @@
     "@lexical/history": ">=0.40.0",
     "@lexical/html": ">=0.40.0",
     "@lexical/link": ">=0.40.0",
+    "@lexical/list": ">=0.40.0",
     "@lexical/mark": ">=0.40.0",
     "@lexical/markdown": ">=0.40.0",
     "@lexical/overflow": ">=0.40.0",
+    "@lexical/react": ">=0.40.0",
     "@lexical/rich-text": ">=0.40.0",
     "@lexical/selection": ">=0.40.0",
-    "@lexical/utils": ">=0.40.0",
     "@lexical/table": ">=0.40.0",
-    "@lexical/list": ">=0.40.0",
-    "@lexical/code": ">=0.40.0",
+    "@lexical/utils": ">=0.40.0",
     "@lexical/yjs": ">=0.40.0",
+    "lexical": ">=0.40.0",
+    "react": ">=18",
+    "react-dom": ">=18",
     "yjs": ">=13.6.0"
   },
   "peerDependenciesMeta": {
@@ -87,8 +87,7 @@
     }
   },
   "devDependencies": {
-    "lexical": "^0.40.0",
-    "@lexical/react": "^0.40.0",
+    "@eslint/js": "^9.39.1",
     "@lexical/clipboard": "^0.40.0",
     "@lexical/code": "^0.40.0",
     "@lexical/code-shiki": "^0.40.0",
@@ -102,13 +101,12 @@
     "@lexical/mark": "^0.40.0",
     "@lexical/markdown": "^0.40.0",
     "@lexical/overflow": "^0.40.0",
+    "@lexical/react": "^0.40.0",
     "@lexical/rich-text": "^0.40.0",
     "@lexical/selection": "^0.40.0",
     "@lexical/table": "^0.40.0",
     "@lexical/utils": "^0.40.0",
     "@lexical/yjs": "^0.40.0",
-    "yjs": "^13.6.29",
-    "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
@@ -118,11 +116,13 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "globals": "^16.5.0",
+    "lexical": "^0.40.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
     "vite": "^7.3.1",
-    "vite-plugin-svgr": "^4.5.0"
+    "vite-plugin-svgr": "^4.5.0",
+    "yjs": "^13.6.29"
   }
 }

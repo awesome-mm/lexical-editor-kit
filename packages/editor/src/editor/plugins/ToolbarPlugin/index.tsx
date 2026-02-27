@@ -84,7 +84,6 @@ import { sanitizeUrl } from "@/editor/utils/url";
 import { EmbedConfigs } from "../AutoEmbedPlugin";
 import { INSERT_COLLAPSIBLE_COMMAND } from "../CollapsiblePlugin";
 import { InsertEquationDialog } from "../EquationsPlugin";
-import { INSERT_EXCALIDRAW_COMMAND } from "../ExcalidrawPlugin";
 import { INSERT_IMAGE_COMMAND, InsertImageDialog, InsertImagePayload } from "../ImagesPlugin";
 import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
@@ -1237,13 +1236,7 @@ export default function ToolbarPlugin({
                   <i className="icon gif" />
                   <span className="text">GIF</span>
                 </DropDownItem>
-                <DropDownItem
-                  onClick={() => dispatchToolbarCommand(INSERT_EXCALIDRAW_COMMAND)}
-                  className="item"
-                >
-                  <i className="icon diagram-2" />
-                  <span className="text">Excalidraw</span>
-                </DropDownItem>
+
                 {getOptionalTable() && (
                   <DropDownItem
                     onClick={() => {
