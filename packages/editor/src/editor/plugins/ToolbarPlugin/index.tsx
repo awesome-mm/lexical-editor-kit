@@ -1235,21 +1235,17 @@ export default function ToolbarPlugin({
                   <i className="icon gif" />
                   <span className="text">GIF</span>
                 </DropDownItem>
-
-                {getOptionalTable() && (
-                  <DropDownItem
-                    onClick={() => {
-                      showModal("Insert Table", (onClose) => (
-                        <LazyInsertTableDialog activeEditor={activeEditor} onClose={onClose} />
-                      ));
-                    }}
-                    className="item"
-                  >
-                    <i className="icon table" />
-                    <span className="text">Table</span>
-                  </DropDownItem>
-                )}
-
+                <DropDownItem
+                  onClick={() => {
+                    showModal("Insert Table", (onClose) => (
+                      <LazyInsertTableDialog activeEditor={activeEditor} onClose={onClose} />
+                    ));
+                  }}
+                  className="item"
+                >
+                  <i className="icon table" />
+                  <span className="text">Table</span>
+                </DropDownItem>
                 <DropDownItem
                   onClick={() => {
                     showModal("Insert Columns Layout", (onClose) => (
@@ -1261,7 +1257,6 @@ export default function ToolbarPlugin({
                   <i className="icon columns" />
                   <span className="text">Columns Layout</span>
                 </DropDownItem>
-
                 <DropDownItem
                   onClick={() => {
                     editor.update(() => {

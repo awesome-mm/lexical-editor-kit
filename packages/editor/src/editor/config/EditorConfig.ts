@@ -5,7 +5,7 @@ import { AutoLinkNode, LinkNode } from "@lexical/link";
 import { HashtagNode } from "@lexical/hashtag";
 import { HorizontalRuleNode } from "@lexical/extension";
 
-import { EmojiNode } from "../custom/plugin/emoji/EmojiNode";
+// import { EmojiNode } from "../custom/plugin/emoji/EmojiNode";
 import { getTableNodes } from "../../features/table";
 import { getListNodes } from "../../features/list";
 import { getCodeNodes } from "../../features/code";
@@ -23,7 +23,7 @@ function getEditorConfigNodes() {
     ...(tableNodes ?? []),
     AutoLinkNode,
     LinkNode,
-    EmojiNode,
+    // EmojiNode,
     HashtagNode,
     HorizontalRuleNode,
   ];

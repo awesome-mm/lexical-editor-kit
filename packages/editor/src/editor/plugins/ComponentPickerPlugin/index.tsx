@@ -37,7 +37,6 @@ import { useCallback, useMemo, useState } from "react";
 import * as ReactDOM from "react-dom";
 
 import useModal from "../../hooks/useModal";
-import catTypingGif from "@/editor/assets/images/cat-typing.gif";
 import { EmbedConfigs } from "../AutoEmbedPlugin";
 import { INSERT_COLLAPSIBLE_COMMAND } from "../CollapsiblePlugin";
 import { INSERT_IMAGE_COMMAND, InsertImageDialog } from "../ImagesPlugin";
@@ -248,16 +247,7 @@ export function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
           onSelect: () => editor.dispatchCommand(INSERT_EMBED_COMMAND, embedConfig.type),
         }),
     ),
-
-    new ComponentPickerOption("GIF", {
-      icon: <i className="icon gif" />,
-      keywords: ["gif", "animate", "image", "file"],
-      onSelect: () =>
-        editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
-          altText: "Cat typing on a laptop",
-          src: catTypingGif,
-        }),
-    }),
+   
     new ComponentPickerOption("Image", {
       icon: <i className="icon image" />,
       keywords: ["image", "photo", "picture", "file"],
