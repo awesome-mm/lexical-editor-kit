@@ -68,9 +68,6 @@ importers:
       '@lexical/utils':
         specifier: ^0.40.0
         version: 0.40.0
-      '@lexical/yjs':
-        specifier: ^0.40.0
-        version: 0.40.0(yjs@13.6.29)
       lexical:
         specifier: ^0.40.0
         version: 0.40.0
@@ -83,9 +80,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
-      yjs:
-        specifier: ^13.6.29
-        version: 13.6.29
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.1
@@ -205,9 +199,6 @@ importers:
       '@lexical/utils':
         specifier: ^0.40.0
         version: 0.40.0
-      '@lexical/yjs':
-        specifier: ^0.40.0
-        version: 0.40.0(yjs@13.6.29)
       '@types/node':
         specifier: ^24.10.1
         version: 24.10.13
@@ -256,9 +247,6 @@ importers:
       vite-plugin-svgr:
         specifier: ^4.5.0
         version: 4.5.0(rollup@4.59.0)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13))
-      yjs:
-        specifier: ^13.6.29
-        version: 13.6.29
 
 packages:
 

@@ -36,3 +36,6 @@ ARCHITECTURE.md
 playwright-report/
 test-results/
 /e2e/.auth/
+
+# Report
+/report.html
