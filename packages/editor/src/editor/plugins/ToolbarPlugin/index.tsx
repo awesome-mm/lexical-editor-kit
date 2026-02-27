@@ -83,7 +83,6 @@ import { getSelectedNode } from "@/editor/utils/getSelectedNode";
 import { sanitizeUrl } from "@/editor/utils/url";
 import { EmbedConfigs } from "../AutoEmbedPlugin";
 import { INSERT_COLLAPSIBLE_COMMAND } from "../CollapsiblePlugin";
-import { InsertEquationDialog } from "../EquationsPlugin";
 import { INSERT_IMAGE_COMMAND, InsertImageDialog, InsertImagePayload } from "../ImagesPlugin";
 import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
@@ -1263,17 +1262,6 @@ export default function ToolbarPlugin({
                   <span className="text">Columns Layout</span>
                 </DropDownItem>
 
-                <DropDownItem
-                  onClick={() => {
-                    showModal("Insert Equation", (onClose) => (
-                      <InsertEquationDialog activeEditor={activeEditor} onClose={onClose} />
-                    ));
-                  }}
-                  className="item"
-                >
-                  <i className="icon equation" />
-                  <span className="text">Equation</span>
-                </DropDownItem>
                 <DropDownItem
                   onClick={() => {
                     editor.update(() => {

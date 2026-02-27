@@ -39,8 +39,6 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@floating-ui/react": "^0.27.18",
     "date-fns": "^4.1.0",
-    "katex": "^0.16.33",
-    "prettier": "^3.8.1",
     "react-day-picker": "^9.13.2",
     "react-error-boundary": "^6.1.1",
     "rollup-plugin-visualizer": "^7.0.0"

@@ -23,7 +23,6 @@ import { CollapsibleContentNode } from "../../plugins/CollapsiblePlugin/Collapsi
 import { CollapsibleTitleNode } from "../../plugins/CollapsiblePlugin/CollapsibleTitleNode";
 import { AutocompleteNode } from "../../nodes/AutocompleteNode";
 import { EmojiNode } from "../../nodes/EmojiNode";
-import { EquationNode } from "../../nodes/EquationNode";
 import { FigmaNode } from "../../nodes/FigmaNode";
 import { ImageNode } from "../../nodes/ImageNode";
 import { KeywordNode } from "../../nodes/KeywordNode";
@@ -54,7 +53,6 @@ function getPlaygroundNodesArray(): Array<Klass<LexicalNode>> {
     ImageNode,
     MentionNode,
     EmojiNode,
-    EquationNode,
     AutocompleteNode,
     KeywordNode,
     HorizontalRuleNode,
