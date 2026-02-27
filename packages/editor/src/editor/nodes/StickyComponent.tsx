@@ -23,7 +23,6 @@ import { $getNodeByKey } from "lexical";
 import * as React from "react";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
-import { createWebsocketProvider } from "../collaboration";
 import { useSharedHistoryContext } from "../context/SharedHistoryContext";
 import StickyEditorTheme from "../config/themes/StickyEditorTheme";
 import ContentEditable from "../ui/ContentEditable";
@@ -229,15 +228,7 @@ export default function StickyComponent({
           <i className="bucket" />
         </button>
         <LexicalNestedComposer initialEditor={caption} initialTheme={StickyEditorTheme}>
-          {isCollabActive ? (
-            <CollaborationPlugin
-              id={caption.getKey()}
-              providerFactory={createWebsocketProvider}
-              shouldBootstrap={true}
-            />
-          ) : (
-            <HistoryPlugin externalHistoryState={historyState} />
-          )}
+          <HistoryPlugin externalHistoryState={historyState} />
           <PlainTextPlugin
             contentEditable={
               <ContentEditable

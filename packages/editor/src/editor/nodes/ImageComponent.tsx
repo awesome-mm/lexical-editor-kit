@@ -42,7 +42,6 @@ import {
 import * as React from "react";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { createWebsocketProvider } from "../collaboration";
 import { useSettings } from "../context/SettingsContext";
 import { useSharedHistoryContext } from "../context/SharedHistoryContext";
 import brokenImage from "@/editor/assets/icons/image-broken.svg";
@@ -456,15 +455,8 @@ export default function ImageComponent({
               <EmojisPlugin />
               <HashtagPlugin />
               <KeywordsPlugin />
-              {isCollabActive ? (
-                <CollaborationPlugin
-                  id={caption.getKey()}
-                  providerFactory={createWebsocketProvider}
-                  shouldBootstrap={true}
-                />
-              ) : (
-                <HistoryPlugin externalHistoryState={historyState} />
-              )}
+
+              <HistoryPlugin externalHistoryState={historyState} />
               <RichTextPlugin
                 contentEditable={
                   <ContentEditable

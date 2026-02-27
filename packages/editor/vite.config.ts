@@ -41,7 +41,6 @@ export default defineConfig({
         "@lexical/overflow",
         "@lexical/history",
         "@lexical/utils",
-        "@lexical/yjs",
         "@lexical/list",
         "@lexical/link",
         "@lexical/code",
@@ -51,7 +50,6 @@ export default defineConfig({
         "@lexical/file",
         "@lexical/hashtag",
         "@lexical/selection",
-        "yjs",
       ],
       output: {
         globals: {

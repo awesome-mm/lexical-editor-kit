@@ -66,9 +66,7 @@ test.describe("에디터 기본 로드", () => {
       (e) =>
         e.includes("@lexical/code") ||
         e.includes("@lexical/list") ||
-        e.includes("@lexical/table") ||
-        e.includes("@lexical/yjs") ||
-        e.includes("Cannot find module 'yjs'"),
+        e.includes("@lexical/table"),
     );
 
     expect(
