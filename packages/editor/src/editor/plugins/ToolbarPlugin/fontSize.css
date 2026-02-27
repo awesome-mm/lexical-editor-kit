@@ -13,7 +13,7 @@
   border-radius: 5px;
   border-color: grey;
   height: 15px;
-  padding: 2px 4px;
+  padding: 6px 12px;
   text-align: center;
   width: 20px;
   align-self: center;
@@ -47,11 +47,11 @@ input[type='number'] {
 }
 
 button.font-decrement {
-  padding: 0px;
-  margin-right: 3px;
+  padding: 2px 6px;
+  margin-right: 2px;
 }
 
 button.font-increment {
-  padding: 0px;
-  margin-left: 3px;
+  padding: 2px 6px;
+  margin-left: 2px;
 }

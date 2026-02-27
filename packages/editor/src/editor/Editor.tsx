@@ -257,10 +257,7 @@ export default function Editor(): JSX.Element {
         <div>{showTableOfContents && <TableOfContentsPlugin />}</div>
         {shouldUseLexicalContextMenu && <ContextMenuPlugin />}
         {shouldAllowHighlightingWithBrackets && <SpecialTextPlugin />}
-        <ActionsPlugin
-          shouldPreserveNewLinesInMarkdown={shouldPreserveNewLinesInMarkdown}
-          useCollabV2={useCollabV2}
-        />
+        <ActionsPlugin shouldPreserveNewLinesInMarkdown={shouldPreserveNewLinesInMarkdown} />
       </div>
       {showTreeView && <TreeViewPlugin />}
     </>

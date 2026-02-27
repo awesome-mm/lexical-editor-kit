@@ -26,10 +26,11 @@ dist-ssr
 *.tsbuildinfo
 
 # ai agent
-# .cursor
-# .cursorrules    
-# AGENTS.md
-# ARCHITECTURE.md
+.cursor
+.cursorrules    
+AGENTS.md
+ARCHITECTURE.md
+.cursorrules
 
 # Playwright
 playwright-report/
