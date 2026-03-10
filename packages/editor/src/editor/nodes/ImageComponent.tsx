@@ -11,8 +11,6 @@ import type { JSX } from "react";
 
 import "./ImageNode.css";
 
-import { useCollaborationContext } from "@lexical/react/LexicalCollaborationContext";
-import { CollaborationPlugin } from "@lexical/react/LexicalCollaborationPlugin";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HashtagPlugin } from "@lexical/react/LexicalHashtagPlugin";
@@ -239,7 +237,6 @@ export default function ImageComponent({
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [isSelected, setSelected, clearSelection] = useLexicalNodeSelection(nodeKey);
   const [isResizing, setIsResizing] = useState<boolean>(false);
-  const { isCollabActive } = useCollaborationContext();
   const [editor] = useLexicalComposerContext();
   const activeEditorRef = useRef<LexicalEditor | null>(null);
   const [isLoadError, setIsLoadError] = useState<boolean>(false);

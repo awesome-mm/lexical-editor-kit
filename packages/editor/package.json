@@ -19,13 +19,13 @@
   ],
   "keywords": [
     "lexical",
+    "text-editor",
     "editor",
+    "editor-kit",
+    "editor-sdk",
+    "rich-editor",
     "rich-text",
-    "plugin",
-    "table",
-    "list",
-    "code-block",
-    "react"
+    "code-block"
   ],
   "scripts": {
     "dev": "vite",
@@ -78,7 +78,6 @@
     }
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
     "@lexical/clipboard": "^0.40.0",
     "@lexical/code": "^0.40.0",
     "@lexical/code-shiki": "^0.40.0",
@@ -97,6 +96,8 @@
     "@lexical/selection": "^0.40.0",
     "@lexical/table": "^0.40.0",
     "@lexical/utils": "^0.40.0",
+    "lexical": "^0.40.0",
+    "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
@@ -107,7 +108,6 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "globals": "^16.5.0",
-    "lexical": "^0.40.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "~5.9.3",

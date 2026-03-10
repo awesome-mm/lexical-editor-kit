@@ -82,8 +82,6 @@ export default function Editor(): JSX.Element {
     settings: {
       isCodeHighlighted,
       isCodeShiki,
-      isCollab,
-      useCollabV2,
       isAutocomplete,
       isMaxLength,
       isCharLimit,
@@ -105,11 +103,7 @@ export default function Editor(): JSX.Element {
     },
   } = useSettings();
   const isEditable = useLexicalEditable();
-  const placeholder = isCollab
-    ? "Enter some collaborative rich text..."
-    : isRichText
-      ? "Enter some rich text..."
-      : "Enter some plain text...";
+  const placeholder = isRichText ? "Enter some rich text..." : "Enter some plain text...";
   const [floatingAnchorElem, setFloatingAnchorElem] = useState<HTMLDivElement | null>(null);
   const [isSmallWidthViewport, setIsSmallWidthViewport] = useState<boolean>(false);
   const [editor] = useLexicalComposerContext();

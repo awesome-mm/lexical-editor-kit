@@ -130,6 +130,22 @@ export default function ColorPicker({
           />
         ))}
       </div>
+      {/* <div className="color-picker-basic-color">
+        <button
+          className={""}
+          onClick={() => {
+
+            editor.update(() => {
+              const selection = $getSelection();
+              if ($isRangeSelection(selection)) {
+                $patchStyleText(selection, {
+                  backgroundColor: null,
+                });
+              }
+            });
+          }}
+        />
+      </div> */}
       <MoveWrapper
         className="color-picker-saturation"
         style={{ backgroundColor: `hsl(${selfColor.hsv.h}, 100%, 50%)` }}

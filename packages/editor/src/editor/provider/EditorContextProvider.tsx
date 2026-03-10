@@ -8,7 +8,6 @@
 
 import { $createLinkNode } from "@lexical/link";
 import { $createListItemNode, $createListNode } from "@lexical/list";
-import { LexicalCollaboration } from "@lexical/react/LexicalCollaborationContext";
 import { LexicalExtensionComposer } from "@lexical/react/LexicalExtensionComposer";
 import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
 import { $createParagraphNode, $createTextNode, $getRoot, defineExtension } from "lexical";
@@ -107,13 +106,13 @@ export function EditorContextProvider({
   children: React.ReactNode;
 }): JSX.Element {
   const {
-    settings: { isCollab, emptyEditor },
+    settings: { emptyEditor },
   } = useSettings();
 
   const app = useMemo(
     () =>
       defineExtension({
-        $initialEditorState: isCollab ? null : emptyEditor ? undefined : $prepopulatedRichText,
+        $initialEditorState: emptyEditor ? undefined : $prepopulatedRichText,
         // dependencies: [],
         html: buildHTMLConfig(),
         name: "@lexical/playground",
@@ -121,22 +120,20 @@ export function EditorContextProvider({
         nodes: PlaygroundNodes,
         theme: PlaygroundEditorTheme,
       }),
-    [emptyEditor, isCollab],
+    [emptyEditor],
   );
 
   return (
-    <LexicalCollaboration>
-      <LexicalExtensionComposer extension={app} contentEditable={null}>
-        <SharedHistoryContext>
-          <FlashMessageContext>
-            <TableContext>
-              <ToolbarContext>
-                <div className="editor-shell">{children}</div>
-              </ToolbarContext>
-            </TableContext>
-          </FlashMessageContext>
-        </SharedHistoryContext>
-      </LexicalExtensionComposer>
-    </LexicalCollaboration>
+    <LexicalExtensionComposer extension={app} contentEditable={null}>
+      <SharedHistoryContext>
+        <FlashMessageContext>
+          <TableContext>
+            <ToolbarContext>
+              <div className="editor-shell">{children}</div>
+            </ToolbarContext>
+          </TableContext>
+        </FlashMessageContext>
+      </SharedHistoryContext>
+    </LexicalExtensionComposer>
   );
 }

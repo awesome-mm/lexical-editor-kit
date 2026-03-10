@@ -11,7 +11,6 @@ import type { JSX } from "react";
 
 import { $createCodeNode, $isCodeNode } from "@lexical/code";
 import { $convertFromMarkdownString, $convertToMarkdownString } from "@lexical/markdown";
-import { useCollaborationContext } from "@lexical/react/LexicalCollaborationContext";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "@lexical/utils";
 import { $createTextNode, $getRoot, $isParagraphNode, CLEAR_EDITOR_COMMAND } from "lexical";
@@ -29,11 +28,9 @@ export default function ActionsPlugin({
 }): JSX.Element {
   const [editor] = useLexicalComposerContext();
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
-  const [connected, setConnected] = useState(false);
   const [isEditorEmpty, setIsEditorEmpty] = useState(true);
   const [modal, showModal] = useModal();
   const showFlashMessage = useFlashMessage();
-  const { isCollabActive } = useCollaborationContext();
 
   useEffect(() => {
     return mergeRegister(

@@ -31,8 +31,7 @@ export class AutocompleteNode extends TextNode {
    * A unique uuid is generated for each session and assigned to the instance.
    * This helps to:
    * - Ensures max one Autocomplete node per session.
-   * - Ensure that when collaboration is enabled, this node is not shown in
-   *   other sessions.
+   * - this node is not shown in other sessions.
    * See https://github.com/facebook/lexical/blob/main/packages/lexical-playground/src/plugins/AutocompletePlugin/index.tsx
    */
   __uuid: string;
