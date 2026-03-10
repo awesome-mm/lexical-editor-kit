@@ -47,10 +47,10 @@ import {
 } from "lexical";
 import * as React from "react";
 
-import { EmojiNode } from "./EmojiNode";
-import { KeywordNode } from "./KeywordNode";
+import { EmojiNode } from "../EmojiNode/EmojiNode";
+import { KeywordNode } from "../KeywordNode/KeywordNode";
 
-const ImageComponent = React.lazy(() => import("./ImageComponent"));
+const ImageComponent = React.lazy(() => import("../ImageComponent/ImageComponent"));
 
 export interface ImagePayload {
   altText: string;

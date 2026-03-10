@@ -29,12 +29,12 @@ import {
   $createLayoutContainerNode,
   $isLayoutContainerNode,
   LayoutContainerNode,
-} from "../../nodes/LayoutContainerNode";
+} from "../../nodes/LayoutContainerNode/LayoutContainerNode";
 import {
   $createLayoutItemNode,
   $isLayoutItemNode,
   LayoutItemNode,
-} from "../../nodes/LayoutItemNode";
+} from "../../nodes/LayoutItemNode/LayoutItemNode";
 
 export const INSERT_LAYOUT_COMMAND: LexicalCommand<string> = createCommand<string>();
 

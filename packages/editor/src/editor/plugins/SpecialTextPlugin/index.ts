@@ -12,7 +12,10 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { TextNode } from "lexical";
 import { useEffect } from "react";
 
-import { $createSpecialTextNode, SpecialTextNode } from "../../nodes/SpecialTextNode";
+import {
+  $createSpecialTextNode,
+  SpecialTextNode,
+} from "../../nodes/SpecialTextNode/SpecialTextNode";
 
 const BRACKETED_TEXT_REGEX = /\[([^\[\]]+)\]/; // eslint-disable-line
 

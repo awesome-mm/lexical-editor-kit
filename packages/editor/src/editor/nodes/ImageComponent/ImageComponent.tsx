@@ -40,18 +40,18 @@ import {
 import * as React from "react";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { useSettings } from "../context/SettingsContext";
-import { useSharedHistoryContext } from "../context/SharedHistoryContext";
+import { useSettings } from "../../context/SettingsContext";
+import { useSharedHistoryContext } from "../../context/SharedHistoryContext";
 import brokenImage from "@/editor/assets/icons/image-broken.svg";
 
-import EmojisPlugin from "../plugins/EmojisPlugin";
-import KeywordsPlugin from "../plugins/KeywordsPlugin";
-import LinkPlugin from "../plugins/LinkPlugin";
-import MentionsPlugin from "../plugins/MentionsPlugin";
-import TreeViewPlugin from "../plugins/TreeViewPlugin";
-import ContentEditable from "../ui/ContentEditable";
-import ImageResizer from "../ui/ImageResizer";
-import { $isCaptionEditorEmpty, $isImageNode } from "./ImageNode";
+import EmojisPlugin from "../../plugins/EmojisPlugin";
+import KeywordsPlugin from "../../plugins/KeywordsPlugin";
+import LinkPlugin from "../../plugins/LinkPlugin";
+import MentionsPlugin from "../../plugins/MentionsPlugin";
+import TreeViewPlugin from "../../plugins/TreeViewPlugin";
+import ContentEditable from "../../ui/ContentEditable";
+import ImageResizer from "../../ui/ImageResizer";
+import { $isCaptionEditorEmpty, $isImageNode } from "../ImageNode/ImageNode";
 
 type ImageStatus = { error: true } | { error: false; width: number; height: number };
 

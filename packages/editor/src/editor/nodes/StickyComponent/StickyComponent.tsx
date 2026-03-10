@@ -21,10 +21,10 @@ import { $getNodeByKey } from "lexical";
 import * as React from "react";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
-import { useSharedHistoryContext } from "../context/SharedHistoryContext";
-import StickyEditorTheme from "../config/themes/StickyEditorTheme";
-import ContentEditable from "../ui/ContentEditable";
-import { $isStickyNode } from "./StickyNode";
+import { useSharedHistoryContext } from "../../context/SharedHistoryContext";
+import StickyEditorTheme from "../../config/themes/StickyEditorTheme";
+import ContentEditable from "../../ui/ContentEditable";
+import { $isStickyNode } from "../StickyNode/StickyNode";
 
 type Positioning = {
   isDragging: boolean;

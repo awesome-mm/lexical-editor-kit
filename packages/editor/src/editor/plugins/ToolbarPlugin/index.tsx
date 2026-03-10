@@ -98,7 +98,7 @@ import {
   formatParagraph,
   formatQuote,
 } from "./utils";
-import { $createStickyNode } from "@/editor/nodes/StickyNode";
+import { $createStickyNode } from "@/editor/nodes/StickyNode/StickyNode";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const rootTypeToRootName = {

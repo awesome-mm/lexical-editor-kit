@@ -26,7 +26,7 @@ import {
 import { $createTextNode, $isParagraphNode, $isTextNode, LexicalNode } from "lexical";
 
 import { getOptionalTable } from "@/utils/optional";
-import { $createImageNode, $isImageNode, ImageNode } from "../../nodes/ImageNode";
+import { $createImageNode, $isImageNode, ImageNode } from "../../nodes/ImageNode/ImageNode";
 import emojiList from "../../utils/emoji-list";
 
 export const HR: ElementTransformer = {

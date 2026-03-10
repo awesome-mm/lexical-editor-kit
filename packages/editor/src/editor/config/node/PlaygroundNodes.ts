@@ -21,17 +21,17 @@ import { getCodeNodes } from "../../../features/code";
 import { CollapsibleContainerNode } from "../../plugins/CollapsiblePlugin/CollapsibleContainerNode";
 import { CollapsibleContentNode } from "../../plugins/CollapsiblePlugin/CollapsibleContentNode";
 import { CollapsibleTitleNode } from "../../plugins/CollapsiblePlugin/CollapsibleTitleNode";
-import { AutocompleteNode } from "../../nodes/AutocompleteNode";
-import { EmojiNode } from "../../nodes/EmojiNode";
-import { ImageNode } from "../../nodes/ImageNode";
-import { KeywordNode } from "../../nodes/KeywordNode";
-import { LayoutContainerNode } from "../../nodes/LayoutContainerNode";
-import { LayoutItemNode } from "../../nodes/LayoutItemNode";
-import { MentionNode } from "../../nodes/MentionNode";
+import { AutocompleteNode } from "../../nodes/AutocompleteNode/AutocompleteNode";
+import { EmojiNode } from "../../nodes/EmojiNode/EmojiNode";
+import { ImageNode } from "../../nodes/ImageNode/ImageNode";
+import { KeywordNode } from "../../nodes/KeywordNode/KeywordNode";
+import { LayoutContainerNode } from "../../nodes/LayoutContainerNode/LayoutContainerNode";
+import { LayoutItemNode } from "../../nodes/LayoutItemNode/LayoutItemNode";
+import { MentionNode } from "../../nodes/MentionNode/MentionNode";
 import { PageBreakNode } from "../../nodes/PageBreakNode";
-import { SpecialTextNode } from "../../nodes/SpecialTextNode";
-import { StickyNode } from "../../nodes/StickyNode";
-import { YouTubeNode } from "../../nodes/YouTubeNode";
+import { SpecialTextNode } from "../../nodes/SpecialTextNode/SpecialTextNode";
+import { StickyNode } from "../../nodes/StickyNode/StickyNode";
+import { YouTubeNode } from "../../nodes/YouTubeNode/YouTubeNode";
 
 function getPlaygroundNodesArray(): Array<Klass<LexicalNode>> {
   const listNodes = getListNodes();
