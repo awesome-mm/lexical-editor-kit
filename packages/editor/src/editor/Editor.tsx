@@ -59,7 +59,6 @@ import SpecialTextPlugin from "./plugins/SpecialTextPlugin";
 import TabFocusPlugin from "./plugins/TabFocusPlugin";
 import TableOfContentsPlugin from "./plugins/TableOfContentsPlugin";
 import ToolbarPlugin from "./plugins/ToolbarPlugin/index";
-import TreeViewPlugin from "./plugins/TreeViewPlugin";
 import YouTubePlugin from "./plugins/YouTubePlugin";
 import ContentEditable from "./ui/ContentEditable";
 
@@ -241,7 +240,6 @@ export default function Editor(): JSX.Element {
         {shouldAllowHighlightingWithBrackets && <SpecialTextPlugin />}
         <ActionsPlugin shouldPreserveNewLinesInMarkdown={shouldPreserveNewLinesInMarkdown} />
       </div>
-      {showTreeView && <TreeViewPlugin />}
     </>
   );
 }
