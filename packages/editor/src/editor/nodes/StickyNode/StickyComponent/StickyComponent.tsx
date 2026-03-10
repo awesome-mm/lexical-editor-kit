@@ -9,7 +9,7 @@
 import type { LexicalEditor, NodeKey } from "lexical";
 import type { JSX } from "react";
 
-import "./StickyNode.css";
+import "../StickyNode.css";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
@@ -21,10 +21,10 @@ import { $getNodeByKey } from "lexical";
 import * as React from "react";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
-import { useSharedHistoryContext } from "../../context/SharedHistoryContext";
-import StickyEditorTheme from "../../config/themes/StickyEditorTheme";
-import ContentEditable from "../../ui/ContentEditable";
-import { $isStickyNode } from "../StickyNode/StickyNode";
+import { useSharedHistoryContext } from "../../../context/SharedHistoryContext";
+import StickyEditorTheme from "../../../config/themes/StickyEditorTheme";
+import ContentEditable from "../../../ui/ContentEditable";
+import { $isStickyNode } from "../StickyNode";
 
 type Positioning = {
   isDragging: boolean;
