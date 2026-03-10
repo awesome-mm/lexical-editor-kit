@@ -15,9 +15,9 @@ import { OverflowNode } from "@lexical/overflow";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 
-import { getTableNodes } from "../../../features/table";
-import { getListNodes } from "../../../features/list";
-import { getCodeNodes } from "../../../features/code";
+import { TableNode, TableRowNode, TableCellNode } from "@lexical/table";
+import { ListNode, ListItemNode } from "@lexical/list";
+import { CodeNode, CodeHighlightNode } from "@lexical/code";
 import { CollapsibleContainerNode } from "../../plugins/CollapsiblePlugin/CollapsibleContainerNode";
 import { CollapsibleContentNode } from "../../plugins/CollapsiblePlugin/CollapsibleContentNode";
 import { CollapsibleTitleNode } from "../../plugins/CollapsiblePlugin/CollapsibleTitleNode";
@@ -34,15 +34,16 @@ import { StickyNode } from "../../nodes/StickyNode/StickyNode";
 import { YouTubeNode } from "../../nodes/YouTubeNode/YouTubeNode";
 
 function getPlaygroundNodesArray(): Array<Klass<LexicalNode>> {
-  const listNodes = getListNodes();
-  const codeNodes = getCodeNodes();
-  const tableNodes = getTableNodes();
   return [
     HeadingNode,
     QuoteNode,
-    ...(listNodes ?? []),
-    ...(codeNodes ?? []),
-    ...(tableNodes ?? []),
+    ListNode,
+    ListItemNode,
+    CodeNode,
+    CodeHighlightNode,
+    TableNode,
+    TableRowNode,
+    TableCellNode,
     HashtagNode,
     AutoLinkNode,
     LinkNode,

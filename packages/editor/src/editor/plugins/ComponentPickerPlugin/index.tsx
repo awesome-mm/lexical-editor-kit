@@ -24,7 +24,7 @@ import {
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
 import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
 import { $setBlocksType } from "@lexical/selection";
-import { getOptionalTable } from "@/utils/optional";
+import { INSERT_TABLE_COMMAND } from "@lexical/table";
 import {
   $createParagraphNode,
   $getSelection,
@@ -118,8 +118,7 @@ export function getDynamicOptions(editor: LexicalEditor, queryString: string) {
 
   const tableMatch = queryString.match(/^([1-9]\d?)(?:x([1-9]\d?)?)?$/);
 
-  const tableApi = getOptionalTable();
-  if (tableMatch !== null && tableApi?.INSERT_TABLE_COMMAND) {
+  if (tableMatch !== null) {
     const rows = tableMatch[1];
     const colOptions = tableMatch[2]
       ? [tableMatch[2]]
@@ -132,7 +131,7 @@ export function getDynamicOptions(editor: LexicalEditor, queryString: string) {
             icon: <i className="icon table" />,
             keywords: ["table"],
             onSelect: () =>
-              editor.dispatchCommand(tableApi.INSERT_TABLE_COMMAND, { columns, rows }),
+              editor.dispatchCommand(INSERT_TABLE_COMMAND, { columns, rows }),
           }),
       ),
     );
@@ -170,18 +169,14 @@ export function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
             }),
         }),
     ),
-    ...(getOptionalTable()
-      ? [
-          new ComponentPickerOption("Table", {
-            icon: <i className="icon table" />,
-            keywords: ["table", "grid", "spreadsheet", "rows", "columns"],
-            onSelect: () =>
-              showModal("Insert Table", (onClose) => (
-                <LazyInsertTableDialog activeEditor={editor} onClose={onClose} />
-              )),
-          }),
-        ]
-      : []),
+    new ComponentPickerOption("Table", {
+      icon: <i className="icon table" />,
+      keywords: ["table", "grid", "spreadsheet", "rows", "columns"],
+      onSelect: () =>
+        showModal("Insert Table", (onClose) => (
+          <LazyInsertTableDialog activeEditor={editor} onClose={onClose} />
+        )),
+    }),
     new ComponentPickerOption("Numbered List", {
       icon: <i className="icon number" />,
       keywords: ["numbered list", "ordered list", "ol"],

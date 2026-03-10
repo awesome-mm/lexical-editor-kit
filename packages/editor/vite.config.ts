@@ -53,6 +53,9 @@ export default defineConfig({
         "@lexical/file",
         "@lexical/hashtag",
         "@lexical/selection",
+        // prettire
+        "prettier",
+        "prettier/parser-postcss",
       ],
       output: {
         globals: {

@@ -28,7 +28,7 @@ import {
   $isParentElementRTL,
   $patchStyleText,
 } from "@lexical/selection";
-import { getOptionalTable } from "@/utils/optional";
+import { $isTableNode, $isTableSelection } from "@lexical/table";
 import {
   $findMatchingParent,
   $getNearestNodeOfType,
@@ -659,9 +659,8 @@ export default function ToolbarPlugin({
       const isLink = $isLinkNode(parent) || $isLinkNode(node);
       updateToolbarState("isLink", isLink);
 
-      const table = getOptionalTable();
-      const tableNode = table ? $findMatchingParent(node, table.$isTableNode) : null;
-      if (table && tableNode && table.$isTableNode(tableNode)) {
+      const tableNode = $findMatchingParent(node, $isTableNode);
+      if (tableNode && $isTableNode(tableNode)) {
         updateToolbarState("rootType", "table");
       } else {
         updateToolbarState("rootType", "root");
@@ -712,8 +711,7 @@ export default function ToolbarPlugin({
             : parent?.getFormatType() || "left",
       );
     }
-    const tableApi = getOptionalTable();
-    if ($isRangeSelection(selection) || (tableApi && tableApi.$isTableSelection(selection))) {
+    if ($isRangeSelection(selection) || $isTableSelection(selection)) {
       // Update text format
       updateToolbarState("isBold", selection.hasFormat("bold"));
       updateToolbarState("isItalic", selection.hasFormat("italic"));

@@ -25,7 +25,18 @@ import {
 } from "@lexical/react/LexicalHorizontalRuleNode";
 import { $createTextNode, $isParagraphNode, $isTextNode, LexicalNode } from "lexical";
 
-import { getOptionalTable } from "@/utils/optional";
+import {
+  $createTableCellNode,
+  $createTableNode,
+  $createTableRowNode,
+  $isTableCellNode,
+  $isTableNode,
+  $isTableRowNode,
+  TableCellHeaderStates,
+  TableCellNode,
+  TableNode,
+  TableRowNode,
+} from "@lexical/table";
 import { $createImageNode, $isImageNode, ImageNode } from "../../nodes/ImageNode/ImageNode";
 import emojiList from "../../utils/emoji-list";
 
@@ -92,28 +103,14 @@ const TABLE_ROW_REG_EXP = /^(?:\|)(.+)(?:\|)\s?$/;
 const TABLE_ROW_DIVIDER_REG_EXP = /^(\| ?:?-*:? ?)+\|\s?$/;
 
 function createTableTransformer(
-  table: NonNullable<ReturnType<typeof getOptionalTable>>,
   getTransformers: () => Transformer[],
 ): ElementTransformer {
-  const {
-    $createTableCellNode,
-    $createTableNode,
-    $createTableRowNode,
-    $isTableCellNode,
-    $isTableNode,
-    $isTableRowNode,
-    TableCellHeaderStates,
-    TableCellNode,
-    TableNode,
-    TableRowNode,
-  } = table;
-
-  const getTableColumnsSize = (t: InstanceType<typeof TableNode>) => {
+  const getTableColumnsSize = (t: TableNode) => {
     const row = t.getFirstChild();
     return $isTableRowNode(row) ? row.getChildrenSize() : 0;
   };
 
-  const createTableCell = (textContent: string): InstanceType<typeof TableCellNode> => {
+  const createTableCell = (textContent: string): TableCellNode => {
     textContent = textContent.replace(/\\n/g, "\n");
     const cell = $createTableCellNode(TableCellHeaderStates.NO_STATUS);
     $convertFromMarkdownString(textContent, getTransformers(), cell);
@@ -122,7 +119,7 @@ function createTableTransformer(
 
   const mapToTableCells = (
     textContent: string,
-  ): InstanceType<typeof TableCellNode>[] | null => {
+  ): TableCellNode[] | null => {
     const match = textContent.match(TABLE_ROW_REG_EXP);
     if (!match || !match[1]) {
       return null;
@@ -273,13 +270,7 @@ export function getPlaygroundTransformers(): Transformer[] {
     ...TEXT_MATCH_TRANSFORMERS,
   ];
 
-  const tableApi = getOptionalTable();
-  if (!tableApi) {
-    cachedTransformers = base;
-    return cachedTransformers;
-  }
-
-  const TABLE = createTableTransformer(tableApi, getPlaygroundTransformers);
+  const TABLE = createTableTransformer(getPlaygroundTransformers);
   cachedTransformers = [TABLE, ...base];
   return cachedTransformers;
 }

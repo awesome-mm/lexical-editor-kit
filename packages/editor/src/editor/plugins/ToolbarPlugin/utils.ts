@@ -20,7 +20,7 @@ import {
   HeadingTagType,
 } from "@lexical/rich-text";
 import { $patchStyleText, $setBlocksType } from "@lexical/selection";
-import { getOptionalTable } from "@/utils/optional";
+import { $isTableSelection } from "@lexical/table";
 import { $getNearestBlockElementAncestorOrThrow } from "@lexical/utils";
 import {
   $addUpdateTag,
@@ -324,8 +324,7 @@ export const clearFormatting = (editor: LexicalEditor, skipRefocus: boolean = fa
       $addUpdateTag(SKIP_DOM_SELECTION_TAG);
     }
     const selection = $getSelection();
-    const tableApi = getOptionalTable();
-    if ($isRangeSelection(selection) || (tableApi && tableApi.$isTableSelection(selection))) {
+    if ($isRangeSelection(selection) || $isTableSelection(selection)) {
       const anchor = selection.anchor;
       const focus = selection.focus;
       const nodes = selection.getNodes();
