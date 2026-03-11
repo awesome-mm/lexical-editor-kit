@@ -14,16 +14,7 @@ lexical-editor-kit/
 │       ├── playground/
 │       └── src/
 │           ├── index.ts                  # 패키지 진입점
-│           ├── createEditorKit.ts        # 에디터 키트 생성 함수
 │           ├── EditorRoot.tsx            # 에디터 루트 컴포넌트
-│           │
-│           ├── features/                 # Optional 기능 모듈
-│           │   ├── code.ts
-│           │   ├── list.ts
-│           │   └── table.ts
-│           │
-│           ├── utils/
-│           │   └── optional.ts           # Optional 패키지 유틸
 │           │
 │           └── editor/                   # 에디터 코어
 │               ├── Editor.tsx            # 메인 에디터 컴포넌트
@@ -103,27 +94,27 @@ lexical-editor-kit/
 │               │   ├── InsertHTMLPlugin/
 │               │   ├── KeywordsPlugin/
 │               │   ├── LayoutPlugin/
+│               │   ├── LazyInsertTableDialog.tsx
 │               │   ├── LinkPlugin/
+│               │   ├── ListMaxIndentLevelPlugin.tsx
 │               │   ├── MarkdownShortcutPlugin/
 │               │   ├── MarkdownTransformers/
 │               │   ├── MaxLengthPlugin/
 │               │   ├── MentionsPlugin/
 │               │   ├── PageBreakPlugin/
-│               │   ├── PasteLogPlugin/
 │               │   ├── ShortcutsPlugin/
 │               │   ├── SpecialTextPlugin/
 │               │   ├── StickyPlugin/
 │               │   ├── TabFocusPlugin/
 │               │   ├── TableActionMenuPlugin/
 │               │   ├── TableCellResizer/
+│               │   ├── TableFeaturePlugins.tsx
 │               │   ├── TableHoverActionsV2Plugin/
 │               │   │   └── dnd/
 │               │   ├── TableOfContentsPlugin/
+│               │   ├── TablePlugin.tsx
 │               │   ├── TableScrollShadowPlugin/
-│               │   ├── TestRecorderPlugin/
 │               │   ├── ToolbarPlugin/
-│               │   ├── TreeViewPlugin/
-│               │   ├── TypingPerfPlugin/
 │               │   └── YouTubePlugin/
 │               │
 │               ├── provider/
@@ -138,17 +129,25 @@ lexical-editor-kit/
 │               │
 │               ├── ui/                  # 공통 UI 컴포넌트
 │               │   ├── Button.tsx
+│               │   ├── Button.css
 │               │   ├── ColorPicker.tsx
+│               │   ├── ColorPicker.css
 │               │   ├── ContentEditable.tsx
+│               │   ├── ContentEditable.css
 │               │   ├── Dialog.tsx
+│               │   ├── Dialog.css
 │               │   ├── DropDown.tsx
 │               │   ├── DropdownColorPicker.tsx
 │               │   ├── FileInput.tsx
 │               │   ├── FlashMessage.tsx
+│               │   ├── FlashMessage.css
 │               │   ├── ImageResizer.tsx
+│               │   ├── Input.css
 │               │   ├── Modal.tsx
+│               │   ├── Modal.css
 │               │   ├── Placeholder.tsx
 │               │   ├── Select.tsx
+│               │   ├── Select.css
 │               │   ├── Switch.tsx
 │               │   └── TextInput.tsx
 │               │
@@ -178,6 +177,7 @@ lexical-editor-kit/
 ├── package.json
 ├── pnpm-workspace.yaml                  # pnpm 모노레포 설정
 ├── tsconfig.json
+├── tsconfig.app.json
 ├── eslint.config.js
 ├── playwright.config.ts
 ├── ARCHITECTURE.md

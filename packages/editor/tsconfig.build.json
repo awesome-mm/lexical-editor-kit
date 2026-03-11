@@ -6,14 +6,13 @@
     "declaration": true,
     "outDir": "dist",
     "rootDir": "src",
-    "composite": true,
+    "incremental": false,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "skipLibCheck": true
     // type
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

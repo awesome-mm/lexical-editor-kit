@@ -26,7 +26,7 @@ import { SelectionAlwaysOnDisplay } from "@lexical/react/LexicalSelectionAlwaysO
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { useLexicalEditable } from "@lexical/react/useLexicalEditable";
 import { CAN_USE_DOM } from "@lexical/utils";
-import React, { Suspense, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useSettings } from "./context/SettingsContext";
 import { useSharedHistoryContext } from "./context/SharedHistoryContext";
@@ -48,10 +48,10 @@ import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
 import ImagesPlugin from "./plugins/ImagesPlugin";
 import KeywordsPlugin from "./plugins/KeywordsPlugin";
-import { LayoutPlugin } from "./plugins/LayoutPlugin/LayoutPlugin";
+import LayoutPlugin from "./plugins/LayoutPlugin/LayoutPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
 import MarkdownShortcutPlugin from "./plugins/MarkdownShortcutPlugin";
-import { MaxLengthPlugin } from "./plugins/MaxLengthPlugin";
+import MaxLengthPlugin from "./plugins/MaxLengthPlugin";
 import MentionsPlugin from "./plugins/MentionsPlugin";
 import PageBreakPlugin from "./plugins/PageBreakPlugin";
 import ShortcutsPlugin from "./plugins/ShortcutsPlugin";
@@ -61,21 +61,9 @@ import TableOfContentsPlugin from "./plugins/TableOfContentsPlugin";
 import ToolbarPlugin from "./plugins/ToolbarPlugin/index";
 import YouTubePlugin from "./plugins/YouTubePlugin";
 import ContentEditable from "./ui/ContentEditable";
+import TableFeaturePlugins from "./plugins/TableFeaturePlugins";
 
-import type { TableFeaturePluginsProps } from "./plugins/TableFeaturePlugins";
-
-function TableFeatureFallback(_props: TableFeaturePluginsProps): JSX.Element {
-  return <></>;
-}
-
-const TableFeatureLazy = React.lazy(() =>
-  import("@lexical/table")
-    .then(() => import("./plugins/TableFeaturePlugins"))
-    .then((m) => ({ default: m.TableFeaturePlugins }))
-    .catch(() => ({ default: TableFeatureFallback })),
-);
-
-export default function Editor(): JSX.Element {
+export default function PlaygroundEditorPlugin(): JSX.Element {
   const { historyState } = useSharedHistoryContext();
   const {
     settings: {
@@ -182,16 +170,14 @@ export default function Editor(): JSX.Element {
               (isCodeShiki ? <CodeHighlightShikiPlugin /> : <CodeHighlightPrismPlugin />)}
             <ListPlugin hasStrictIndent={listStrictIndent} />
             <CheckListPlugin />
-            <Suspense fallback={null}>
-              <TableFeatureLazy
-                tableCellMerge={tableCellMerge}
-                tableCellBackgroundColor={tableCellBackgroundColor}
-                tableHorizontalScroll={tableHorizontalScroll}
-                hasNestedTables={hasNestedTables}
-                anchorElem={floatingAnchorElem}
-                isSmallWidthViewport={isSmallWidthViewport}
-              />
-            </Suspense>
+            <TableFeaturePlugins
+              tableCellMerge={tableCellMerge}
+              tableCellBackgroundColor={tableCellBackgroundColor}
+              tableHorizontalScroll={tableHorizontalScroll}
+              hasNestedTables={hasNestedTables}
+              anchorElem={floatingAnchorElem}
+              isSmallWidthViewport={isSmallWidthViewport}
+            />
             <ImagesPlugin />
             <LinkPlugin hasLinkAttributes={hasLinkAttributes} />
             <YouTubePlugin />

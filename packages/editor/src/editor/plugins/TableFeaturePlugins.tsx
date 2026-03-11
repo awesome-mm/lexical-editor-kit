@@ -18,7 +18,7 @@ export type TableFeaturePluginsProps = {
   isSmallWidthViewport: boolean;
 };
 
-export function TableFeaturePlugins({
+export default function TableFeaturePlugins({
   tableCellMerge,
   tableCellBackgroundColor,
   tableHorizontalScroll,

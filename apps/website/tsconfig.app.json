@@ -19,7 +19,11 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "lexical-editor-kit": ["../../packages/editor/src"]
+      "lexical-editor-kit": ["../../packages/editor/src/index.ts"],
+      "lexical-editor-kit/plugins": ["../../packages/editor/src/plugins.ts"],
+      "lexical-editor-kit/nodes": ["../../packages/editor/src/nodes.ts"],
+      "lexical-editor-kit/providers": ["../../packages/editor/src/providers.ts"],
+      "lexical-editor-kit/playground": ["../../packages/editor/src/playground.ts"]
     }
   },
   "include": ["src"]

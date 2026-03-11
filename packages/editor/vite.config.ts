@@ -23,54 +23,47 @@ export default defineConfig({
     },
   },
   build: {
+    cssCodeSplit: false,
     lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
-      name: "LexicalEditorKit",
-      fileName: (format) => `index.${format === "es" ? "es" : "cjs"}.js`,
-      formats: ["es", "cjs"],
+      entry: {
+        index: path.resolve(__dirname, "src/index.ts"),
+        plugins: path.resolve(__dirname, "src/plugins.ts"),
+        nodes: path.resolve(__dirname, "src/nodes.ts"),
+        providers: path.resolve(__dirname, "src/providers.ts"),
+        playground: path.resolve(__dirname, "src/playground.ts"),
+      },
+      formats: ["es"],
+      fileName: (_format, entryName) => `${entryName}.es.js`,
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react/jsx-runtime",
-        "lexical",
-        "@lexical/react",
-        "@lexical/rich-text",
-        "@lexical/html",
-        "@lexical/clipboard",
-        "@lexical/markdown",
-        "@lexical/mark",
-        "@lexical/overflow",
-        "@lexical/history",
-        "@lexical/utils",
-        "@lexical/list",
-        "@lexical/link",
-        "@lexical/code",
-        "@lexical/table",
-        "@lexical/code-shiki",
-        "@lexical/extension",
-        "@lexical/file",
-        "@lexical/hashtag",
-        "@lexical/selection",
-        // prettire
-        "prettier",
-        "prettier/parser-postcss",
-      ],
+      external: (id) =>
+        /^(react($|\/|-dom)|lexical($|\/)|@lexical\/|prettier|typescript$)/.test(
+          id,
+        ),
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
           lexical: "Lexical",
         },
-        inlineDynamicImports: true,
+        manualChunks(id) {
+          // if (id.includes("node_modules")) {
+          //   if (id.includes("date-fns")) {
+          //     return "date-fns";
+          //   }
+          //   if (id.includes("@floating-ui")) {
+          //     return "floating-ui";
+          //   }
+          //   if (id.includes("@dnd-kit")) {
+          //     return "dnd-kit";
+          //   }
+          //   if (id.includes("emoji-list")) {
+          //     return "emoji";
+          //   }
+          //   return "vendor";
+          // }
+        },
       },
     },
-    sourcemap: true,
-    cssCodeSplit: true,
-    cssMinify: true,
-  },
-  server: {
-    open: "./playground/index.html",
   },
 });

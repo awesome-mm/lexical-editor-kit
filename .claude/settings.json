@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for node in AutocompleteNode EmojiNode ImageNode KeywordNode LayoutContainerNode LayoutItemNode MentionNode PageBreakNode SpecialTextNode StickyNode YouTubeNode)",
+      "Bash(do)",
+      "Bash(echo \"=== $node ===\")",
+      "Read(//c/Users/KSC/Desktop/회사 프로젝트/에디터/lexical-editor-kit/lexical-editor-kit/packages/editor/src/editor/nodes/**)",
+      "Bash(done)",
+      "Bash(pnpm build)",
+      "Bash(node --version)",
+      "Bash(fnm list)",
+      "Bash(volta list node)",
+      "Read(//c/Users/KSC/AppData/Roaming/nvm/v22.11.0/**)",
+      "Bash(/c/Users/KSC/AppData/Roaming/nvm/v22.11.0/node.exe -v)",
+      "Read(//c/Users/KSC/AppData/Roaming/nvm//**)",
+      "Bash(/c/Users/KSC/AppData/Roaming/nvm/v22.20.0/node.exe -v)",
+      "Bash(export PATH=\"/c/Users/KSC/AppData/Roaming/nvm/v22.20.0:/c/Users/KSC/AppData/Roaming/nvm/v22.20.0/node_modules/corepack/shims:$PATH\")",
+      "Bash(npx pnpm build)",
+      "Bash(export PATH=\"/c/Users/KSC/AppData/Roaming/nvm/v22.20.0:$PATH\")",
+      "Bash(pnpm --filter lexical-editor-playground build)",
+      "Bash(ls \"c:/Users/KSC/Desktop/회사 프로젝트/에디터/lexical-editor-kit/lexical-editor-kit/packages/editor/dist/\"*.css)"
+    ]
+  }
+}
