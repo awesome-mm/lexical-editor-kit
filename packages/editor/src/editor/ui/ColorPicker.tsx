@@ -119,6 +119,12 @@ export default function ColorPicker({
     emitOnChange(newColor.hex, isKeyboardInput(e));
   };
 
+  const onResetClick = () => {
+    setSelfColor(transformColor("hex", "#000000"));
+    setInputColor("");
+    onReset?.();
+  };
+
   return (
     <div className="color-picker-wrapper" style={{ width: WIDTH }} ref={innerDivRef}>
       <TextInput label="Hex" onChange={onSetHex} value={inputColor} />
@@ -135,7 +141,7 @@ export default function ColorPicker({
         </div>
         {onReset && (
           <div className="color-picker-basic-color">
-            <button className="color-picker-reset-button" onClick={onReset} title="색상 초기화">
+            <button className="color-picker-reset-button" onClick={onResetClick} title="색상 초기화">
               <span className="color-picker-reset-icon" />
             </button>
           </div>
