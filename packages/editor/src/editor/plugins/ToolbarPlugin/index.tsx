@@ -838,6 +838,26 @@ export default function ToolbarPlugin({
     [applyStyleText],
   );
 
+  const onResetStyle = useCallback(
+    (styleProperty: string) => {
+      activeEditor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, { [styleProperty]: null });
+        }
+      });
+    },
+    [activeEditor],
+  );
+
+  const onFontColorReset = useCallback(() => {
+    onResetStyle("color");
+  }, [onResetStyle]);
+
+  const onBgColorReset = useCallback(() => {
+    onResetStyle("background-color");
+  }, [onResetStyle]);
+
   const insertLink = useCallback(() => {
     if (!toolbarState.isLink) {
       setIsLinkEditMode(true);
@@ -1071,6 +1091,7 @@ export default function ToolbarPlugin({
             buttonIconClassName="icon font-color"
             color={toolbarState.fontColor}
             onChange={onFontColorSelect}
+            onReset={onFontColorReset}
             title="text color"
           />
           <DropdownColorPicker
@@ -1080,6 +1101,7 @@ export default function ToolbarPlugin({
             buttonIconClassName="icon bg-color"
             color={toolbarState.bgColor}
             onChange={onBgColorSelect}
+            onReset={onBgColorReset}
             title="bg color"
           />
           <DropDown

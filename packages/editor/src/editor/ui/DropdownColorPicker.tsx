@@ -21,6 +21,7 @@ type Props = {
   stopCloseOnClickSelf?: boolean;
   color: string;
   onChange?: (color: string, skipHistoryStack: boolean, skipRefocus: boolean) => void;
+  onReset?: () => void;
 };
 
 export default function DropdownColorPicker({
@@ -28,11 +29,12 @@ export default function DropdownColorPicker({
   stopCloseOnClickSelf = true,
   color,
   onChange,
+  onReset,
   ...rest
 }: Props) {
   return (
     <DropDown {...rest} disabled={disabled} stopCloseOnClickSelf={stopCloseOnClickSelf}>
-      <ColorPicker color={color} onChange={onChange} />
+      <ColorPicker color={color} onChange={onChange} onReset={onReset} />
     </DropDown>
   );
 }

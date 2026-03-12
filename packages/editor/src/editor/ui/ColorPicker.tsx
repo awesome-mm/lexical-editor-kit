@@ -22,6 +22,7 @@ let skipAddingToHistoryStack = false;
 interface ColorPickerProps {
   color: string;
   onChange?: (value: string, skipHistoryStack: boolean, skipRefocus: boolean) => void;
+  onReset?: () => void;
 }
 
 export function parseAllowedColor(input: string) {
@@ -52,6 +53,7 @@ const HEIGHT = 150;
 export default function ColorPicker({
   color,
   onChange,
+  onReset,
 }: Readonly<ColorPickerProps>): JSX.Element {
   const [selfColor, setSelfColor] = useState(transformColor("hex", color));
   const [inputColor, setInputColor] = useState(transformColor("hex", color).hex);
@@ -120,32 +122,25 @@ export default function ColorPicker({
   return (
     <div className="color-picker-wrapper" style={{ width: WIDTH }} ref={innerDivRef}>
       <TextInput label="Hex" onChange={onSetHex} value={inputColor} />
-      <div className="color-picker-basic-color">
-        {basicColors.map((basicColor) => (
-          <button
-            className={basicColor === selfColor.hex ? " active" : ""}
-            key={basicColor}
-            style={{ backgroundColor: basicColor }}
-            onClick={(e) => onBasicColorClick(e, basicColor)}
-          />
-        ))}
+      <div className="color-picker-basic-color-container">
+        <div className="color-picker-basic-color">
+          {basicColors.map((basicColor) => (
+            <button
+              className={basicColor === selfColor.hex ? " active" : ""}
+              key={basicColor}
+              style={{ backgroundColor: basicColor }}
+              onClick={(e) => onBasicColorClick(e, basicColor)}
+            />
+          ))}
+        </div>
+        {onReset && (
+          <div className="color-picker-basic-color">
+            <button className="color-picker-reset-button" onClick={onReset} title="색상 초기화">
+              <span className="color-picker-reset-icon" />
+            </button>
+          </div>
+        )}
       </div>
-      {/* <div className="color-picker-basic-color">
-        <button
-          className={""}
-          onClick={() => {
-
-            editor.update(() => {
-              const selection = $getSelection();
-              if ($isRangeSelection(selection)) {
-                $patchStyleText(selection, {
-                  backgroundColor: null,
-                });
-              }
-            });
-          }}
-        />
-      </div> */}
       <MoveWrapper
         className="color-picker-saturation"
         style={{ backgroundColor: `hsl(${selfColor.hsv.h}, 100%, 50%)` }}

@@ -821,6 +821,26 @@ export default function LightToolbarPlugin({
     [applyStyleText],
   );
 
+  const onResetStyle = useCallback(
+    (styleProperty: string) => {
+      activeEditor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, { [styleProperty]: null });
+        }
+      });
+    },
+    [activeEditor],
+  );
+
+  const onFontColorReset = useCallback(() => {
+    onResetStyle("color");
+  }, [onResetStyle]);
+
+  const onBgColorReset = useCallback(() => {
+    onResetStyle("background-color");
+  }, [onResetStyle]);
+
   const insertLink = useCallback(() => {
     if (!toolbarState.isLink) {
       setIsLinkEditMode(true);
@@ -1053,6 +1073,7 @@ export default function LightToolbarPlugin({
             buttonIconClassName="icon font-color"
             color={toolbarState.fontColor}
             onChange={onFontColorSelect}
+            onReset={onFontColorReset}
             title="text color"
           />
           <DropdownColorPicker
@@ -1062,6 +1083,7 @@ export default function LightToolbarPlugin({
             buttonIconClassName="icon bg-color"
             color={toolbarState.bgColor}
             onChange={onBgColorSelect}
+            onReset={onBgColorReset}
             title="bg color"
           />
           <DropDown
