@@ -37,9 +37,7 @@ export default defineConfig({
     },
     rollupOptions: {
       external: (id) =>
-        /^(react($|\/|-dom)|lexical($|\/)|@lexical\/|prettier|typescript$)/.test(
-          id,
-        ),
+        /^(react($|\/|-dom)|lexical($|\/)|@lexical\/|prettier|typescript$)/.test(id),
       output: {
         globals: {
           react: "React",
@@ -66,4 +64,5 @@ export default defineConfig({
       },
     },
   },
+  server: { open: "./playground/index.html" },
 });

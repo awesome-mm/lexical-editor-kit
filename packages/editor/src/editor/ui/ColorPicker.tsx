@@ -130,22 +130,28 @@ export default function ColorPicker({
       <TextInput label="Hex" onChange={onSetHex} value={inputColor} />
       <div className="color-picker-basic-color-container">
         <div className="color-picker-basic-color">
-          {basicColors.map((basicColor) => (
-            <button
-              className={basicColor === selfColor.hex ? " active" : ""}
-              key={basicColor}
-              style={{ backgroundColor: basicColor }}
-              onClick={(e) => onBasicColorClick(e, basicColor)}
-            />
+          {basicColors.map((basicColor, index) => (
+            <>
+              <button
+                className={basicColor === selfColor.hex ? " active" : ""}
+                key={basicColor}
+                style={{ backgroundColor: basicColor }}
+                onClick={(e) => onBasicColorClick(e, basicColor)}
+              />
+              {index === basicColors.length - 1 && onReset && (
+                <div className="color-picker-basic-color">
+                  <button
+                    className="color-picker-reset-button"
+                    onClick={onResetClick}
+                    title="색상 초기화"
+                  >
+                    <span className="color-picker-reset-icon" />
+                  </button>
+                </div>
+              )}
+            </>
           ))}
         </div>
-        {onReset && (
-          <div className="color-picker-basic-color">
-            <button className="color-picker-reset-button" onClick={onResetClick} title="색상 초기화">
-              <span className="color-picker-reset-icon" />
-            </button>
-          </div>
-        )}
       </div>
       <MoveWrapper
         className="color-picker-saturation"
