@@ -4,7 +4,9 @@
       "Bash(ls packages/editor/src/editor/nodes/*/ packages/editor/src/editor/plugins/*/)",
       "Bash(npx tsc --noEmit)",
       "Bash(npx vite build)",
-      "Bash(pnpm run build)"
+      "Bash(pnpm run build)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite:*)"
     ]
   }
 }

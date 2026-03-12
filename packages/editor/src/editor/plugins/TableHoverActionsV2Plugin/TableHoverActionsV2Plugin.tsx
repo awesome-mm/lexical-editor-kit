@@ -595,18 +595,18 @@
 //           aria-label="Drag to reorder column"
 //           type="button"
 //         />
-// <DropDown
-//   buttonAriaLabel="Sort column"
-//   buttonClassName="floating-filter-indicator"
-//   hideChevron={true}
-// >
-//   <DropDownItem className="item" onClick={() => handleSortColumn("desc")}>
-//     Sort Ascending
-//   </DropDownItem>
-//   <DropDownItem className="item" onClick={() => handleSortColumn("asc")}>
-//     Sort Descending
-//   </DropDownItem>
-// </DropDown>
+//         <DropDown
+//           buttonAriaLabel="Sort column"
+//           buttonClassName="floating-filter-indicator"
+//           hideChevron={true}
+//         >
+//           <DropDownItem className="item" onClick={() => handleSortColumn("desc")}>
+//             Sort Ascending
+//           </DropDownItem>
+//           <DropDownItem className="item" onClick={() => handleSortColumn("asc")}>
+//             Sort Descending
+//           </DropDownItem>
+//         </DropDown>
 //         <button
 //           className="floating-add-indicator"
 //           aria-label="Add column"
