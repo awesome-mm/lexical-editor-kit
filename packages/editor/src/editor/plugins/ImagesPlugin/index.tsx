@@ -34,7 +34,6 @@ import {
 import { useEffect, useRef, useState } from "react";
 import * as React from "react";
 
-import landscapeImage from "@/editor/assets/images/landscape.jpg";
 import yellowFlowerImage from "@/editor/assets/images/yellow-flower.jpg";
 import {
   $createImageNode,
@@ -175,17 +174,10 @@ export function InsertImageDialog({
           <Button
             data-test-id="image-modal-option-sample"
             onClick={() =>
-              onClick(
-                hasModifier.current
-                  ? {
-                      altText: "Daylight fir trees forest glacier green high ice landscape",
-                      src: landscapeImage,
-                    }
-                  : {
-                      altText: "Yellow flower in tilt shift lens",
-                      src: yellowFlowerImage,
-                    },
-              )
+              onClick({
+                altText: "Yellow flower in tilt shift lens",
+                src: yellowFlowerImage,
+              })
             }
           >
             Sample
