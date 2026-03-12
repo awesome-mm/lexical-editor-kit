@@ -42,7 +42,7 @@ import { INSERT_COLLAPSIBLE_COMMAND } from "../CollapsiblePlugin";
 import { INSERT_IMAGE_COMMAND, InsertImageDialog } from "../ImagesPlugin";
 import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
-import { LazyInsertTableDialog } from "../LazyInsertTableDialog";
+import { InsertTableDialog } from "../TablePlugin";
 
 export class ComponentPickerOption extends MenuOption {
   // What shows up in the editor
@@ -174,7 +174,7 @@ export function getBaseOptions(editor: LexicalEditor, showModal: ShowModal) {
       keywords: ["table", "grid", "spreadsheet", "rows", "columns"],
       onSelect: () =>
         showModal("Insert Table", (onClose) => (
-          <LazyInsertTableDialog activeEditor={editor} onClose={onClose} />
+          <InsertTableDialog activeEditor={editor} onClose={onClose} />
         )),
     }),
     new ComponentPickerOption("Numbered List", {

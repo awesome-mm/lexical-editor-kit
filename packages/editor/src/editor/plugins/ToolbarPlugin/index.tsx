@@ -86,7 +86,7 @@ import { INSERT_IMAGE_COMMAND, InsertImageDialog, InsertImagePayload } from "../
 import InsertLayoutDialog from "../LayoutPlugin/InsertLayoutDialog";
 import { INSERT_PAGE_BREAK } from "../PageBreakPlugin";
 import { SHORTCUTS } from "../ShortcutsPlugin/shortcuts";
-import { LazyInsertTableDialog } from "../LazyInsertTableDialog";
+import { InsertTableDialog } from "../TablePlugin";
 import FontSize, { parseFontSizeForToolbar } from "./fontSize";
 import {
   clearFormatting,
@@ -1223,7 +1223,7 @@ export default function ToolbarPlugin({
                 <DropDownItem
                   onClick={() => {
                     showModal("Insert Table", (onClose) => (
-                      <LazyInsertTableDialog activeEditor={activeEditor} onClose={onClose} />
+                      <InsertTableDialog activeEditor={activeEditor} onClose={onClose} />
                     ));
                   }}
                   className="item"

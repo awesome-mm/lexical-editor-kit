@@ -78,6 +78,7 @@ export default function CustomEditorPlugin() {
   return (
     <div className="editor-shell">
       <div className="editor-container">
+        {/* ── toolbar ── */}
         <LightToolbarPlugin
           editor={editor}
           activeEditor={activeEditor}
