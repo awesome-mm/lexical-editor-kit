@@ -150,7 +150,7 @@ All plugins are available via `lexical-editor-kit/plugins`.
 | [TabFocusPlugin](packages/editor/src/editor/plugins/TabFocusPlugin) | Tab key focus management |
 | [TableActionMenuPlugin](packages/editor/src/editor/plugins/TableActionMenuPlugin) | Table right-click actions |
 | [TableCellResizerPlugin](packages/editor/src/editor/plugins/TableCellResizer) | Table column/row resizing |
-| [TableExcelPastePlugin](packages/editor/src/editor/plugins/TableExcelPastePlugin) | Paste tables from Excel |
+| [TableExcelPastePlugin](packages/editor/src/editor/plugins/TableExcelPastePlugin) | Excel paste with cell styles (background color, font color, font size, bold/italic, text alignment, column widths, row heights) |
 | [TableHoverActionsV2Plugin](packages/editor/src/editor/plugins/TableHoverActionsV2Plugin) | Table hover add row/column |
 | [TableOfContentsPlugin](packages/editor/src/editor/plugins/TableOfContentsPlugin) | Table of contents sidebar |
 | [TableScrollShadowPlugin](packages/editor/src/editor/plugins/TableScrollShadowPlugin) | Table horizontal scroll shadow |
