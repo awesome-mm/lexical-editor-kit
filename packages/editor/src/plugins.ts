@@ -30,6 +30,7 @@ export { default as SpecialTextPlugin } from "./editor/plugins/SpecialTextPlugin
 export { default as StickyPlugin } from "./editor/plugins/StickyPlugin";
 export { default as TabFocusPlugin } from "./editor/plugins/TabFocusPlugin";
 export { default as TableActionMenuPlugin } from "./editor/plugins/TableActionMenuPlugin";
+export { default as TableExcelPastePlugin } from "./editor/plugins/TableExcelPastePlugin";
 export { default as TableCellResizerPlugin } from "./editor/plugins/TableCellResizer";
 export { default as TableHoverActionsV2Plugin } from "./editor/plugins/TableHoverActionsV2Plugin";
 export { default as TableOfContentsPlugin } from "./editor/plugins/TableOfContentsPlugin";

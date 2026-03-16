@@ -1,101 +1,238 @@
 # Lexical Editor Kit
 
-이 레포지토리는 [Lexical](https://lexical.dev/) 에디터를 기반으로 합니다. Lexical은 Meta에서 만든 확장 가능한 웹 텍스트 에디터 프레임워크입니다.
+A ready-to-use rich text editor built on top of [Lexical](https://lexical.dev/) — Meta's extensible text editor framework.
 
-## 이 프로젝트를 만든 이유
+> **Built with the open-source [Lexical Playground](https://playground.lexical.dev/) as a reference.**
+> If you're familiar with Lexical, you can **customize every plugin, node, and context** provided by this kit to build your own editor from scratch.
 
-Lexical은 확장성이 넓고 강력하지만, 초기 설정과 테이블·리스트·코드 블록 같은 기능을 붙이는 과정이 꽤 어렵다고 느꼈습니다.  
-**단순한 설정으로 설치해서 바로 쓸 수 있는 에디터**를 만드는 것이 이 프로젝트의 목적입니다.
+## Demo
 
-이 코드는 **오픈소스**이며, 누구나 자유롭게 사용할 수 있습니다.
-
-## 데모
-
-- **플레이그라운드 (배포):** [https://lexical-editor-kit-playground.vercel.app/](https://lexical-editor-kit-playground.vercel.app/)
-
-## 레포지토리 구조
-
-| 경로 | 설명 |
-|------|------|
-| **`apps/website`** | 에디터 패키지를 **실제로 설치해서 사용**하는 웹 앱입니다. 배포된 플레이그라운드가 이 앱을 기반으로 합니다. |
-| **`packages/editor`** | **npm에 배포되는 에디터 패키지** (`lexical-editor-kit`) 코드가 들어 있습니다. 동시에 Vite 기반 **개발용 플레이그라운드**가 포함되어 있어, npm 배포 없이 로컬에서 패키지를 수정하면서 바로 확인할 수 있습니다. |
-
-## 참고 자료
-
-- [Lexical 공식 사이트](https://lexical.dev/)
-- [Lexical Playground](https://playground.lexical.dev/) — 이 프로젝트의 UI/기능 구성 시 참고했습니다.
-- [Lexical 문서 (Introduction)](https://lexical.dev/docs/intro) — 에디터 개념과 수정 방법을 문서로 학습할 수 있습니다.
+[Live Playground](https://lexical-editor-kit-playground.vercel.app/)
 
 ---
 
-## 설치 방법
+## Installation
 
-현재 패키지는 **npm에 배포되어 있지 않습니다.** 아래 방법 중 하나로 사용할 수 있습니다.
+```bash
+npm install lexical-editor-kit
+```
 
-### 1) 모노레포 내부에서 사용 (workspace)
+You also need to install Lexical peer dependencies:
 
-이 레포지토리를 클론한 뒤, `apps/website`에서 `lexical-editor-kit`을 workspace 프로토콜로 의존합니다.
+```bash
+npm install lexical @lexical/react @lexical/rich-text @lexical/html @lexical/clipboard \
+  @lexical/markdown @lexical/mark @lexical/overflow @lexical/history @lexical/link \
+  @lexical/selection @lexical/utils @lexical/extension @lexical/file @lexical/hashtag \
+  @lexical/code-shiki react react-dom
+```
 
-```json
-{
-  "dependencies": {
-    "lexical-editor-kit": "workspace:*"
-  }
+**Optional packages** (install only the features you need):
+
+```bash
+npm install @lexical/table   # Table support
+npm install @lexical/list    # List support (bullet, numbered, checklist)
+npm install @lexical/code    # Code block support
+```
+
+---
+
+## Quick Start
+
+### Option 1: Use the Playground Editor (Fastest)
+
+Drop in a fully-configured editor with all plugins and nodes pre-wired:
+
+```tsx
+import { PlaygroundEditorRoot, PlaygroundEditorPlugin } from "lexical-editor-kit/playground";
+import { EditorContextProvider, PlaygroundNodes } from "lexical-editor-kit/playground";
+import "lexical-editor-kit/index.css";
+
+function App() {
+  return (
+    <EditorContextProvider>
+      <PlaygroundEditorRoot nodes={PlaygroundNodes}>
+        <PlaygroundEditorPlugin />
+      </PlaygroundEditorRoot>
+    </EditorContextProvider>
+  );
 }
 ```
 
-### 2) npm 배포 후 설치 (추후)
+### Option 2: Build Your Own Editor with `createEditor`
 
-npm에 배포한 뒤에는 다음처럼 설치할 수 있습니다.
+Pick only the plugins and nodes you need:
 
-```bash
-# npm
-npm install lexical-editor-kit
+```tsx
+import { createEditor } from "lexical-editor-kit";
+import { AutoLinkPlugin, CollapsiblePlugin, ImagesPlugin } from "lexical-editor-kit/plugins";
+import { HeadingNode, QuoteNode, ImageNode } from "lexical-editor-kit/nodes";
+import { SettingsContext, SharedHistoryContext } from "lexical-editor-kit/providers";
+import "lexical-editor-kit/index.css";
 
-# pnpm
-pnpm add lexical-editor-kit
+const MyEditor = createEditor({
+  nodes: [HeadingNode, QuoteNode, ImageNode],
+  plugins: [AutoLinkPlugin, CollapsiblePlugin, ImagesPlugin],
+  providers: [SettingsContext, SharedHistoryContext],
+});
 
-# yarn
-yarn add lexical-editor-kit
+function App() {
+  return <MyEditor />;
+}
+```
+
+### Option 3: Use the `EditorBuilder` (Fluent API)
+
+```tsx
+import { EditorBuilder } from "lexical-editor-kit";
+import { CollapsiblePlugin, ImagesPlugin } from "lexical-editor-kit/plugins";
+import { HeadingNode, ImageNode } from "lexical-editor-kit/nodes";
+import { SettingsContext } from "lexical-editor-kit/providers";
+import "lexical-editor-kit/index.css";
+
+const MyEditor = new EditorBuilder()
+  .usePlugin(CollapsiblePlugin)
+  .usePlugin(ImagesPlugin)
+  .useNode(HeadingNode)
+  .useNode(ImageNode)
+  .useProvider(SettingsContext)
+  .build();
+
+function App() {
+  return <MyEditor />;
+}
 ```
 
 ---
 
-## 프로젝트 실행 방법
+## Customization
 
-필수: [Node.js](https://nodejs.org/)와 [pnpm](https://pnpm.io/)이 설치되어 있어야 합니다.
-
-```bash
-# 의존성 설치
-pnpm install
-
-# 플레이그라운드(웹 앱) 개발 서버 실행 — apps/website 기반
-pnpm dev
-
-# 에디터 패키지(packages/editor)만 Vite로 개발 — 패키지 수정 시 사용
-pnpm dev:editor
-```
-
-### 기타 스크립트
-
-```bash
-# 에디터 패키지 빌드
-pnpm build:editor
-
-# 플레이그라운드 빌드
-pnpm build:apps
-
-# 플레이그라운드 빌드 결과 미리보기
-pnpm preview
-
-# 린트
-pnpm lint
-
-# 테스트
-pnpm test
-```
+> This library is built on top of the **open-source Lexical Playground**.
+> Every plugin, node, and context is exported individually — if you know how Lexical works,
+> you can **mix, match, extend, or replace** any component to create a fully custom editor.
+>
+> See the [Lexical Documentation](https://lexical.dev/docs/intro) and
+> [Lexical GitHub](https://github.com/facebook/lexical) for details on the core framework.
 
 ---
 
-에디터 확장·커스터마이징 방법은 [Lexical 문서](https://lexical.dev/docs/intro)를 참고,
-깃허브 [Github 문서](https://github.com/facebook/lexical)를 참고하시면 됩니다.
+## Available Plugins
+
+All plugins are available via `lexical-editor-kit/plugins`.
+
+| Plugin | Description |
+|--------|-------------|
+| [AutocompletePlugin](packages/editor/src/editor/plugins/AutocompletePlugin) | Text autocomplete suggestions |
+| [AutoEmbedPlugin](packages/editor/src/editor/plugins/AutoEmbedPlugin) | Auto-embed URLs (YouTube, etc.) |
+| [AutoLinkPlugin](packages/editor/src/editor/plugins/AutoLinkPlugin) | Auto-detect and linkify URLs |
+| [CodeActionMenuPlugin](packages/editor/src/editor/plugins/CodeActionMenuPlugin) | Action menu for code blocks |
+| [CodeHighlightPrismPlugin](packages/editor/src/editor/plugins/CodeHighlightPrismPlugin) | Code syntax highlighting (Prism) |
+| [CodeHighlightShikiPlugin](packages/editor/src/editor/plugins/CodeHighlightShikiPlugin) | Code syntax highlighting (Shiki) |
+| [CollapsiblePlugin](packages/editor/src/editor/plugins/CollapsiblePlugin) | Collapsible/accordion blocks |
+| [ComponentPickerPlugin](packages/editor/src/editor/plugins/ComponentPickerPlugin) | Slash command menu (`/`) |
+| [ContextMenuPlugin](packages/editor/src/editor/plugins/ContextMenuPlugin) | Right-click context menu |
+| [DragDropPastePlugin](packages/editor/src/editor/plugins/DragDropPastePlugin) | Drag & drop file/image paste |
+| [DraggableBlockPlugin](packages/editor/src/editor/plugins/DraggableBlockPlugin) | Drag handle for blocks |
+| [EmojiPickerPlugin](packages/editor/src/editor/plugins/EmojiPickerPlugin) | Emoji picker (`:` trigger) |
+| [EmojisPlugin](packages/editor/src/editor/plugins/EmojisPlugin) | Emoji rendering support |
+| [FloatingLinkEditorPlugin](packages/editor/src/editor/plugins/FloatingLinkEditorPlugin) | Floating link editor popup |
+| [ImagesPlugin](packages/editor/src/editor/plugins/ImagesPlugin) | Image insert & resize |
+| [InsertHTMLPlugin](packages/editor/src/editor/plugins/InsertHTMLPlugin) | Insert raw HTML content |
+| [KeywordsPlugin](packages/editor/src/editor/plugins/KeywordsPlugin) | Keyword highlighting |
+| [LayoutPlugin](packages/editor/src/editor/plugins/LayoutPlugin) | Multi-column layouts |
+| [LightToolbarPlugin](packages/editor/src/editor/plugins/LightToolbarPlugin) | Minimal toolbar |
+| [LinkPlugin](packages/editor/src/editor/plugins/LinkPlugin) | Link support |
+| [ListMaxIndentLevelPlugin](packages/editor/src/editor/plugins/ListMaxIndentLevelPlugin) | Limit list indent depth |
+| [MarkdownShortcutPlugin](packages/editor/src/editor/plugins/MarkdownShortcutPlugin) | Markdown shortcuts |
+| [MentionsPlugin](packages/editor/src/editor/plugins/MentionsPlugin) | `@mention` support |
+| [PageBreakPlugin](packages/editor/src/editor/plugins/PageBreakPlugin) | Page break insertion |
+| [SpecialTextPlugin](packages/editor/src/editor/plugins/SpecialTextPlugin) | Special text formatting |
+| [StickyPlugin](packages/editor/src/editor/plugins/StickyPlugin) | Sticky note blocks |
+| [TabFocusPlugin](packages/editor/src/editor/plugins/TabFocusPlugin) | Tab key focus management |
+| [TableActionMenuPlugin](packages/editor/src/editor/plugins/TableActionMenuPlugin) | Table right-click actions |
+| [TableCellResizerPlugin](packages/editor/src/editor/plugins/TableCellResizer) | Table column/row resizing |
+| [TableExcelPastePlugin](packages/editor/src/editor/plugins/TableExcelPastePlugin) | Paste tables from Excel |
+| [TableHoverActionsV2Plugin](packages/editor/src/editor/plugins/TableHoverActionsV2Plugin) | Table hover add row/column |
+| [TableOfContentsPlugin](packages/editor/src/editor/plugins/TableOfContentsPlugin) | Table of contents sidebar |
+| [TableScrollShadowPlugin](packages/editor/src/editor/plugins/TableScrollShadowPlugin) | Table horizontal scroll shadow |
+| [YouTubePlugin](packages/editor/src/editor/plugins/YouTubePlugin) | YouTube embed support |
+
+---
+
+## Available Nodes
+
+All nodes are available via `lexical-editor-kit/nodes`.
+
+### Lexical Built-in Nodes
+
+| Node | Package |
+|------|---------|
+| [HeadingNode, QuoteNode](packages/editor/src/nodes.ts) | `@lexical/rich-text` |
+| [ListNode, ListItemNode](packages/editor/src/nodes.ts) | `@lexical/list` |
+| [CodeNode, CodeHighlightNode](packages/editor/src/nodes.ts) | `@lexical/code` |
+| [TableNode, TableRowNode, TableCellNode](packages/editor/src/nodes.ts) | `@lexical/table` |
+| [HashtagNode](packages/editor/src/nodes.ts) | `@lexical/hashtag` |
+| [AutoLinkNode, LinkNode](packages/editor/src/nodes.ts) | `@lexical/link` |
+| [OverflowNode](packages/editor/src/nodes.ts) | `@lexical/overflow` |
+| [MarkNode](packages/editor/src/nodes.ts) | `@lexical/mark` |
+| [HorizontalRuleNode](packages/editor/src/nodes.ts) | `@lexical/react` |
+
+### Custom Nodes
+
+| Node | Description |
+|------|-------------|
+| [AutocompleteNode](packages/editor/src/editor/nodes/AutocompleteNode) | Autocomplete suggestion node |
+| [CollapsibleContainerNode](packages/editor/src/editor/plugins/CollapsiblePlugin) | Collapsible container |
+| [CollapsibleContentNode](packages/editor/src/editor/plugins/CollapsiblePlugin) | Collapsible content area |
+| [CollapsibleTitleNode](packages/editor/src/editor/plugins/CollapsiblePlugin) | Collapsible title |
+| [EmojiNode](packages/editor/src/editor/nodes/EmojiNode) | Emoji node |
+| [ImageNode](packages/editor/src/editor/nodes/ImageNode) | Image with caption & resize |
+| [KeywordNode](packages/editor/src/editor/nodes/KeywordNode) | Highlighted keyword |
+| [LayoutContainerNode](packages/editor/src/editor/nodes/LayoutContainerNode) | Multi-column container |
+| [LayoutItemNode](packages/editor/src/editor/nodes/LayoutItemNode) | Column item in layout |
+| [MentionNode](packages/editor/src/editor/nodes/MentionNode) | @mention node |
+| [PageBreakNode](packages/editor/src/editor/nodes/PageBreakNode) | Page break |
+| [SpecialTextNode](packages/editor/src/editor/nodes/SpecialTextNode) | Special formatted text |
+| [StickyNode](packages/editor/src/editor/nodes/StickyNode) | Sticky note |
+| [YouTubeNode](packages/editor/src/editor/nodes/YouTubeNode) | YouTube embed |
+
+---
+
+## Available Contexts / Providers
+
+All providers are available via `lexical-editor-kit/providers`.
+
+| Provider | Description |
+|----------|-------------|
+| [EditorContextProvider](packages/editor/src/editor/provider) | Root context wrapping all editor state |
+| [FlashMessageContext](packages/editor/src/editor/context/FlashMessageContext) | Flash notification messages |
+| [SettingsContext](packages/editor/src/editor/context/SettingsContext) | Editor settings state |
+| [SharedHistoryContext](packages/editor/src/editor/context/SharedHistoryContext) | Shared undo/redo history |
+| [ToolbarContext](packages/editor/src/editor/context/ToolbarContext) | Toolbar state (block type, font, format) |
+| [TableContext](packages/editor/src/editor/plugins/TablePlugin) | Table cell selection state |
+
+---
+
+## Package Exports
+
+| Import Path | Description |
+|-------------|-------------|
+| `lexical-editor-kit` | Core API: `createEditor`, `EditorBuilder`, settings, contexts, themes |
+| `lexical-editor-kit/plugins` | All editor plugins |
+| `lexical-editor-kit/nodes` | All Lexical node classes |
+| `lexical-editor-kit/providers` | All context providers |
+| `lexical-editor-kit/playground` | Pre-configured playground editor |
+| `lexical-editor-kit/index.css` | Editor styles |
+
+---
+
+## References
+
+- [Lexical Documentation](https://lexical.dev/docs/intro)
+- [Lexical GitHub](https://github.com/facebook/lexical)
+- [Lexical Playground](https://playground.lexical.dev/) — The UI and feature structure of this project were built using this as a reference.
+
+---
+
+## License
+
+Open source. Free to use.

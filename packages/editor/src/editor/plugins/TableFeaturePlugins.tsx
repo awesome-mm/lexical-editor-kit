@@ -7,6 +7,7 @@ import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
 import TableCellResizer from "./TableCellResizer";
 import TableScrollShadowPlugin from "./TableScrollShadowPlugin";
 import TableCellActionMenuPlugin from "./TableActionMenuPlugin";
+import TableExcelPastePlugin from "./TableExcelPastePlugin";
 import TableHoverActionsV2Plugin from "./TableHoverActionsV2Plugin";
 
 export type TableFeaturePluginsProps = {
@@ -35,6 +36,7 @@ export default function TableFeaturePlugins({
         hasNestedTables={hasNestedTables}
       />
       <TableCellResizer />
+      <TableExcelPastePlugin />
       <TableScrollShadowPlugin />
       {anchorElem && (
         <>

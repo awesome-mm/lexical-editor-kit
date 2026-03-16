@@ -1,10 +1,28 @@
 {
   "name": "lexical-editor-kit",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "A comprehensive collection of Lexical editor extensions and widely-used packages, providing rich-text editing, tables, lists, code blocks, syntax highlighting, and many more powerful features for building advanced editors.",
   "type": "module",
   "main": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/awesome-mm/lexical-editor-kit.git",
+    "directory": "packages/editor"
+  },
+  "author": "awesome-mm",
+  "homepage": "https://lexical-editor-kit-playground.vercel.app/",
+  "keywords": [
+    "lexical",
+    "text-editor",
+    "editor",
+    "editor-kit",
+    "editor-sdk",
+    "rich-editor",
+    "rich-text",
+    "code-block"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -30,16 +48,6 @@
   },
   "files": [
     "dist"
-  ],
-  "keywords": [
-    "lexical",
-    "text-editor",
-    "editor",
-    "editor-kit",
-    "editor-sdk",
-    "rich-editor",
-    "rich-text",
-    "code-block"
   ],
   "scripts": {
     "dev": "vite",

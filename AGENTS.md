@@ -8,17 +8,25 @@
 
 ---
 
-## 에이전트 역할 정의
+## 현재 상태 요약
 
-> 각 에이전트의 상세 수행 절차는 `.cursor/agents/` 디렉토리의 개별 파일을 참조한다.
+- **Feature Registry:** 미구현. `features/` 디렉토리, `createEditorKit.ts`, `utils/optional.ts` 없음
+- **optional peer 처리:** `@lexical/code`, `@lexical/list`, `@lexical/table`이 여러 파일에서 정적 import 중
+- **빌드 출력:** ESM only (5개 엔트리 포인트)
+- **테스트:** Playwright E2E (Chromium), vitest 단위 테스트
+- **CI/CD:** 없음
+
+---
+
+## 에이전트 역할 정의
 
 ### Agent A – 아키텍처 & 의존성 검증
 📄 `.cursor/agents/agent-a.md`
 
 **역할:**
-- `features/*/index.ts`의 static import가 해당 feature 파일 내부에만 존재하는지 확인
-- `editor/` 하위 파일에서 optional 패키지(`@lexical/code`, `@lexical/list`, `@lexical/yjs`, `yjs`) top-level static import 탐지
-- `features/index.ts`의 Feature Registry 구조 검증
+- `editor/` 하위 파일에서 optional 패키지(`@lexical/code`, `@lexical/list`, `@lexical/table`) top-level static import 탐지
+- Feature Registry 구현 후: `features/*/index.ts`의 static import가 해당 feature 파일 내부에만 존재하는지 확인
+- Feature Registry 구현 후: `features/index.ts` 구조 검증
 - `package.json` exports / peerDependencies / peerDependenciesMeta 검증
 - `vite.config.ts` external 목록 완전성 확인
 
@@ -32,7 +40,7 @@
 **역할:**
 - `pnpm build:editor` 실행 및 에러 확인
 - `dist/` 결과물에서 React / Lexical 코드 포함 여부 검사
-- `features/code`, `features/list`, `features/table`이 별도 chunk로 분리되는지 확인
+- Feature Registry 구현 후: `features/code`, `features/list`, `features/table`이 별도 chunk로 분리되는지 확인
 - 번들 크기 측정 — 목표: 메인 번들 2MB 이하
 - `pnpm preview` 실행으로 apps/website 동작 확인
 
@@ -44,11 +52,13 @@
 📄 `.cursor/agents/agent-c.md`
 
 **역할:**
-- `pnpm dev:editor`로 Playground 실행
-- optional packages 미설치 시나리오: `@lexical/code` 없이 에디터 로드 → 에러 없어야 함
-- `loadFeatures({ code: true })` 호출 후 코드 블록 메뉴 항목 노출 확인
-- `features.code` null일 때 ToolbarPlugin 버튼 비활성화 확인
-- `features.list` null일 때 리스트 관련 메뉴 비노출 확인
+- `pnpm dev` 또는 `pnpm dev:editor`로 Playground 실행 확인
+- Feature Registry 구현 후:
+  - optional packages 미설치 시나리오: `@lexical/code` 없이 에디터 로드 → 에러 없어야 함
+  - `loadFeatures({ code: true })` 호출 후 코드 블록 메뉴 항목 노출 확인
+  - `features.code` null일 때 ToolbarPlugin 버튼 비활성화 확인
+  - `features.list` null일 때 리스트 관련 메뉴 비노출 확인
+- E2E 테스트 실행 및 결과 확인
 
 **금지:** 배포 파이프라인 수정
 
@@ -58,9 +68,8 @@
 📄 `.cursor/agents/agent-d.md`
 
 **역할:**
-- `pnpm pack --dry-run` 결과 검증 (dist만 포함되는지)
-- Vercel 빌드 설정 확인
-- README 사용자 가이드 검토 (loadFeatures 사용법 포함 여부)
+- `pnpm pack --dry-run` 결과 검증 (`dist/`만 포함되는지, `files: ["dist"]` 확인)
+- README 사용자 가이드 검토
 - `package.json` version, license, repository, exports 필드 확인
 
 **금지:** 빌드 스크립트 변경
@@ -70,38 +79,72 @@
 ## 절대 규칙 (Hard Rules)
 
 1. `react`, `react-dom`, `lexical`, `@lexical/*` → 반드시 `peerDependencies`에만 존재
-2. optional peer(`@lexical/table`, `@lexical/list`, `@lexical/code`, `@lexical/yjs`, `yjs`) → **`features/*/index.ts` 내부에서만 static import 허용**
-3. `editor/` 하위 파일(ToolbarPlugin, ComponentPickerPlugin, Editor 등)에서 optional peer top-level import **절대 금지**
-4. Vite/Rollup `external`에 peerDependencies 전체 포함 필수
-5. `features/index.ts`의 `loadFeatures()`는 `await import()`로만 로드
-6. `dist/`에 React 또는 Lexical 코드가 포함되면 안 됨
+2. Vite/Rollup `external`에 peerDependencies 전체 포함 필수
+3. `dist/`에 React 또는 Lexical 코드가 포함되면 안 됨
+4. **Feature Registry 구현 후 추가 규칙:**
+   - optional peer(`@lexical/table`, `@lexical/list`, `@lexical/code`) → `features/*/index.ts` 내부에서만 static import 허용
+   - `editor/` 하위 파일에서 optional peer top-level import 절대 금지
+   - `features/index.ts`의 `loadFeatures()`는 `await import()`로만 로드
 
 ---
 
-## 저장소 구조
+## 저장소 구조 (현재)
 
 ```
 lexical-editor-kit/
+├── pnpm-workspace.yaml
+├── package.json               # 루트 스크립트
+├── playwright.config.ts
+├── e2e/                       # E2E 테스트
+│
 ├── apps/
-│   └── website/          # 데모 웹 앱 (Vercel 배포)
+│   └── website/               # 데모 앱 (lexical-editor-playground)
+│       ├── package.json       # workspace:* 로 editor 참조, optional peer 전체 설치
+│       └── vite.config.ts     # dedupe 설정
+│
 ├── packages/
-│   └── editor/
+│   └── editor/                # 라이브러리 (lexical-editor-kit)
+│       ├── package.json       # 5개 exports, peerDependenciesMeta.optional
+│       ├── vite.config.ts     # 5개 entry, ESM only, external 정규식
+│       ├── tsconfig.build.json # emitDeclarationOnly
 │       └── src/
-│           ├── index.ts
-│           ├── createEditorKit.ts
-│           ├── features/
-│           │   ├── code/index.ts     # @lexical/code 전담
-│           │   ├── list/index.ts     # @lexical/list 전담
-│           │   ├── table/index.ts    # @lexical/table 전담
-│           │   └── index.ts          # Feature Registry
-│           └── editor/               # 내부 구현
-├── AGENTS.md
-└── ARCHITECTURE.md
+│           ├── index.ts       # Core, Settings, Context, Nodes, Themes
+│           ├── plugins.ts     # 40+ 플러그인 재export
+│           ├── nodes.ts       # 노드 재export (⚠️ optional peer 포함)
+│           ├── providers.ts   # Provider 컴포넌트
+│           ├── playground.ts  # 플레이그라운드 전용
+│           ├── core/          # createEditor, EditorBuilder
+│           └── editor/        # 내부 구현 (plugins/, config/, nodes/, ui/, hooks/, context/)
+│
+├── ARCHITECTURE.md
+└── AGENTS.md
 ```
 
 ---
 
-## Feature Registry 검증 포인트
+## 배포 전 검증 체크리스트
+
+### 기본 (현재 적용 가능)
+- [ ] `pnpm build:editor` 성공
+- [ ] `dist/`에 React / Lexical 코드 포함 안 됨
+- [ ] `pnpm test:e2e` 통과
+- [ ] `pnpm pack --dry-run` 결과 `dist/`만 포함
+- [ ] `package.json`의 exports 경로가 실제 dist 파일과 일치
+
+### Feature Registry 구현 후 추가
+- [ ] `features/*/index.ts` 각각 존재하고 해당 optional 패키지만 static import
+- [ ] `editor/` 하위에서 optional peer top-level import 없음
+- [ ] `features/index.ts`에 `loadFeatures()` + `features` 접근자 존재
+- [ ] 메인 번들 2MB 이하
+- [ ] `features/code`, `features/list`, `features/table` chunk 분리 확인
+- [ ] `@lexical/code` 미설치 → Code Block 메뉴 비노출
+- [ ] `@lexical/list` 미설치 → List 메뉴 비노출
+- [ ] `@lexical/table` 미설치 → Table 메뉴 비노출
+- [ ] 모두 설치 시 모든 기능 정상 동작
+
+---
+
+## Feature Registry 검증 포인트 (구현 후)
 
 Agent A가 반드시 확인해야 할 항목:
 
@@ -124,10 +167,6 @@ features/table/index.ts
   ✅ @lexical/table를 static import (이 파일 안에서만 허용)
   ✅ TableFeaturePlugins, getTableNodes() export
 
-editor/Editor.tsx
-  ✅ yjs static import 없음
-  ✅ TableFeatureLazy: React.lazy + dynamic import 유지
-
 editor/plugins/ToolbarPlugin/utils.ts
   ✅ @lexical/code, @lexical/list import 없음
   ✅ features.code?.formatCode() 패턴 사용
@@ -146,38 +185,7 @@ editor/plugins/MarkdownTransformers/index.ts
 
 ---
 
-## 배포 전 검증 체크리스트
-
-### 아키텍처
-- [ ] `features/*/index.ts` 각각 존재하고 해당 optional 패키지만 static import
-- [ ] `editor/` 하위에서 optional peer top-level import 없음 (`rg "from \"@lexical/code\""` 등으로 탐지)
-- [ ] `features/index.ts`에 `loadFeatures()` + `features` 접근자 존재
-- [ ] `createEditorKit()`가 내부적으로 `loadFeatures()` 호출
-
-### 빌드
-- [ ] `pnpm build:editor` 성공
-- [ ] `dist/` 에 React / Lexical 포함 안 됨
-- [ ] 메인 번들 2MB 이하
-- [ ] `vite.config.ts`에서 `inlineDynamicImports: true` 제거됨
-- [ ] `features/code`, `features/list`, `features/table` chunk 분리 확인
-- [ ] `pnpm test:e2e` (editor-load.spec.ts) 통과
-
-### 런타임
-- [ ] `pnpm test:e2e` 전체 통과 (editor-load + features-toolbar + features-insert)
-- [ ] `pnpm test:e2e:no-optional` 통과 (optional-missing.spec.ts)
-- [ ] `@lexical/code` 미설치 → Code Block 메뉴 비노출 (Playwright 확인)
-- [ ] `@lexical/list` 미설치 → List 메뉴 비노출 (Playwright 확인)
-- [ ] `@lexical/table` 미설치 → Table 메뉴 비노출 (Playwright 확인)
-- [ ] 모두 설치 시 Code Block / List / Table 삽입 DOM 렌더 확인 (Playwright 확인)
-
-### 배포
-- [ ] `pnpm pack --dry-run` 결과 `dist/`만 포함
-- [ ] Vercel 빌드 성공
-- [ ] 배포 URL 대상 `pnpm test:e2e` 스모크 테스트 통과
-
----
-
-## 수정 대상 파일 (우선순위)
+## 수정 대상 파일 (Feature Registry 구현 시 우선순위)
 
 ### 🔴 즉시 수정 (배포 블로커)
 
@@ -186,9 +194,8 @@ editor/plugins/MarkdownTransformers/index.ts
 | `features/index.ts` | Feature Registry 신규 작성 |
 | `features/code/index.ts` | `@lexical/code` 로직 전담 모듈 (신규) |
 | `features/list/index.ts` | `@lexical/list` 로직 전담 모듈 (신규) |
-| `features/table/index.ts` | 기존 `features/table.ts` 리팩터 + 디렉터리로 이동 |
-| `editor/Editor.tsx` | `import { Doc } from "yjs"` 제거 |
-| `editor/plugins/ToolbarPlugin/utils.ts` | `@lexical/code`, `@lexical/list` static import 제거 → `features.*` 위임 |
+| `features/table/index.ts` | `@lexical/table` 로직 전담 모듈 (신규) |
+| `editor/plugins/ToolbarPlugin/utils.ts` | 정적 import 제거 → `features.*` 위임 |
 | `editor/plugins/ToolbarPlugin/index.tsx` | 동일 |
 | `editor/plugins/ComponentPickerPlugin/index.tsx` | 동일 |
 
@@ -198,14 +205,13 @@ editor/plugins/MarkdownTransformers/index.ts
 |------|-----------|
 | `editor/plugins/MarkdownTransformers/index.ts` | `features.code` 조건부 transformer |
 | `editor/config/EditorConfig.ts` | `features.*.getNodes()` 사용으로 통일 |
-| `createEditorKit.ts` | `loadFeatures()` 호출로 재설계 |
+| `nodes.ts` | optional 노드 직접 export 제거 |
+| `createEditorKit.ts` | `loadFeatures()` 호출 헬퍼 (신규) |
 | `index.ts` | `loadFeatures` 공개 export 추가 |
-| `src/utils/optional.ts` | CJS 전용으로 범위 축소 또는 삭제 |
-| `src/features/code.ts`, `src/features/list.ts`, `src/features/table.ts` | 삭제 (`src/features/*/index.ts` 구조로 대체) |
 
 ---
 
-## Vercel 배포 설정
+## Vercel 배포 설정 (해당 시)
 
 | 항목 | 값 |
 |------|----|
@@ -214,8 +220,7 @@ editor/plugins/MarkdownTransformers/index.ts
 | Output Directory | `apps/website/dist` |
 | Install Command | `pnpm install` |
 
-- `apps/website/package.json`에 optional peer 전체 명시 설치
-- `main.tsx` 또는 앱 진입점에서 `await loadFeatures(...)` 호출
+> 현재 `vercel.json` 미설정. Vercel 대시보드에서 수동 구성 필요.
 
 ---
 
@@ -224,8 +229,9 @@ editor/plugins/MarkdownTransformers/index.ts
 ```bash
 pnpm build:editor
 cd packages/editor
-pnpm pack --dry-run
-pnpm pack
+pnpm pack --dry-run    # dist/ 만 포함되는지 확인
+pnpm pack              # tarball 생성
+# npm publish           # NPM 배포
 ```
 
 ---
@@ -234,14 +240,16 @@ pnpm pack
 
 | 스크립트 | 설명 |
 |----------|------|
-| `pnpm dev` | apps/website 개발 서버 |
+| `pnpm dev` | apps/website 개발 서버 (포트 5173) |
 | `pnpm dev:editor` | packages/editor Vite 플레이그라운드 |
 | `pnpm build` | 전체 빌드 |
-| `pnpm build:editor` | 에디터 패키지만 빌드 |
+| `pnpm build:editor` | 에디터 패키지만 빌드 (`vite build && tsc`) |
 | `pnpm build:apps` | apps/website 빌드 |
-| `pnpm preview` | 빌드 결과 미리보기 |
-| `pnpm test:e2e` | Playwright E2E 전체 실행 (preview 서버 자동 기동) |
-| `pnpm test:e2e:ui` | Playwright UI 모드 (브라우저에서 테스트 확인) |
+| `pnpm preview` | 빌드 결과 미리보기 (포트 4173) |
+| `pnpm test` | vitest 단위 테스트 |
+| `pnpm test:e2e` | Playwright E2E (preview 서버 자동 기동, 포트 4173) |
+| `pnpm test:e2e:ui` | Playwright UI 모드 |
 | `pnpm test:e2e:debug` | Playwright 디버그 모드 |
-| `pnpm test:e2e:report` | 마지막 테스트 HTML 리포트 열기 |
-| `pnpm test:e2e:no-optional` | optional 패키지 미설치 시나리오 테스트 (포트 4174) |
+| `pnpm test:e2e:report` | 마지막 테스트 HTML 리포트 |
+| `pnpm test:e2e:no-optional` | optional 미설치 시나리오 테스트 (포트 4174) |
+| `pnpm --filter lexical-editor-kit analyze` | 번들 크기 분석 (rollup-plugin-visualizer) |
