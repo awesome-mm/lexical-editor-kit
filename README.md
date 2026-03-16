@@ -225,6 +225,17 @@ All providers are available via `lexical-editor-kit/providers`.
 
 ---
 
+## Custom & Modified Plugins
+
+The following plugins are **newly added** or **modified** compared to the original [Lexical Playground](https://playground.lexical.dev/).
+
+| Plugin | Status | Description |
+|--------|--------|-------------|
+| [TableExcelPastePlugin](packages/editor/src/editor/plugins/TableExcelPastePlugin) | **New** | Excel copy & paste support. Preserves cell styles including background color, font color, font size, bold/italic/underline/strikethrough, text alignment, column widths, and row heights. Parses Excel's `<style>` block and `<col span>` for accurate reproduction. |
+| [TableHoverActionsV2Plugin](packages/editor/src/editor/plugins/TableHoverActionsV2Plugin) | **Modified** | Refactored from the original playground's legacy drag-and-drop library to [@dnd-kit](https://dndkit.com/) for table row/column hover actions (add, move, drag). |
+
+---
+
 ## References
 
 - [Lexical Documentation](https://lexical.dev/docs/intro)
