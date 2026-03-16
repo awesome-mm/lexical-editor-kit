@@ -223,7 +223,6 @@
 }
 
 .PlaygroundEditorTheme__tableScrollableWrapper {
-  overflow-x: auto;
   margin: 0px 0px 5px 0px;
 }
 
@@ -261,8 +260,6 @@
   border-spacing: 0;
   overflow-y: scroll;
   overflow-x: scroll;
-  table-layout: fixed;
-  width: fit-content;
   margin-top: 25px;
   margin-bottom: 30px;
 }
@@ -339,20 +336,17 @@
 .PlaygroundEditorTheme__tableCell {
   border: 1px solid #bbb;
   width: 75px;
-  vertical-align: top;
-  text-align: start;
-  padding: 6px 8px;
+  vertical-align: middle;
   position: relative;
   outline: none;
-  overflow: auto;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-/*
-  A firefox workaround to allow scrolling of overflowing table cell
-  ref: https://bugzilla.mozilla.org/show_bug.cgi?id=1904159
-*/
-.PlaygroundEditorTheme__tableCell > * {
-  overflow: inherit;
+/* 테이블 셀 내부 paragraph의 여백 제거 */
+.PlaygroundEditorTheme__tableCell .PlaygroundEditorTheme__paragraph {
+  margin: 0;
+  padding: 0;
 }
 
 .PlaygroundEditorTheme__tableCellResizer {

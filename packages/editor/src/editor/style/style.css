@@ -89,7 +89,7 @@ header h1 {
 
 .editor {
   flex: auto;
-  max-width: 100%;
+  width: 1280px;
   position: relative;
   resize: vertical;
   z-index: -1;
