@@ -18,63 +18,7 @@
 
 ---
 
-## 에이전트 역할 정의
 
-### Agent A – 아키텍처 & 의존성 검증
-📄 `.cursor/agents/agent-a.md`
-
-**역할:**
-- `editor/` 하위 파일에서 optional 패키지(`@lexical/code`, `@lexical/list`, `@lexical/table`) top-level static import 탐지
-- Feature Registry 구현 후: `features/*/index.ts`의 static import가 해당 feature 파일 내부에만 존재하는지 확인
-- Feature Registry 구현 후: `features/index.ts` 구조 검증
-- `package.json` exports / peerDependencies / peerDependenciesMeta 검증
-- `vite.config.ts` external 목록 완전성 확인
-
-**금지:** 실제 코드 수정, 번들 설정 변경
-
----
-
-### Agent B – 빌드 & 번들 검사
-📄 `.cursor/agents/agent-b.md`
-
-**역할:**
-- `pnpm build:editor` 실행 및 에러 확인
-- `dist/` 결과물에서 React / Lexical 코드 포함 여부 검사
-- Feature Registry 구현 후: `features/code`, `features/list`, `features/table`이 별도 chunk로 분리되는지 확인
-- 번들 크기 측정 — 목표: 메인 번들 2MB 이하
-- `pnpm preview` 실행으로 apps/website 동작 확인
-
-**금지:** 아키텍처 변경
-
----
-
-### Agent C – 런타임 & Playground 테스트
-📄 `.cursor/agents/agent-c.md`
-
-**역할:**
-- `pnpm dev` 또는 `pnpm dev:editor`로 Playground 실행 확인
-- Feature Registry 구현 후:
-  - optional packages 미설치 시나리오: `@lexical/code` 없이 에디터 로드 → 에러 없어야 함
-  - `loadFeatures({ code: true })` 호출 후 코드 블록 메뉴 항목 노출 확인
-  - `features.code` null일 때 ToolbarPlugin 버튼 비활성화 확인
-  - `features.list` null일 때 리스트 관련 메뉴 비노출 확인
-- E2E 테스트 실행 및 결과 확인
-
-**금지:** 배포 파이프라인 수정
-
----
-
-### Agent D – 배포 & 릴리즈
-📄 `.cursor/agents/agent-d.md`
-
-**역할:**
-- `pnpm pack --dry-run` 결과 검증 (`dist/`만 포함되는지, `files: ["dist"]` 확인)
-- README 사용자 가이드 검토
-- `package.json` version, license, repository, exports 필드 확인
-
-**금지:** 빌드 스크립트 변경
-
----
 
 ## 절대 규칙 (Hard Rules)
 
