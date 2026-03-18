@@ -43,19 +43,20 @@ npm install @lexical/code    # Code block support
 Drop in a fully-configured editor with all plugins and nodes pre-wired:
 
 ```tsx
-import { PlaygroundEditorRoot, PlaygroundEditorPlugin } from "lexical-editor-kit/playground";
-import { EditorContextProvider, PlaygroundNodes } from "lexical-editor-kit/playground";
-import "lexical-editor-kit/index.css";
+import { createEditor, getPlaygroundNodes, SettingsContext } from "lexical-editor-kit";
+import { PlaygroundEditorPlugin } from "lexical-editor-kit/playground";
+import { EditorContextProvider } from "lexical-editor-kit/playground";
 
-function App() {
-  return (
-    <EditorContextProvider>
-      <PlaygroundEditorRoot nodes={PlaygroundNodes}>
-        <PlaygroundEditorPlugin />
-      </PlaygroundEditorRoot>
-    </EditorContextProvider>
-  );
+const PlaygroundEditorComponent = createEditor({
+  plugins: [PlaygroundEditorPlugin],
+  nodes: [...getPlaygroundNodes()],
+  providers: [SettingsContext, EditorContextProvider],
+});
+
+export default function PlayGroundEditor() {
+  return <PlaygroundEditorComponent />;
 }
+
 ```
 
 ### Option 2: Build Your Own Editor with `createEditor`
