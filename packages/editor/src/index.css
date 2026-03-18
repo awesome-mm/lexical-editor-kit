@@ -7,6 +7,20 @@
 @import "./editor/ui/Input.css";
 @import "./editor/ui/Modal.css";
 @import "./editor/ui/Select.css";
-
+/* nodes */
+@import "./editor/nodes/PageBreakNode/index.css";
+@import "./editor/nodes/StickyNode/StickyNode.css";
+@import "./editor/nodes/ImageNode/ImageNode.css";
+/* plugins */
+@import "./editor/plugins/ToolbarPlugin/fontSize.css";
+@import "./editor/plugins/TableHoverActionsV2Plugin/index.css";
+@import "./editor/plugins/TableCellResizer/index.css";
+@import "./editor/plugins/TableOfContentsPlugin/index.css";
+@import "./editor/plugins/FloatingTextFormatToolbarPlugin/index.css";
+@import "./editor/plugins/FloatingLinkEditorPlugin/index.css";
+@import "./editor/plugins/DraggableBlockPlugin/index.css";
+@import "./editor/plugins/CollapsiblePlugin/Collapsible.css";
+@import "./editor/plugins/CodeActionMenuPlugin/index.css";
+/* style */
 @import "./editor/style/style.css";
 @import "./editor/style/editor.css";

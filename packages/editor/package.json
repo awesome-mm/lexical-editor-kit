@@ -1,6 +1,6 @@
 {
   "name": "lexical-editor-kit",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "A comprehensive collection of Lexical editor extensions and widely-used packages, providing rich-text editing, tables, lists, code blocks, syntax highlighting, and many more powerful features for building advanced editors.",
   "type": "module",
   "main": "dist/index.es.js",

@@ -1,6 +1,7 @@
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { EditorConfig } from "./core";
 import PlaygroundEditorTheme from "../editor/config/themes/PlaygroundEditorTheme";
+import { uuid } from "@/editor/utils/uuid";
 
 export function createEditor(config: EditorConfig) {
   const { plugins = [], providers = [], nodes = [], theme } = config;
@@ -17,14 +18,18 @@ export function createEditor(config: EditorConfig) {
 
     const pluginContent = (
       <>
-        {plugins.map((Plugin, i) => (
-          <Plugin key={i} />
+        {plugins.map((Plugin, idx) => (
+          <Plugin key={Plugin.displayName || Plugin.name || `plugin-${idx}`} />
         ))}
       </>
     );
 
     const withProviders = providers.reduceRight(
-      (acc, Provider) => <Provider>{acc}</Provider>,
+      (acc, Provider, idx) => (
+        <Provider key={Provider.displayName || Provider.name || `provider-${idx}`}>
+          {acc}
+        </Provider>
+      ),
       pluginContent,
     );
 
